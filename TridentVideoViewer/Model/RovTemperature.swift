@@ -8,29 +8,17 @@
 
 import Foundation
 
-protocol Keyed {
-    var key: String { get }
-}
-
-struct RovTime: Codable {
-    let sec: Int32
-    let nanosec: UInt32
-}
-
-struct RovHeader: Codable {
-    let stamp: RovTime
-    let frameId: String
-}
-
 struct OrovTemperature_: Codable{
     let header: RovHeader
     let temperature: Double
     let variance: Double
 }
 
-struct RovTemperature: Codable, Keyed {
+struct RovTemperature: DDSType {
     let temperature_: OrovTemperature_
     let id: String
     
-    var key: String { return id }
+    static var isKeyed: Bool { true }
+    static var ddsTypeName: String { "orov::msg::sensor::Temperature" }
+
 }

@@ -12,19 +12,22 @@ import Foundation
 //const unsigned long VIDEO_DATA_MAX_SIZE = 1000 * 1024;           // 1MB
 //const unsigned long IMAGE_DATA_MAX_SIZE = 12 * 1024 * 1024;     // 12MB
 
-struct RovVideoData: Codable {
+struct RovVideoData: DDSType {
     let timestamp: UInt64
     let frame_id: UInt64
     let data: Data
+
+    static var isKeyed: Bool { false }
+    static var ddsTypeName: String { "orov::msg::image::VideoData" }
 }
 
 // Topic format: "<topicPrefix_rov_camChannels><channel_id>_ctrl_video"
 // Ex: rov_cam_forward_H2640_video
-struct RovImageData: Codable {
-    let timestamp: UInt64
-    let frame_id: UInt64
-    let data: Data
-}
+//struct RovImageData: Codable {
+//    let timestamp: UInt64
+//    let frame_id: UInt64
+//    let data: Data
+//}
 
 struct RovVideoStats: Codable {
     let average_bitrate: UInt32        // Average calculated bitrate

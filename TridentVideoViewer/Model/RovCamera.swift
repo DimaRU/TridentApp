@@ -9,7 +9,7 @@
 import Foundation
 
 
-struct RovCamera
+struct RovCamera: Codable
 {
     let guid: String     //@key // Globally unique identifier within the domain/partition for a particular camera
     let driver: String   //@key // Name of the driver used by the camera, i.e. uvcvideo, gc6500, etc

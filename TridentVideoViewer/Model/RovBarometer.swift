@@ -15,10 +15,11 @@ struct FluidPressure: Codable {
     let variance: Double
 }
 
-struct RovBarometer: Codable {
+struct RovBarometer: DDSType {
     let pressure: FluidPressure
     let id: String
-    
-    var key: String { return id }
+
+    static var isKeyed: Bool { true }
+    static var ddsTypeName: String { "orov::sensor::Barometer" }
 }
 

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A28B707231AE067000FDA62 /* DDSType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A28B706231AE067000FDA62 /* DDSType.swift */; };
+		0A28B709231AE36F000FDA62 /* RovCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A28B708231AE36F000FDA62 /* RovCommon.swift */; };
 		0A7654842319C16900AF9488 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7654832319C16900AF9488 /* AppDelegate.swift */; };
 		0A7654882319C16900AF9488 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A7654872319C16900AF9488 /* Assets.xcassets */; };
 		0A76548B2319C16900AF9488 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A7654892319C16900AF9488 /* Main.storyboard */; };
@@ -48,6 +50,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0A28B706231AE067000FDA62 /* DDSType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDSType.swift; sourceTree = "<group>"; };
+		0A28B708231AE36F000FDA62 /* RovCommon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RovCommon.swift; sourceTree = "<group>"; };
 		0A7654802319C16900AF9488 /* TridentVideoViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TridentVideoViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A7654832319C16900AF9488 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0A7654872319C16900AF9488 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -152,10 +156,12 @@
 		0A7654AC231A691500AF9488 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				0A28B706231AE067000FDA62 /* DDSType.swift */,
 				0A7654B3231A692500AF9488 /* RovAttitude.swift */,
 				0A7654B4231A692500AF9488 /* RovBarometer.swift */,
 				0A7654AD231A692400AF9488 /* RovCamera.swift */,
 				0A7654AE231A692400AF9488 /* RovChannel.swift */,
+				0A28B708231AE36F000FDA62 /* RovCommon.swift */,
 				0A7654B0231A692400AF9488 /* RovControlDescriptor.swift */,
 				0A7654B2231A692500AF9488 /* RovPoint.swift */,
 				0A7654B1231A692400AF9488 /* RovQuaternion.swift */,
@@ -244,11 +250,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A28B709231AE36F000FDA62 /* RovCommon.swift in Sources */,
 				0A7654A8231A685F00AF9488 /* TestReaderRegistered.mm in Sources */,
 				0A7654A9231A685F00AF9488 /* ORovTopicListener.mm in Sources */,
 				0A7654BD231A693300AF9488 /* RovQuaternion.swift in Sources */,
 				0A7654BF231A693300AF9488 /* RovVector3.swift in Sources */,
 				0A7654C0231A693300AF9488 /* RovVideoData.swift in Sources */,
+				0A28B707231AE067000FDA62 /* DDSType.swift in Sources */,
 				0A7654842319C16900AF9488 /* AppDelegate.swift in Sources */,
 				0A7654AB231A68F400AF9488 /* Decoder.swift in Sources */,
 				0A7654C3231A6B1600AF9488 /* VideoViewController.swift in Sources */,

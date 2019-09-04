@@ -43,8 +43,8 @@ public class PayloadDecoder: NSObject {
             let barometer = try decoder.decode(RovBarometer.self, from: data)
             print("Sqn: \(sequence) \(topicName!) pressure: \(barometer.pressure.fluidPressure) id: \(barometer.id)")
         case "rov_video_overlay_mode_current":
-            let videoOverlayMore = try decoder.decode(String.self, from: data)
-            print("Sqn: \(sequence) \(topicName!)", videoOverlayMore)
+            let videoOverlayMode = try decoder.decode(String.self, from: data)
+            print("Sqn: \(sequence) \(topicName!)", videoOverlayMode)
         case "orov::msg::sensor::Attitude":
             let attitude = try decoder.decode(RovAttitude.self, from: data)
             print("Sqn: \(sequence) \(topicName!)", attitude.orientation.x, attitude.orientation.y, attitude.orientation.z, attitude.orientation.w, attitude.id)

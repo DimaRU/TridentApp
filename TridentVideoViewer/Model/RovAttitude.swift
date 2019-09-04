@@ -8,11 +8,13 @@
 
 import Foundation
 
-struct RovAttitude: Codable, Keyed {
+struct RovAttitude: DDSType {
     let header: RovHeader
     let orientation: RovQuaternion
     let angularVelocity: RovVector3
     
     let id: String
-    var key: String { return id }
+
+    static var isKeyed: Bool { true }
+    static var ddsTypeName: String { "orov::msg::sensor::Attitude" }
 }

@@ -12,3 +12,9 @@ protocol DDSType: Codable {
     static var ddsTypeName: String { get }
     static var isKeyed: Bool { get }
 }
+
+
+extension String: DDSType {
+    static var isKeyed: Bool { false }
+    static var ddsTypeName: String { "DDS::String" }
+}

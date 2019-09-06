@@ -9,7 +9,7 @@
 import Foundation
 
 
-struct RovCamera: Codable
+struct RovCamera: DDSType
 {
     let guid: String     //@key // Globally unique identifier within the domain/partition for a particular camera
     let driver: String   //@key // Name of the driver used by the camera, i.e. uvcvideo, gc6500, etc
@@ -22,4 +22,8 @@ struct RovCamera: Codable
     let extra: [String]         // Any additional, custom meta-data. i.e. gc6500 histogram or motion vector support
     let frame_id: String        // ID of the frame of reference associated with this camera
     let channel_ids: [String]   // List of channel IDs for this camera. Use these to find channel specific topics for this camera.
+    
+    static var isKeyed: Bool { true }
+    static var ddsTypeName: String { "orov::image::Camera" }
+
 }

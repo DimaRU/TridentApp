@@ -33,6 +33,10 @@
 		0A7654C0231A693300AF9488 /* RovVideoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7654B6231A692500AF9488 /* RovVideoData.swift */; };
 		0A7654C3231A6B1600AF9488 /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7654C1231A6B1600AF9488 /* VideoViewController.swift */; };
 		0AD277F4231FFBC30014D555 /* FastRTPSBridge.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0AD277F3231FFBC30014D555 /* FastRTPSBridge.mm */; };
+		0AF1164E2322584E000717F7 /* RovTopic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF1164D2322584E000717F7 /* RovTopic.swift */; };
+		0AF1165023226D32000717F7 /* RovDepth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF1164F23226D32000717F7 /* RovDepth.swift */; };
+		0AF11652232274FE000717F7 /* BatteryState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF11651232274FE000717F7 /* BatteryState.swift */; };
+		0AF11654232277B5000717F7 /* RovFuelgauge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF11653232277B5000717F7 /* RovFuelgauge.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -83,6 +87,10 @@
 		0A7654C1231A6B1600AF9488 /* VideoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
 		0AD277F2231FFBC20014D555 /* FastRTPSBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FastRTPSBridge.h; sourceTree = "<group>"; };
 		0AD277F3231FFBC30014D555 /* FastRTPSBridge.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = FastRTPSBridge.mm; sourceTree = "<group>"; };
+		0AF1164D2322584E000717F7 /* RovTopic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RovTopic.swift; sourceTree = "<group>"; };
+		0AF1164F23226D32000717F7 /* RovDepth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RovDepth.swift; sourceTree = "<group>"; };
+		0AF11651232274FE000717F7 /* BatteryState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryState.swift; sourceTree = "<group>"; };
+		0AF11653232277B5000717F7 /* RovFuelgauge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RovFuelgauge.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -173,6 +181,10 @@
 				0A7654AF231A692400AF9488 /* RovTemperature.swift */,
 				0A7654B5231A692500AF9488 /* RovVector3.swift */,
 				0A7654B6231A692500AF9488 /* RovVideoData.swift */,
+				0AF11651232274FE000717F7 /* BatteryState.swift */,
+				0AF11653232277B5000717F7 /* RovFuelgauge.swift */,
+				0AF1164F23226D32000717F7 /* RovDepth.swift */,
+				0AF1164D2322584E000717F7 /* RovTopic.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -258,8 +270,11 @@
 				0A28B709231AE36F000FDA62 /* RovCommon.swift in Sources */,
 				0A7654A8231A685F00AF9488 /* OrovParticipant.mm in Sources */,
 				0A7654A9231A685F00AF9488 /* ORovTopicListener.mm in Sources */,
+				0AF11652232274FE000717F7 /* BatteryState.swift in Sources */,
+				0AF1164E2322584E000717F7 /* RovTopic.swift in Sources */,
 				0A7654BD231A693300AF9488 /* RovQuaternion.swift in Sources */,
 				0A7654BF231A693300AF9488 /* RovVector3.swift in Sources */,
+				0AF11654232277B5000717F7 /* RovFuelgauge.swift in Sources */,
 				0A7654C0231A693300AF9488 /* RovVideoData.swift in Sources */,
 				0A28B707231AE067000FDA62 /* DDSType.swift in Sources */,
 				0A7654842319C16900AF9488 /* AppDelegate.swift in Sources */,
@@ -268,6 +283,7 @@
 				0A7654BB231A693300AF9488 /* RovControlDescriptor.swift in Sources */,
 				0A7654BC231A693300AF9488 /* RovPoint.swift in Sources */,
 				0AD277F4231FFBC30014D555 /* FastRTPSBridge.mm in Sources */,
+				0AF1165023226D32000717F7 /* RovDepth.swift in Sources */,
 				0A7654B9231A693300AF9488 /* RovCamera.swift in Sources */,
 				0A7654B8231A693300AF9488 /* RovBarometer.swift in Sources */,
 				0A7654BA231A693300AF9488 /* RovChannel.swift in Sources */,

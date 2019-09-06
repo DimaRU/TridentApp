@@ -8,13 +8,13 @@
 
 #import <Foundation/Foundation.h>
 #include <fastrtps/rtps/RTPSDomain.h>
-#include "OrovParticipant.h"
+#include "RovParticipant.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface FastRTPSBridge : NSObject
 {
-    OrovParticipant* participant;
+    RovParticipant* participant;
 }
 - (id)init;
 //- (BOOL)createRTPSParticipant;

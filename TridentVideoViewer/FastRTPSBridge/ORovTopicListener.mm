@@ -7,7 +7,7 @@
 //
 
 #include "ORovTopicListener.hpp"
-#include "OrovParticipant.h"
+#include "RovParticipant.h"
 
 #include <fastrtps/rtps/reader/RTPSReader.h>
 

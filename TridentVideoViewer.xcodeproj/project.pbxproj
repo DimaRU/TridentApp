@@ -18,7 +18,6 @@
 		0A76549B231A598100AF9488 /* libfastcdr.1.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 0A765498231A597900AF9488 /* libfastcdr.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		0A76549D231A598300AF9488 /* libfastrtps.1.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 0A765497231A597900AF9488 /* libfastrtps.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		0A7654A7231A685F00AF9488 /* CustomLogConsumer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A7654A1231A685E00AF9488 /* CustomLogConsumer.cpp */; };
-		0A7654A8231A685F00AF9488 /* OrovParticipant.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0A7654A4231A685E00AF9488 /* OrovParticipant.mm */; };
 		0A7654A9231A685F00AF9488 /* ORovTopicListener.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0A7654A6231A685F00AF9488 /* ORovTopicListener.mm */; };
 		0A7654AB231A68F400AF9488 /* Decoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7654AA231A68F400AF9488 /* Decoder.swift */; };
 		0A7654B7231A693300AF9488 /* RovAttitude.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7654B3231A692500AF9488 /* RovAttitude.swift */; };
@@ -32,6 +31,7 @@
 		0A7654BF231A693300AF9488 /* RovVector3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7654B5231A692500AF9488 /* RovVector3.swift */; };
 		0A7654C0231A693300AF9488 /* RovVideoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7654B6231A692500AF9488 /* RovVideoData.swift */; };
 		0A7654C3231A6B1600AF9488 /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7654C1231A6B1600AF9488 /* VideoViewController.swift */; };
+		0AAD92F82322B4B1000EAE4E /* RovParticipant.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0AAD92F62322B4B1000EAE4E /* RovParticipant.mm */; };
 		0AD277F4231FFBC30014D555 /* FastRTPSBridge.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0AD277F3231FFBC30014D555 /* FastRTPSBridge.mm */; };
 		0AF1164E2322584E000717F7 /* RovTopic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF1164D2322584E000717F7 /* RovTopic.swift */; };
 		0AF1165023226D32000717F7 /* RovDepth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF1164F23226D32000717F7 /* RovDepth.swift */; };
@@ -66,11 +66,9 @@
 		0A765497231A597900AF9488 /* libfastrtps.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libfastrtps.1.dylib; sourceTree = "<group>"; };
 		0A765498231A597900AF9488 /* libfastcdr.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libfastcdr.1.dylib; sourceTree = "<group>"; };
 		0A76549F231A685E00AF9488 /* TridentVideoViewer-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TridentVideoViewer-Bridging-Header.h"; sourceTree = "<group>"; };
-		0A7654A0231A685E00AF9488 /* OrovParticipant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrovParticipant.h; sourceTree = "<group>"; };
 		0A7654A1231A685E00AF9488 /* CustomLogConsumer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CustomLogConsumer.cpp; sourceTree = "<group>"; };
 		0A7654A2231A685E00AF9488 /* FastRTPSBri.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FastRTPSBri.h; sourceTree = "<group>"; };
 		0A7654A3231A685E00AF9488 /* CustomLogConsumer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomLogConsumer.h; sourceTree = "<group>"; };
-		0A7654A4231A685E00AF9488 /* OrovParticipant.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OrovParticipant.mm; sourceTree = "<group>"; };
 		0A7654A5231A685F00AF9488 /* ORovTopicListener.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ORovTopicListener.hpp; sourceTree = "<group>"; };
 		0A7654A6231A685F00AF9488 /* ORovTopicListener.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ORovTopicListener.mm; sourceTree = "<group>"; };
 		0A7654AA231A68F400AF9488 /* Decoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Decoder.swift; sourceTree = "<group>"; };
@@ -85,6 +83,8 @@
 		0A7654B5231A692500AF9488 /* RovVector3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RovVector3.swift; sourceTree = "<group>"; };
 		0A7654B6231A692500AF9488 /* RovVideoData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RovVideoData.swift; sourceTree = "<group>"; };
 		0A7654C1231A6B1600AF9488 /* VideoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
+		0AAD92F62322B4B1000EAE4E /* RovParticipant.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RovParticipant.mm; sourceTree = "<group>"; };
+		0AAD92F72322B4B1000EAE4E /* RovParticipant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RovParticipant.h; sourceTree = "<group>"; };
 		0AD277F2231FFBC20014D555 /* FastRTPSBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FastRTPSBridge.h; sourceTree = "<group>"; };
 		0AD277F3231FFBC30014D555 /* FastRTPSBridge.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = FastRTPSBridge.mm; sourceTree = "<group>"; };
 		0AF1164D2322584E000717F7 /* RovTopic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RovTopic.swift; sourceTree = "<group>"; };
@@ -155,10 +155,10 @@
 				0A7654A1231A685E00AF9488 /* CustomLogConsumer.cpp */,
 				0A7654A3231A685E00AF9488 /* CustomLogConsumer.h */,
 				0A7654A2231A685E00AF9488 /* FastRTPSBri.h */,
+				0AAD92F72322B4B1000EAE4E /* RovParticipant.h */,
+				0AAD92F62322B4B1000EAE4E /* RovParticipant.mm */,
 				0A7654A5231A685F00AF9488 /* ORovTopicListener.hpp */,
 				0A7654A6231A685F00AF9488 /* ORovTopicListener.mm */,
-				0A7654A0231A685E00AF9488 /* OrovParticipant.h */,
-				0A7654A4231A685E00AF9488 /* OrovParticipant.mm */,
 				0A76549F231A685E00AF9488 /* TridentVideoViewer-Bridging-Header.h */,
 				0AD277F2231FFBC20014D555 /* FastRTPSBridge.h */,
 				0AD277F3231FFBC30014D555 /* FastRTPSBridge.mm */,
@@ -268,9 +268,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A28B709231AE36F000FDA62 /* RovCommon.swift in Sources */,
-				0A7654A8231A685F00AF9488 /* OrovParticipant.mm in Sources */,
 				0A7654A9231A685F00AF9488 /* ORovTopicListener.mm in Sources */,
 				0AF11652232274FE000717F7 /* BatteryState.swift in Sources */,
+				0AAD92F82322B4B1000EAE4E /* RovParticipant.mm in Sources */,
 				0AF1164E2322584E000717F7 /* RovTopic.swift in Sources */,
 				0A7654BD231A693300AF9488 /* RovQuaternion.swift in Sources */,
 				0A7654BF231A693300AF9488 /* RovVector3.swift in Sources */,

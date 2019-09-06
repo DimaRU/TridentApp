@@ -1,23 +1,12 @@
-// Copyright 2016 Proyectos y Sistemas de Mantenimiento SL (eProsima).
 //
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
+//  RovParticipant.mm
+//  TridentVideoViewer
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
+//  Created by Dmitriy Borovikov on 06/09/2019.
+//  Copyright © 2019 Dmitriy Borovikov. All rights reserved.
 //
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
 
-/**
- * @file TestReaderRegistered.cpp
- *
- */
-
-#include "OrovParticipant.h"
+#include "RovParticipant.h"
 
 #include <fastrtps/rtps/reader/RTPSReader.h>
 #include <fastrtps/rtps/participant/RTPSParticipant.h>
@@ -37,20 +26,20 @@
 using namespace eprosima::fastrtps;
 using namespace eprosima::fastrtps::rtps;
 
-OrovParticipant::OrovParticipant():
+RovParticipant::RovParticipant():
 mp_participant(nullptr),
 mp_history(nullptr)
 {
 }
 
-OrovParticipant::~OrovParticipant()
+RovParticipant::~RovParticipant()
 {
     RTPSDomain::removeRTPSParticipant(mp_participant);
     delete(mp_history);
 //    mp_participant->stopRTPSParticipantAnnouncement();
 }
 
-bool OrovParticipant::init()
+bool RovParticipant::init()
 {
     //CREATE PARTICIPANT
     RTPSParticipantAttributes PParam;
@@ -76,7 +65,7 @@ bool OrovParticipant::init()
     return true;
 }
 
-RTPSReader* OrovParticipant::reg(const char* name,
+RTPSReader* RovParticipant::registerReader(const char* name,
                                const char* dataType,
                                rtps::TopicKind_t tKind)
 {
@@ -104,8 +93,4 @@ RTPSReader* OrovParticipant::reg(const char* name,
         return reader;
     }
     return reader;
-}
-
-void OrovParticipant::run()
-{
 }

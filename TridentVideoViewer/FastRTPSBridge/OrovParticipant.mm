@@ -17,7 +17,7 @@
  *
  */
 
-#include "TestReaderRegistered.h"
+#include "OrovParticipant.h"
 
 #include <fastrtps/rtps/reader/RTPSReader.h>
 #include <fastrtps/rtps/participant/RTPSParticipant.h>
@@ -37,21 +37,20 @@
 using namespace eprosima::fastrtps;
 using namespace eprosima::fastrtps::rtps;
 
-TestReaderRegistered::TestReaderRegistered():
+OrovParticipant::OrovParticipant():
 mp_participant(nullptr),
-mp_reader(nullptr),
 mp_history(nullptr)
 {
 }
 
-TestReaderRegistered::~TestReaderRegistered()
+OrovParticipant::~OrovParticipant()
 {
     RTPSDomain::removeRTPSParticipant(mp_participant);
     delete(mp_history);
 //    mp_participant->stopRTPSParticipantAnnouncement();
 }
 
-bool TestReaderRegistered::init()
+bool OrovParticipant::init()
 {
     //CREATE PARTICIPANT
     RTPSParticipantAttributes PParam;
@@ -77,7 +76,7 @@ bool TestReaderRegistered::init()
     return true;
 }
 
-ORovTopicListener* TestReaderRegistered::reg(const char* name,
+RTPSReader* OrovParticipant::reg(const char* name,
                                const char* dataType,
                                rtps::TopicKind_t tKind)
 {
@@ -90,23 +89,23 @@ ORovTopicListener* TestReaderRegistered::reg(const char* name,
     ratt.endpoint.topicKind = tKind;
 
     auto listener = new ORovTopicListener(name, dataType);
-    mp_reader = RTPSDomain::createRTPSReader(mp_participant, ratt, mp_history, listener);
-    mp_reader->enableMessagesFromUnkownWriters(true);
-    if (mp_reader == nullptr)
+    auto reader = RTPSDomain::createRTPSReader(mp_participant, ratt, mp_history, listener);
+    reader->enableMessagesFromUnkownWriters(true);
+    if (reader == nullptr)
         return nullptr;
 
     TopicAttributes Tatt(name, dataType, tKind);
     ReaderQos Rqos;
     Rqos.m_partition.push_back("fe39129");
 //    Rqos.m_durability.kind = VOLATILE_DURABILITY_QOS;
-    auto rezult = mp_participant->registerReader(mp_reader, Tatt, Rqos);
+    auto rezult = mp_participant->registerReader(reader, Tatt, Rqos);
     if (rezult) {
         std::cout << "Registered reader: " << name << " - " << dataType << std::endl;
-        return listener;
+        return reader;
     }
-    return listener;
+    return reader;
 }
 
-void TestReaderRegistered::run()
+void OrovParticipant::run()
 {
 }

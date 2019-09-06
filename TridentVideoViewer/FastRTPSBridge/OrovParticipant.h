@@ -13,7 +13,7 @@
 // limitations under the License.
 
 /**
- * @file TestReaderRegistered.h
+ * @file OrovParticipant.h
  *
  */
 
@@ -25,16 +25,15 @@
 
 
 class ORovTopicListener;
-class TestReaderRegistered
+class OrovParticipant
 {
 public:
-    TestReaderRegistered();
-    virtual ~TestReaderRegistered();
+    OrovParticipant();
+    virtual ~OrovParticipant();
     eprosima::fastrtps::rtps::RTPSParticipant* mp_participant;
-    eprosima::fastrtps::rtps::RTPSReader* mp_reader;
     eprosima::fastrtps::rtps::ReaderHistory* mp_history;
     bool init(); //Initialization
-    ORovTopicListener* reg(const char* name,
+    eprosima::fastrtps::rtps::RTPSReader* reg(const char* name,
              const char* dataType,
              eprosima::fastrtps::rtps::TopicKind_t tKind= eprosima::fastrtps::rtps::NO_KEY); //Register
     void run(); //Run

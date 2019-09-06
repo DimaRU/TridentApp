@@ -1,16 +1,23 @@
 //
 //  FastRTPSBridge.h
-//  TestIntegration
+//  TridentVideoViewer
 //
-//  Created by Dmitriy Borovikov on 14/08/2019.
+//  Created by Dmitriy Borovikov on 04/09/2019.
 //  Copyright © 2019 Dmitriy Borovikov. All rights reserved.
 //
 
-#ifndef FastRTPSBridge_h
-#define FastRTPSBridge_h
+#import <Foundation/Foundation.h>
+#include <fastrtps/rtps/RTPSDomain.h>
+#include "TestReaderRegistered.h"
 
-//extern "C" {
-void startReader();
-//}
+NS_ASSUME_NONNULL_BEGIN
 
-#endif /* FastRTPSBridge_h */
+@interface FastRTPSBridge : NSObject
+{
+    TestReaderRegistered* participant;
+}
+- (id)init;
+//- (BOOL)createRTPSParticipant;
+@end
+
+NS_ASSUME_NONNULL_END

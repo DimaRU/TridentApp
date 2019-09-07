@@ -15,6 +15,7 @@ class VideoViewController: NSViewController {
     @IBOutlet var statusLabel: NSTextField!
     @IBOutlet var closeButton: NSButton!
 
+    var fastRTPSBridge = FastRTPSBridge()
     // instance variables
     var running = false
     var dispatchGroup = DispatchGroup()
@@ -36,6 +37,8 @@ class VideoViewController: NSViewController {
     }
 
     func start() {
+        
+        
         // set the status label
         statusLabel.stringValue = "Initializing video..."
         statusLabel.textColor = Params.goodTextColor

@@ -1,5 +1,5 @@
 //
-//  ORovTopicListener.hpp
+//  RovTopicListener.hpp
 //  TestIntegration
 //
 //  Created by Dmitriy Borovikov on 21/08/2019.
@@ -16,11 +16,11 @@
 #include "TridentVideoViewer-Swift.h"
 
 
-class ORovTopicListener:public eprosima::fastrtps::rtps::ReaderListener
+class RovTopicListener:public eprosima::fastrtps::rtps::ReaderListener
 {
 public:
-    ORovTopicListener(const char* topicName, const char* dataType);
-    ~ORovTopicListener();
+    RovTopicListener(const char* topicName);
+    ~RovTopicListener();
     void onNewCacheChangeAdded(eprosima::fastrtps::rtps::RTPSReader* reader,
                                const eprosima::fastrtps::rtps::CacheChange_t* const change) override;
     void onReaderMatched(eprosima::fastrtps::rtps::RTPSReader*,
@@ -30,7 +30,6 @@ public:
     
     PayloadDecoder *payloadDecoder;
     uint32_t n_matched;
-    std::string dataType;
     std::string topicName;
 };
 

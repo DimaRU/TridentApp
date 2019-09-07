@@ -17,7 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
     RovParticipant* participant;
 }
 - (id)init;
-//- (BOOL)createRTPSParticipant;
+- (bool)registerReaderWithTopicName:(NSString *)topicName typeName:(NSString*)typeName;
+- (bool)removeReaderWithTopicName:(NSString *)topicName;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -8,20 +8,18 @@
 
 #include "RovParticipant.h"
 
-#include <fastrtps/rtps/reader/RTPSReader.h>
-#include <fastrtps/rtps/participant/RTPSParticipant.h>
 #include <fastrtps/rtps/RTPSDomain.h>
-
+#include <fastrtps/rtps/participant/RTPSParticipant.h>
+#include <fastrtps/rtps/reader/RTPSReader.h>
 #include <fastrtps/rtps/attributes/RTPSParticipantAttributes.h>
 #include <fastrtps/rtps/attributes/ReaderAttributes.h>
 #include <fastrtps/rtps/attributes/HistoryAttributes.h>
-
 #include <fastrtps/rtps/history/ReaderHistory.h>
 
 #include <fastrtps/attributes/TopicAttributes.h>
 #include <fastrtps/qos/ReaderQos.h>
 
-#include "ORovTopicListener.hpp"
+#include "RovTopicListener.hpp"
 
 using namespace eprosima::fastrtps;
 using namespace eprosima::fastrtps::rtps;
@@ -34,6 +32,14 @@ mp_history(nullptr)
 
 RovParticipant::~RovParticipant()
 {
+    for(auto it = readerList.begin(); it != readerList.end(); it++)
+    {
+        auto reader = it->second;
+        auto listener = reader->getListener();
+        RTPSDomain::removeRTPSReader(reader);
+        delete listener;
+    }
+    readerList.clear();
     RTPSDomain::removeRTPSParticipant(mp_participant);
     delete(mp_history);
 //    mp_participant->stopRTPSParticipantAnnouncement();
@@ -50,7 +56,7 @@ bool RovParticipant::init()
     PParam.builtin.readerHistoryMemoryPolicy = PREALLOCATED_WITH_REALLOC_MEMORY_MODE;
     PParam.builtin.writerHistoryMemoryPolicy = PREALLOCATED_WITH_REALLOC_MEMORY_MODE;
     PParam.builtin.domainId = 0;
-    PParam.setName("Temp_reader");
+    PParam.setName("TridentVideoViewer");
     mp_participant = RTPSDomain::createParticipant(PParam);
     if (mp_participant == nullptr)
         return false;
@@ -65,32 +71,54 @@ bool RovParticipant::init()
     return true;
 }
 
-RTPSReader* RovParticipant::registerReader(const char* name,
+bool RovParticipant::addReader(const char* name,
                                const char* dataType,
                                rtps::TopicKind_t tKind)
 {
-
+    auto topicName = std::string(name);
+    if (readerList.find(topicName) != readerList.end()) {
+        // aready registered
+        return false;
+    }
     //CREATE READER
-    ReaderAttributes ratt;
-    //    ratt.disable_positive_acks = false;
-//    Locator_t loc(22222);
-//    ratt.endpoint.unicastLocatorList.push_back(loc);
-    ratt.endpoint.topicKind = tKind;
-
-    auto listener = new ORovTopicListener(name, dataType);
-    auto reader = RTPSDomain::createRTPSReader(mp_participant, ratt, mp_history, listener);
+    ReaderAttributes readerAttributes;
+    readerAttributes.endpoint.topicKind = tKind;
+    auto listener = new RovTopicListener(name);
+    auto reader = RTPSDomain::createRTPSReader(mp_participant, readerAttributes, mp_history, listener);
+    if (reader == nullptr) {
+        delete listener;
+        return false;
+    }
+    readerList[topicName] = reader;
+    
     reader->enableMessagesFromUnkownWriters(true);
-    if (reader == nullptr)
-        return nullptr;
-
+    
     TopicAttributes Tatt(name, dataType, tKind);
     ReaderQos Rqos;
-    Rqos.m_partition.push_back("fe39129");
+    Rqos.m_partition.push_back("*");
 //    Rqos.m_durability.kind = VOLATILE_DURABILITY_QOS;
     auto rezult = mp_participant->registerReader(reader, Tatt, Rqos);
-    if (rezult) {
-        std::cout << "Registered reader: " << name << " - " << dataType << std::endl;
-        return reader;
+    if (!rezult) {
+        RTPSDomain::removeRTPSReader(reader);
+        readerList.erase(topicName);
+        delete listener;
+        return false;
     }
-    return reader;
+    std::cout << "Registered reader: " << name << " - " << dataType << std::endl;
+    return true;
+}
+
+bool RovParticipant::removeReader(const char* name)
+{
+    auto topicName = std::string(name);
+    if (readerList.find(topicName) == readerList.end()) {
+        return false;
+    }
+    auto reader = readerList[topicName];
+    auto listener = reader->getListener();
+    if (!RTPSDomain::removeRTPSReader(reader))
+        return false;
+    delete listener;
+    readerList.erase(topicName);
+    return true;
 }

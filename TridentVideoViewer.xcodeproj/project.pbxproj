@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0A28B707231AE067000FDA62 /* DDSType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A28B706231AE067000FDA62 /* DDSType.swift */; };
 		0A28B709231AE36F000FDA62 /* RovCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A28B708231AE36F000FDA62 /* RovCommon.swift */; };
+		0A6B1CA52324438A00D48305 /* FastRTPS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6B1CA42324438A00D48305 /* FastRTPS.swift */; };
 		0A7654842319C16900AF9488 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7654832319C16900AF9488 /* AppDelegate.swift */; };
 		0A7654882319C16900AF9488 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A7654872319C16900AF9488 /* Assets.xcassets */; };
 		0A76548B2319C16900AF9488 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A7654892319C16900AF9488 /* Main.storyboard */; };
@@ -57,6 +58,7 @@
 /* Begin PBXFileReference section */
 		0A28B706231AE067000FDA62 /* DDSType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDSType.swift; sourceTree = "<group>"; };
 		0A28B708231AE36F000FDA62 /* RovCommon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RovCommon.swift; sourceTree = "<group>"; };
+		0A6B1CA42324438A00D48305 /* FastRTPS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastRTPS.swift; sourceTree = "<group>"; };
 		0A7654802319C16900AF9488 /* TridentVideoViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TridentVideoViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A7654832319C16900AF9488 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0A7654872319C16900AF9488 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -84,7 +86,7 @@
 		0A7654C1231A6B1600AF9488 /* VideoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
 		0AAD92F62322B4B1000EAE4E /* RovParticipant.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RovParticipant.mm; sourceTree = "<group>"; };
 		0AAD92F72322B4B1000EAE4E /* RovParticipant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RovParticipant.h; sourceTree = "<group>"; };
-		0AD277F2231FFBC20014D555 /* FastRTPSBridge.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FastRTPSBridge.hpp; sourceTree = "<group>"; };
+		0AD277F2231FFBC20014D555 /* FastRTPSBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FastRTPSBridge.h; sourceTree = "<group>"; };
 		0AD277F3231FFBC30014D555 /* FastRTPSBridge.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = FastRTPSBridge.mm; sourceTree = "<group>"; };
 		0AF1164D2322584E000717F7 /* RovTopic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RovTopic.swift; sourceTree = "<group>"; };
 		0AF1164F23226D32000717F7 /* RovDepth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RovDepth.swift; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 				0A76549E231A681E00AF9488 /* FastRTPSBridge */,
 				0A7654832319C16900AF9488 /* AppDelegate.swift */,
 				0A7654C1231A6B1600AF9488 /* VideoViewController.swift */,
+				0A6B1CA42324438A00D48305 /* FastRTPS.swift */,
 				0A7654AA231A68F400AF9488 /* PayloadDecoder.swift */,
 				0A7654AC231A691500AF9488 /* Model */,
 				0A7654872319C16900AF9488 /* Assets.xcassets */,
@@ -155,11 +158,11 @@
 				0A7654A3231A685E00AF9488 /* CustomLogConsumer.h */,
 				0AAD92F72322B4B1000EAE4E /* RovParticipant.h */,
 				0AAD92F62322B4B1000EAE4E /* RovParticipant.mm */,
-				0A7654A5231A685F00AF9488 /* RovTopicListener.hpp */,
-				0A7654A6231A685F00AF9488 /* RovTopicListener.mm */,
-				0A76549F231A685E00AF9488 /* TridentVideoViewer-Bridging-Header.h */,
-				0AD277F2231FFBC20014D555 /* FastRTPSBridge.hpp */,
+				0AD277F2231FFBC20014D555 /* FastRTPSBridge.h */,
 				0AD277F3231FFBC30014D555 /* FastRTPSBridge.mm */,
+				0A7654A6231A685F00AF9488 /* RovTopicListener.mm */,
+				0A7654A5231A685F00AF9488 /* RovTopicListener.hpp */,
+				0A76549F231A685E00AF9488 /* TridentVideoViewer-Bridging-Header.h */,
 			);
 			path = FastRTPSBridge;
 			sourceTree = "<group>";
@@ -281,6 +284,7 @@
 				0A7654BB231A693300AF9488 /* RovControlDescriptor.swift in Sources */,
 				0A7654BC231A693300AF9488 /* RovPoint.swift in Sources */,
 				0AD277F4231FFBC30014D555 /* FastRTPSBridge.mm in Sources */,
+				0A6B1CA52324438A00D48305 /* FastRTPS.swift in Sources */,
 				0AF1165023226D32000717F7 /* RovDepth.swift in Sources */,
 				0A7654B9231A693300AF9488 /* RovCamera.swift in Sources */,
 				0A7654B8231A693300AF9488 /* RovBarometer.swift in Sources */,

@@ -7,6 +7,7 @@
 //
 
 #include "RovParticipant.h"
+#include "RovTopicListener.hpp"
 
 #include <fastrtps/rtps/RTPSDomain.h>
 #include <fastrtps/rtps/participant/RTPSParticipant.h>
@@ -19,7 +20,6 @@
 #include <fastrtps/attributes/TopicAttributes.h>
 #include <fastrtps/qos/ReaderQos.h>
 
-#include "RovTopicListener.hpp"
 
 using namespace eprosima::fastrtps;
 using namespace eprosima::fastrtps::rtps;
@@ -73,9 +73,10 @@ bool RovParticipant::init()
 
 bool RovParticipant::addReader(const char* name,
                                const char* dataType,
-                               rtps::TopicKind_t tKind)
+                               const bool keyed)
 {
     auto topicName = std::string(name);
+    auto tKind = keyed ? eprosima::fastrtps::rtps::WITH_KEY : eprosima::fastrtps::rtps::NO_KEY;
     if (readerList.find(topicName) != readerList.end()) {
         // aready registered
         return false;
@@ -90,7 +91,7 @@ bool RovParticipant::addReader(const char* name,
         return false;
     }
     readerList[topicName] = reader;
-    
+  
     reader->enableMessagesFromUnkownWriters(true);
     
     TopicAttributes Tatt(name, dataType, tKind);

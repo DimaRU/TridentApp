@@ -6,15 +6,12 @@
 //  Copyright © 2019 Dmitriy Borovikov. All rights reserved.
 //
 
-#ifndef RovParticipant_h
-#define RovParticipant_h
+#pragma once
 
-#include <map>
 #include <string>
+#include <map>
 #include "fastrtps/rtps/rtps_fwd.h"
-//#include "fastrtps/rtps/reader/ReaderListeћner.h"
 
-//class RovTopicListener;
 class RovParticipant
 {
 public:
@@ -25,9 +22,7 @@ public:
     std::map<std::string, eprosima::fastrtps::rtps::RTPSReader*> readerList;
     bool init(); //Initialization
     bool addReader(const char* name,
-             const char* dataType,
-             eprosima::fastrtps::rtps::TopicKind_t tKind= eprosima::fastrtps::rtps::NO_KEY); //Register
+                   const char* dataType,
+                   const bool keyed);
     bool removeReader(const char* name);
 };
-
-#endif /* RovParticipant_hpp */

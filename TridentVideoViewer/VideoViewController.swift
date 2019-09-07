@@ -15,7 +15,6 @@ class VideoViewController: NSViewController {
     @IBOutlet var statusLabel: NSTextField!
     @IBOutlet var closeButton: NSButton!
 
-    var fastRTPSBridge = FastRTPSBridge()
     // instance variables
     var running = false
     var dispatchGroup = DispatchGroup()

@@ -7,17 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
-#include <fastrtps/rtps/RTPSDomain.h>
-#include "RovParticipant.h"
+#import <Cocoa/Cocoa.h>
+#import "TridentVideoViewer-Swift.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface FastRTPSBridge : NSObject
-{
-    RovParticipant* participant;
-}
 - (id)init;
-- (bool)registerReaderWithTopicName:(NSString *)topicName typeName:(NSString*)typeName;
+- (bool)registerReaderWithTopicName:(NSString *)topicName typeName:(NSString*)typeName keyed:(bool) keyed;
 - (bool)removeReaderWithTopicName:(NSString *)topicName;
 @end
 

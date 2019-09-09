@@ -40,7 +40,7 @@ class VideoViewController: NSViewController {
         
         // set the status label
         statusLabel.stringValue = "Initializing video..."
-        statusLabel.textColor = Params.goodTextColor
+        statusLabel.textColor = NSColor(named: "okColor")
         statusLabel.isHidden = false
         imageView.image = nil
 
@@ -64,7 +64,7 @@ class VideoViewController: NSViewController {
 
     func statusError(_ message: String) {
         statusLabel.stringValue = message
-        statusLabel.textColor = Params.badTextColor
+        statusLabel.textColor = NSColor(named: "errorColor")
         statusLabel.isHidden = false
     }
 
@@ -229,9 +229,4 @@ class VideoViewController: NSViewController {
 private func globalDecompressionCallback(_ decompressionOutputRefCon: UnsafeMutableRawPointer?, _ sourceFrameRefCon: UnsafeMutableRawPointer?, _ status: OSStatus, _ infoFlags: VTDecodeInfoFlags, _ imageBuffer: CVImageBuffer?, _ presentationTimeStamp: CMTime, _ presentationDuration: CMTime) {
     let videoController: VideoViewController = unsafeBitCast(decompressionOutputRefCon, to: VideoViewController.self)
     videoController.decompressionCallback(sourceFrameRefCon, status, infoFlags, imageBuffer, presentationTimeStamp, presentationDuration)
-}
-
-struct Params {
-    static let badTextColor = NSColor.red
-    static let goodTextColor = NSColor(red: 0, green: CGFloat(192) / 255.0, blue: 0, alpha: 1)
 }

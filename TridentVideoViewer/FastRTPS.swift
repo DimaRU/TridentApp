@@ -13,9 +13,11 @@ class FastRTPS {
     static let shared = FastRTPS()
     
     class func registerReader(topic: RovTopic) {
+        let payloadDecoder = PayloadDecoder(topic: topic)
         FastRTPS.shared.fastRTPSBridge.registerReader(withTopicName: topic.rawValue,
                                                       typeName: topic.ddsTypeName,
-                                                      keyed: topic.isKeyed)
+                                                      keyed: topic.isKeyed,
+                                                      payloadDecoder: payloadDecoder)
     }
     
     class func removeReader(topic: RovTopic) {

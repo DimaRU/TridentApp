@@ -13,12 +13,14 @@ public class PayloadDecoder: NSObject {
     let decoder = CDRDecoder()
     var topic: RovTopic
     
-    @objc public init?(topicName: UnsafePointer<UInt8>) {
-        let topicName = String(cString: topicName)
-        guard let topic = RovTopic(rawValue: topicName) else { return nil}
+    init(topic: RovTopic) {
         self.topic = topic
     }
 
+    deinit {
+        print("deinit PayloadDecoder")
+    }
+    
     @objc public func decode(sequence: Int,
                              payloadSize: Int,
                              payload: UnsafePointer<CUnsignedChar>) {

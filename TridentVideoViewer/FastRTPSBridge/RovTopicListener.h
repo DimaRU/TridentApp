@@ -1,13 +1,13 @@
 //
-//  RovTopicListener.hpp
+//  RovTopicListener.h
 //  TestIntegration
 //
 //  Created by Dmitriy Borovikov on 21/08/2019.
 //  Copyright © 2019 Dmitriy Borovikov. All rights reserved.
 //
 
-#ifndef ORovTopicListener_hpp
-#define ORovTopicListener_hpp
+#ifndef ORovTopicListener_h
+#define ORovTopicListener_h
 
 #include <stdio.h>
 #include "fastrtps/rtps/rtps_fwd.h"
@@ -19,7 +19,7 @@
 class RovTopicListener:public eprosima::fastrtps::rtps::ReaderListener
 {
 public:
-    RovTopicListener(const char* topicName);
+    RovTopicListener(const char* topicName, PayloadDecoder *payloadDecoder);
     ~RovTopicListener();
     void onNewCacheChangeAdded(eprosima::fastrtps::rtps::RTPSReader* reader,
                                const eprosima::fastrtps::rtps::CacheChange_t* const change) override;
@@ -33,4 +33,4 @@ public:
     std::string topicName;
 };
 
-#endif /* ORovTopicListener_hpp */
+#endif /* ORovTopicListener_h */

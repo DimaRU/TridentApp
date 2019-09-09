@@ -11,6 +11,8 @@
 #include <string>
 #include <map>
 #include "fastrtps/rtps/rtps_fwd.h"
+#import <Cocoa/Cocoa.h>
+#import "TridentVideoViewer-Swift.h"
 
 class RovParticipant
 {
@@ -23,6 +25,7 @@ public:
     bool init(); //Initialization
     bool addReader(const char* name,
                    const char* dataType,
-                   const bool keyed);
+                   const bool keyed,
+                   PayloadDecoder *payloadDecoder);
     bool removeReader(const char* name);
 };

@@ -73,7 +73,8 @@ bool RovParticipant::init()
 
 bool RovParticipant::addReader(const char* name,
                                const char* dataType,
-                               const bool keyed)
+                               const bool keyed,
+                               PayloadDecoder *payloadDecoder)
 {
     auto topicName = std::string(name);
     auto tKind = keyed ? eprosima::fastrtps::rtps::WITH_KEY : eprosima::fastrtps::rtps::NO_KEY;
@@ -84,7 +85,7 @@ bool RovParticipant::addReader(const char* name,
     //CREATE READER
     ReaderAttributes readerAttributes;
     readerAttributes.endpoint.topicKind = tKind;
-    auto listener = new RovTopicListener(name);
+    auto listener = new RovTopicListener(name, payloadDecoder);
     auto reader = RTPSDomain::createRTPSReader(mp_participant, readerAttributes, mp_history, listener);
     if (reader == nullptr) {
         delete listener;

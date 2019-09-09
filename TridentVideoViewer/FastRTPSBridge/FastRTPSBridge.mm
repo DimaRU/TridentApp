@@ -7,9 +7,9 @@
 //
 
 #import "FastRTPSBridge.h"
+#import "RovParticipant.h"
 #include <fastrtps/log/Log.h>
 #include "CustomLogConsumer.h"
-#import "RovParticipant.h"
 
 using namespace eprosima;
 using namespace fastrtps;
@@ -38,10 +38,11 @@ using namespace std;
 }
 
 
-- (bool)registerReaderWithTopicName:(NSString *)topicName typeName:(NSString*)typeName keyed:(bool) keyed {
+- (bool)registerReaderWithTopicName:(NSString *)topicName typeName:(NSString*)typeName keyed:(bool) keyed payloadDecoder: (PayloadDecoder*) payloadDecoder {
     return _participant->addReader([topicName cStringUsingEncoding:NSUTF8StringEncoding],
-                                  [typeName cStringUsingEncoding:NSUTF8StringEncoding],
-                                  keyed);
+                                   [typeName cStringUsingEncoding:NSUTF8StringEncoding],
+                                   keyed,
+                                   payloadDecoder);
 }
 
 - (bool)removeReaderWithTopicName:(NSString *)topicName {

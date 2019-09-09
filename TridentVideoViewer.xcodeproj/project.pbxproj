@@ -70,7 +70,7 @@
 		0A76549F231A685E00AF9488 /* TridentVideoViewer-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TridentVideoViewer-Bridging-Header.h"; sourceTree = "<group>"; };
 		0A7654A1231A685E00AF9488 /* CustomLogConsumer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CustomLogConsumer.cpp; sourceTree = "<group>"; };
 		0A7654A3231A685E00AF9488 /* CustomLogConsumer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomLogConsumer.h; sourceTree = "<group>"; };
-		0A7654A5231A685F00AF9488 /* RovTopicListener.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = RovTopicListener.hpp; sourceTree = "<group>"; };
+		0A7654A5231A685F00AF9488 /* RovTopicListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RovTopicListener.h; sourceTree = "<group>"; };
 		0A7654A6231A685F00AF9488 /* RovTopicListener.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RovTopicListener.mm; sourceTree = "<group>"; };
 		0A7654AA231A68F400AF9488 /* PayloadDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayloadDecoder.swift; sourceTree = "<group>"; };
 		0A7654AD231A692400AF9488 /* RovCamera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RovCamera.swift; sourceTree = "<group>"; };
@@ -128,11 +128,11 @@
 		0A7654822319C16900AF9488 /* TridentVideoViewer */ = {
 			isa = PBXGroup;
 			children = (
-				0A76549E231A681E00AF9488 /* FastRTPSBridge */,
 				0A7654832319C16900AF9488 /* AppDelegate.swift */,
 				0A7654C1231A6B1600AF9488 /* VideoViewController.swift */,
 				0A6B1CA42324438A00D48305 /* FastRTPS.swift */,
 				0A7654AA231A68F400AF9488 /* PayloadDecoder.swift */,
+				0A76549E231A681E00AF9488 /* FastRTPSBridge */,
 				0A7654AC231A691500AF9488 /* Model */,
 				0A7654872319C16900AF9488 /* Assets.xcassets */,
 				0A7654892319C16900AF9488 /* Main.storyboard */,
@@ -156,12 +156,12 @@
 			children = (
 				0A7654A1231A685E00AF9488 /* CustomLogConsumer.cpp */,
 				0A7654A3231A685E00AF9488 /* CustomLogConsumer.h */,
-				0AAD92F72322B4B1000EAE4E /* RovParticipant.h */,
 				0AAD92F62322B4B1000EAE4E /* RovParticipant.mm */,
-				0AD277F2231FFBC20014D555 /* FastRTPSBridge.h */,
+				0AAD92F72322B4B1000EAE4E /* RovParticipant.h */,
 				0AD277F3231FFBC30014D555 /* FastRTPSBridge.mm */,
+				0AD277F2231FFBC20014D555 /* FastRTPSBridge.h */,
 				0A7654A6231A685F00AF9488 /* RovTopicListener.mm */,
-				0A7654A5231A685F00AF9488 /* RovTopicListener.hpp */,
+				0A7654A5231A685F00AF9488 /* RovTopicListener.h */,
 				0A76549F231A685E00AF9488 /* TridentVideoViewer-Bridging-Header.h */,
 			);
 			path = FastRTPSBridge;

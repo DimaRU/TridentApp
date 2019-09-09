@@ -6,7 +6,7 @@
 //  Copyright © 2019 Dmitriy Borovikov. All rights reserved.
 //
 
-#include "RovTopicListener.hpp"
+#include "RovTopicListener.h"
 #include "RovParticipant.h"
 
 #include <fastrtps/rtps/reader/RTPSReader.h>
@@ -21,10 +21,10 @@
 using namespace eprosima::fastrtps;
 using namespace eprosima::fastrtps::rtps;
 
-RovTopicListener::RovTopicListener(const char* topicName): n_matched(0)
+RovTopicListener::RovTopicListener(const char* topicName, PayloadDecoder *payloadDecoder): n_matched(0)
 {
     RovTopicListener::topicName = std::string(topicName);
-    payloadDecoder = [[PayloadDecoder alloc] initWithTopicName:(const uint8_t * _Nonnull)topicName];
+    RovTopicListener::payloadDecoder = payloadDecoder;
 }
 
 RovTopicListener::~RovTopicListener()

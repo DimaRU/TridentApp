@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface FastRTPSBridge : NSObject
 - (id)init;
-- (bool)registerReaderWithTopicName:(NSString *)topicName typeName:(NSString*)typeName keyed:(bool) keyed;
+- (bool)registerReaderWithTopicName:(NSString *)topicName typeName:(NSString*)typeName keyed:(bool) keyed payloadDecoder: (PayloadDecoder*) payloadDecoder;
 - (bool)removeReaderWithTopicName:(NSString *)topicName;
 @end
 

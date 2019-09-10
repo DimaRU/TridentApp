@@ -32,17 +32,23 @@ mp_history(nullptr)
 
 RovParticipant::~RovParticipant()
 {
+    std::cout << "Delete participant" << std::endl;
+    resignAll();
+    RTPSDomain::removeRTPSParticipant(mp_participant);
+    delete(mp_history);
+//    mp_participant->stopRTPSParticipantAnnouncement();
+}
+
+void RovParticipant::resignAll() {
     for(auto it = readerList.begin(); it != readerList.end(); it++)
     {
+        std::cout << "Remove reader: " << it->first << std::endl;
         auto reader = it->second;
         auto listener = reader->getListener();
         RTPSDomain::removeRTPSReader(reader);
         delete listener;
     }
     readerList.clear();
-    RTPSDomain::removeRTPSParticipant(mp_participant);
-    delete(mp_history);
-//    mp_participant->stopRTPSParticipantAnnouncement();
 }
 
 bool RovParticipant::init()
@@ -112,6 +118,7 @@ bool RovParticipant::addReader(const char* name,
 
 bool RovParticipant::removeReader(const char* name)
 {
+    std::cout << "Remove reader: " << name << std::endl;
     auto topicName = std::string(name);
     if (readerList.find(topicName) == readerList.end()) {
         return false;

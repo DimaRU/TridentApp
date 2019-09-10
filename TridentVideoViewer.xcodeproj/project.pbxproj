@@ -31,6 +31,7 @@
 		0A7654BE231A693300AF9488 /* RovTemperature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7654AF231A692400AF9488 /* RovTemperature.swift */; };
 		0A7654BF231A693300AF9488 /* RovVector3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7654B5231A692500AF9488 /* RovVector3.swift */; };
 		0A7654C0231A693300AF9488 /* RovVideoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7654B6231A692500AF9488 /* RovVideoData.swift */; };
+		0A861E962327E9EF00A54F72 /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7654C1231A6B1600AF9488 /* VideoViewController.swift */; };
 		0AAD92F82322B4B1000EAE4E /* RovParticipant.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0AAD92F62322B4B1000EAE4E /* RovParticipant.mm */; };
 		0AD277F4231FFBC30014D555 /* FastRTPSBridge.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0AD277F3231FFBC30014D555 /* FastRTPSBridge.mm */; };
 		0AF1164E2322584E000717F7 /* RovTopic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF1164D2322584E000717F7 /* RovTopic.swift */; };
@@ -269,6 +270,7 @@
 			files = (
 				0A28B709231AE36F000FDA62 /* RovCommon.swift in Sources */,
 				0A7654A9231A685F00AF9488 /* RovTopicListener.mm in Sources */,
+				0A861E962327E9EF00A54F72 /* VideoViewController.swift in Sources */,
 				0AF11652232274FE000717F7 /* BatteryState.swift in Sources */,
 				0AAD92F82322B4B1000EAE4E /* RovParticipant.mm in Sources */,
 				0AF1164E2322584E000717F7 /* RovTopic.swift in Sources */,

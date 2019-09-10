@@ -10,7 +10,7 @@ import AVFoundation
 import Cocoa
 import VideoToolbox
 
-class VideoViewController: NSViewController {
+class VideoViewController: NSViewController, NSWindowDelegate {
     @IBOutlet var imageView: NSImageView!
     @IBOutlet var statusLabel: NSTextField!
     @IBOutlet var closeButton: NSButton!
@@ -29,15 +29,43 @@ class VideoViewController: NSViewController {
         return Data()
     }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        start()
+    deinit {
+        print("Deinit VideoViewController")
     }
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+
+    func windowWillClose(_ notification: Notification) {
+        print("windowWillClose")
+        FastRTPS.stopRTPS()
+    }
+
+    override func viewWillAppear() {
+        super.viewWillAppear()
+        view.window?.delegate = self
+    }
+
+    override func viewDidAppear() {
+        super.viewDidAppear()
+        print("viewDidAppear")
+        FastRTPS.registerReader(topic: .rovTempWater) { (temp: RovTemperature) in
+            DispatchQueue.main.async {
+                self.statusLabel.stringValue = "\(temp.temperature_.temperature)"
+                print(temp.temperature_.header.frameId)
+            }
+        }
+    }
+
+    override func viewWillDisappear() {
+        super.viewWillDisappear()
+        print("viewWillDisappear")
+        FastRTPS.removeReader(topic: .rovTempWater)
+    }
+
+
     func start() {
-        
-        
         // set the status label
         statusLabel.stringValue = "Initializing video..."
         statusLabel.textColor = NSColor(named: "okColor")

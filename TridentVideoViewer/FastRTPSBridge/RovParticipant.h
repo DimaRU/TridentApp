@@ -28,4 +28,5 @@ public:
                    const bool keyed,
                    NSObject<PayloadDecoderInterface>* payloadDecoder);
     bool removeReader(const char* name);
+    void resignAll();
 };

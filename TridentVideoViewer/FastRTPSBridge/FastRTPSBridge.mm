@@ -49,4 +49,13 @@ using namespace std;
     return _participant->removeReader([topicName cStringUsingEncoding:NSUTF8StringEncoding]);
 }
 
+- (void)stopRTPS {
+    _participant->resignAll();
+    delete _participant;
+}
+
+- (void)resignAll {
+    _participant->resignAll();
+}
+
 @end

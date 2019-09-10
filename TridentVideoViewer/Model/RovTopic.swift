@@ -68,33 +68,3 @@ enum RovTopic: String {
     case rovFirmwareCommandReq       = "rov_firmware_command_req" // orov::msg::system::FirmwareCommand
     
 }
-
-extension RovTopic {
-    var ddsTypeName: String {
-        return self.ddsType.ddsTypeName
-    }
-    
-    var isKeyed: Bool {
-        return self.ddsType.isKeyed
-    }
-    
-    var ddsType: DDSType.Type {
-        switch self {
-        case .rovPingReply: return String.self
-        case .rovVideoOverlayModeCurrent: return String.self
-        case .rovCamFwdH2640CtrlDesc: return RovControlDescriptor.self
-        case .rovCamFwdH2641CtrlDesc: return RovControlDescriptor.self
-        case .rovCamFwdH2640Video: return RovVideoData.self
-        case .rovCamFwdH2641Video: return RovVideoData.self
-        case .rovAttitude: return RovAttitude.self
-        case .rovPressureInternal: return RovBarometer.self
-        case .rovDepth: return RovDepth.self
-        case .rovFuelgaugeHealth: return RovFuelgaugeHealth.self
-        case .rovFuelgaugeStatus: return RovFuelgaugeStatus.self
-        case .rovTempInternal: return RovTemperature.self
-        case .rovTempWater: return RovTemperature.self
-        default:
-            fatalError("Unsupported topic type")
-       }
-    }
-}

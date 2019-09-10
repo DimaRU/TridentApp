@@ -9,7 +9,6 @@
 import Foundation
 
 struct RovDepth: DDSType {
-   
     let pressure: FluidPressure
     let id: String      // @key
     let depth: Float    // Unit: meters
@@ -19,8 +18,6 @@ struct RovDepth: DDSType {
 }
 
 
-
-// TODO: Use in trident-control
 struct DepthConfig {
     enum WaterType: UInt8 {
         case fresh = 0

@@ -8,14 +8,14 @@
 
 import Foundation
 
-struct RovTemperature_: Codable{
-    let header: RovHeader
-    let temperature: Double
-    let variance: Double
-}
-
 struct RovTemperature: DDSType {
-    let temperature_: RovTemperature_
+    struct RovTemperature_: Codable{
+        let header: RovHeader
+        let temperature: Double
+        let variance: Double
+    }
+    
+    let temperature: RovTemperature_
     let id: String
     
     static var isKeyed: Bool { true }

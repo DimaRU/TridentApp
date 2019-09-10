@@ -13,21 +13,17 @@ import VideoToolbox
 class VideoViewController: NSViewController, NSWindowDelegate {
     @IBOutlet var imageView: NSImageView!
     @IBOutlet var statusLabel: NSTextField!
-    @IBOutlet var closeButton: NSButton!
 
     // instance variables
     var running = false
     var dispatchGroup = DispatchGroup()
+    let videoDecoderQueue = DispatchQueue.init(label: "in.ioshack.Trident", qos: .background)
     var formatDescription: CMVideoFormatDescription?
     var videoSession: VTDecompressionSession?
     var fullsps: [UInt8]?
     var fullpps: [UInt8]?
 
     let NalStart = Data([0, 0, 0, 1])
-
-    func getVideoData() -> Data {
-        return Data()
-    }
 
     deinit {
         print("Deinit VideoViewController")
@@ -39,6 +35,7 @@ class VideoViewController: NSViewController, NSWindowDelegate {
 
     func windowWillClose(_ notification: Notification) {
         print("windowWillClose")
+        stop()
         FastRTPS.stopRTPS()
     }
 
@@ -50,68 +47,25 @@ class VideoViewController: NSViewController, NSWindowDelegate {
     override func viewDidAppear() {
         super.viewDidAppear()
         print("viewDidAppear")
-        FastRTPS.registerReader(topic: .rovTempWater) { (temp: RovTemperature) in
-            DispatchQueue.main.async {
-                self.statusLabel.stringValue = "\(temp.temperature_.temperature)"
-                print(temp.temperature_.header.frameId)
-            }
-        }
+        start()
     }
 
     override func viewWillDisappear() {
         super.viewWillDisappear()
         print("viewWillDisappear")
-        FastRTPS.removeReader(topic: .rovTempWater)
+        FastRTPS.resignAll()
     }
-
 
     func start() {
-        // set the status label
-        statusLabel.stringValue = "Initializing video..."
-        statusLabel.textColor = NSColor(named: "okColor")
-        statusLabel.isHidden = false
-        imageView.image = nil
+        statusLabel.stringValue = "Connecting to Trident..."
+        statusLabel.textColor = NSColor.lightGray
 
-        // start reading the stream and decoding the video
-        if createReadThread() {
-            // fade out after a while
-        }
-    }
 
-    func stop() {
-        running = false
-    }
-
-    func stopVideo() {
-        // terminate the video processing
-        destroyVideoSession()
-
-        // set the status label
-        statusError("Video stopped.")
-    }
-
-    func statusError(_ message: String) {
-        statusLabel.stringValue = message
-        statusLabel.textColor = NSColor(named: "errorColor")
-        statusLabel.isHidden = false
-    }
-
-    func createReadThread() -> Bool {
-        DispatchQueue.global(qos: .background).async {
-            self.dispatchGroup.enter()
-            self.dispatchGroup.notify(queue: .main) {
-                self.stopVideo()
-            }
-
+        FastRTPS.registerReader(topic: .rovCamFwdH2640Video) { (videoData: RovVideoData) in
             self.running = true
-
-            while self.running {
-                let data = self.getVideoData()
-                if data.isEmpty {
-                    break
-                }
+            self.videoDecoderQueue.async {
+                let data = videoData.data
                 var startIndex = data.startIndex
-
                 repeat {
                     let endIndex: Data.Index
                     if let range = data.range(of: self.NalStart, options: [], in: startIndex.advanced(by: 1) ..< data.endIndex) {
@@ -124,10 +78,31 @@ class VideoViewController: NSViewController, NSWindowDelegate {
                     startIndex = endIndex
                 } while startIndex < data.endIndex
             }
-            self.dispatchGroup.leave()
         }
+        
+//        FastRTPS.registerReader(topic: .rovTempWater) { (temp: RovTemperature) in
+//            DispatchQueue.main.async {
+//                print(temp.temperature_.temperature)
+//                self.statusLabel.stringValue = "Connected"
+//                self.statusLabel.textColor = NSColor(named: "okColor")
+//            }
+//        }
 
-        return true
+    }
+
+    private func stop() {
+        running = false
+        FastRTPS.resignAll()
+        stopVideo()
+    }
+
+    private func stopVideo() {
+        // terminate the video processing
+        destroyVideoSession()
+
+        statusLabel.stringValue = "Disconnected"
+        statusLabel.textColor = NSColor(named: "errorColor")
+        imageView.image = nil
     }
 
     func processNal(_ nal: inout [UInt8]) {
@@ -146,7 +121,8 @@ class VideoViewController: NSViewController, NSWindowDelegate {
         default:
             break
         }
-        print("nal type, size:", nalType, nal.count)
+        print("nal type: \(nalType), size:", nal.count)
+
         if let sps = fullsps, let pps = fullpps {
             destroyVideoSession()
             _ = createVideoSession(sps: sps, pps: pps)
@@ -247,6 +223,7 @@ class VideoViewController: NSViewController, NSWindowDelegate {
             if let cgImage = context.createCGImage(ciImage, from: CGRect(origin: .zero, size: size)) {
                 DispatchQueue.main.async {
                     let uiImage = NSImage(cgImage: cgImage, size: self.imageView.frame.size)
+                    print("set image")
                     self.imageView.image = uiImage
                 }
             }

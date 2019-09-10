@@ -8,15 +8,15 @@
 
 import Foundation
 
-struct RovMenuOption: Codable
-{
-    let value_string: String
-    let value_s64: Int64
-}
 
 // Topic format: "<topicPrefix_rov_camChannels><channel_id>_ctrl_desc"
 // Ex: rov_cam_forward_H2640_ctrl_desc
 struct RovControlDescriptor: DDSType {
+    struct RovMenuOption: Codable
+    {
+        let value_string: String
+        let value_s64: Int64
+    }
     let id: UInt32       //@key
     let id_string: String
     let type: UInt32

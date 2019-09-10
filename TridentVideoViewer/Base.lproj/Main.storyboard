@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14865.1" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14865.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14868"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -212,26 +212,19 @@
         <scene sceneID="jBG-fP-4Z9">
             <objects>
                 <viewController id="Wgr-FD-Jeg" customClass="VideoViewController" customModule="TridentVideoViewer" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="Rxz-w6-QWt">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="310"/>
+                    <view key="view" focusRingType="none" id="Rxz-w6-QWt">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="602"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8S7-OO-7j4">
-                                <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" placeholderIntrinsicWidth="1000" placeholderIntrinsicHeight="562" translatesAutoresizingMaskIntoConstraints="NO" id="8S7-OO-7j4">
+                                <rect key="frame" x="0.0" y="0.0" width="1000" height="562"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="8S7-OO-7j4" secondAttribute="height" multiplier="16:9" id="g3f-fw-4Aj"/>
                                 </constraints>
-                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="lju-ac-TaH"/>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" image="octopus-foundation-island-mozambique-unesco-trident-openrov" id="lju-ac-TaH"/>
                             </imageView>
-                            <button focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kz7-nS-qYI">
-                                <rect key="frame" x="374" y="281" width="33" height="34"/>
-                                <buttonCell key="cell" type="inline" bezelStyle="inline" image="NSTouchBarPlayTemplate" imagePosition="only" alignment="center" focusRingType="none" imageScaling="proportionallyUpOrDown" inset="2" id="B7e-sT-0wi">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="smallSystemBold"/>
-                                </buttonCell>
-                            </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xCn-7A-stl">
-                                <rect key="frame" x="419" y="290" width="43" height="16"/>
+                                <rect key="frame" x="939" y="582" width="43" height="16"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Status" id="XgG-1H-wB4">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -242,26 +235,24 @@
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="8S7-OO-7j4" secondAttribute="trailing" id="7tC-j4-uay"/>
                             <constraint firstItem="8S7-OO-7j4" firstAttribute="top" secondItem="Rxz-w6-QWt" secondAttribute="top" constant="40" id="9Fw-d5-c92"/>
-                            <constraint firstItem="xCn-7A-stl" firstAttribute="leading" secondItem="kz7-nS-qYI" secondAttribute="trailing" constant="14" id="Cbq-Md-a1d"/>
+                            <constraint firstItem="xCn-7A-stl" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Rxz-w6-QWt" secondAttribute="leading" constant="20" symbolic="YES" id="BNC-bE-oex"/>
                             <constraint firstItem="xCn-7A-stl" firstAttribute="top" secondItem="Rxz-w6-QWt" secondAttribute="top" constant="4" id="HTx-oZ-8vT"/>
                             <constraint firstAttribute="trailing" secondItem="xCn-7A-stl" secondAttribute="trailing" constant="20" id="Tu2-Br-6iY"/>
                             <constraint firstItem="8S7-OO-7j4" firstAttribute="leading" secondItem="Rxz-w6-QWt" secondAttribute="leading" id="YYg-ey-g1Q"/>
-                            <constraint firstItem="kz7-nS-qYI" firstAttribute="centerY" secondItem="xCn-7A-stl" secondAttribute="centerY" id="hOt-gx-qvu"/>
                             <constraint firstAttribute="bottom" secondItem="8S7-OO-7j4" secondAttribute="bottom" id="oaa-gc-lHV"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="closeButton" destination="kz7-nS-qYI" id="ZGp-Id-NLf"/>
                         <outlet property="imageView" destination="8S7-OO-7j4" id="Ttq-fi-o1N"/>
                         <outlet property="statusLabel" destination="xCn-7A-stl" id="DzV-UX-C4n"/>
                     </connections>
                 </viewController>
                 <customObject id="Z09-aO-Sxq" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="700"/>
+            <point key="canvasLocation" x="146" y="864"/>
         </scene>
     </scenes>
     <resources>
-        <image name="NSTouchBarPlayTemplate" width="14" height="30"/>
+        <image name="octopus-foundation-island-mozambique-unesco-trident-openrov" width="1000" height="560"/>
     </resources>
 </document>

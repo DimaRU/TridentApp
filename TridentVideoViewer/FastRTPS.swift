@@ -21,12 +21,16 @@ class FastRTPS {
     class func registerReader<T: DDSType>(topic: RovTopic, completion: @escaping (T)->Void) {
         let payloadDecoder = PayloadDecoder(topic: topic, completion: completion)
         FastRTPS.shared.fastRTPSBridge?.registerReader(withTopicName: topic.rawValue,
-                                                      typeName: topic.ddsTypeName,
-                                                      keyed: topic.isKeyed,
+                                                      typeName: T.ddsTypeName,
+                                                      keyed: T.isKeyed,
                                                       payloadDecoder: payloadDecoder)
     }
     
     class func removeReader(topic: RovTopic) {
         FastRTPS.shared.fastRTPSBridge?.removeReader(withTopicName: topic.rawValue)
+    }
+    
+    class func resignAll() {
+        FastRTPS.shared.fastRTPSBridge?.resignAll()
     }
 }

@@ -26,6 +26,6 @@ public:
     bool addReader(const char* name,
                    const char* dataType,
                    const bool keyed,
-                   PayloadDecoder *payloadDecoder);
+                   NSObject<PayloadDecoderInterface>* payloadDecoder);
     bool removeReader(const char* name);
 };

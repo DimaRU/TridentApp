@@ -31,7 +31,6 @@
 		0A7654BE231A693300AF9488 /* RovTemperature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7654AF231A692400AF9488 /* RovTemperature.swift */; };
 		0A7654BF231A693300AF9488 /* RovVector3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7654B5231A692500AF9488 /* RovVector3.swift */; };
 		0A7654C0231A693300AF9488 /* RovVideoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7654B6231A692500AF9488 /* RovVideoData.swift */; };
-		0A7654C3231A6B1600AF9488 /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7654C1231A6B1600AF9488 /* VideoViewController.swift */; };
 		0AAD92F82322B4B1000EAE4E /* RovParticipant.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0AAD92F62322B4B1000EAE4E /* RovParticipant.mm */; };
 		0AD277F4231FFBC30014D555 /* FastRTPSBridge.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0AD277F3231FFBC30014D555 /* FastRTPSBridge.mm */; };
 		0AF1164E2322584E000717F7 /* RovTopic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF1164D2322584E000717F7 /* RovTopic.swift */; };
@@ -280,7 +279,6 @@
 				0A28B707231AE067000FDA62 /* DDSType.swift in Sources */,
 				0A7654842319C16900AF9488 /* AppDelegate.swift in Sources */,
 				0A7654AB231A68F400AF9488 /* PayloadDecoder.swift in Sources */,
-				0A7654C3231A6B1600AF9488 /* VideoViewController.swift in Sources */,
 				0A7654BB231A693300AF9488 /* RovControlDescriptor.swift in Sources */,
 				0A7654BC231A693300AF9488 /* RovPoint.swift in Sources */,
 				0AD277F4231FFBC30014D555 /* FastRTPSBridge.mm in Sources */,

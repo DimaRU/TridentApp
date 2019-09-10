@@ -19,7 +19,7 @@
 class RovTopicListener:public eprosima::fastrtps::rtps::ReaderListener
 {
 public:
-    RovTopicListener(const char* topicName, PayloadDecoder *payloadDecoder);
+    RovTopicListener(const char* topicName, NSObject<PayloadDecoderInterface>* payloadDecoder);
     ~RovTopicListener();
     void onNewCacheChangeAdded(eprosima::fastrtps::rtps::RTPSReader* reader,
                                const eprosima::fastrtps::rtps::CacheChange_t* const change) override;
@@ -28,7 +28,7 @@ public:
     void on_liveliness_changed(eprosima::fastrtps::rtps::RTPSReader *reader,
                                const eprosima::fastrtps::LivelinessChangedStatus &status) override;
     
-    PayloadDecoder *payloadDecoder;
+    NSObject<PayloadDecoderInterface>* payloadDecoder;
     uint32_t n_matched;
     std::string topicName;
 };

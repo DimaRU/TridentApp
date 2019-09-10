@@ -7,7 +7,7 @@
 //
 
 #include "RovParticipant.h"
-#include "RovTopicListener.hpp"
+#include "RovTopicListener.h"
 
 #include <fastrtps/rtps/RTPSDomain.h>
 #include <fastrtps/rtps/participant/RTPSParticipant.h>
@@ -74,7 +74,7 @@ bool RovParticipant::init()
 bool RovParticipant::addReader(const char* name,
                                const char* dataType,
                                const bool keyed,
-                               PayloadDecoder *payloadDecoder)
+                               NSObject<PayloadDecoderInterface>* payloadDecoder)
 {
     auto topicName = std::string(name);
     auto tKind = keyed ? eprosima::fastrtps::rtps::WITH_KEY : eprosima::fastrtps::rtps::NO_KEY;

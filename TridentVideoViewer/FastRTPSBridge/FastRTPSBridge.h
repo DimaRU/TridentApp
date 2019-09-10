@@ -7,14 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <Cocoa/Cocoa.h>
-#import "TridentVideoViewer-Swift.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol PayloadDecoderInterface;
 @interface FastRTPSBridge : NSObject
 - (id)init;
-- (bool)registerReaderWithTopicName:(NSString *)topicName typeName:(NSString*)typeName keyed:(bool) keyed payloadDecoder: (PayloadDecoder*) payloadDecoder;
+- (bool)registerReaderWithTopicName:(NSString *)topicName typeName:(NSString*)typeName keyed:(bool) keyed payloadDecoder: (NSObject<PayloadDecoderInterface>*) payloadDecoder;
 - (bool)removeReaderWithTopicName:(NSString *)topicName;
 @end
 

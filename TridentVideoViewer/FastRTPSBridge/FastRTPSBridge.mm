@@ -37,8 +37,8 @@ using namespace std;
     return self;
 }
 
+- (bool)registerReaderWithTopicName:(NSString *)topicName typeName:(NSString*)typeName keyed:(bool) keyed payloadDecoder: (NSObject<PayloadDecoderInterface>*) payloadDecoder {
 
-- (bool)registerReaderWithTopicName:(NSString *)topicName typeName:(NSString*)typeName keyed:(bool) keyed payloadDecoder: (PayloadDecoder*) payloadDecoder {
     return _participant->addReader([topicName cStringUsingEncoding:NSUTF8StringEncoding],
                                    [typeName cStringUsingEncoding:NSUTF8StringEncoding],
                                    keyed,

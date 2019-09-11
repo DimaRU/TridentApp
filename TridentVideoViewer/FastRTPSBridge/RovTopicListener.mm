@@ -43,15 +43,12 @@ void RovTopicListener::onReaderMatched(RTPSReader* reader, MatchingInfo& info)
     switch (info.status)
     {
         case MATCHED_MATCHING:
-            std::cout << "\tMatched:" << topicName << " - " << " guid: " << info.remoteEndpointGuid <<  std::endl;
+            std::cout << "\tReader Matched:" << topicName << " -  guid: " << info.remoteEndpointGuid <<  std::endl;
             n_matched++;
             break;
         case REMOVED_MATCHING:
-            std::cout << "\tRemove matched:" << topicName << " - " << " guid: " << info.remoteEndpointGuid << std::endl;
+            std::cout << "\tReader remove matched:" << topicName << " - guid: " << info.remoteEndpointGuid << std::endl;
             n_matched--;
-            break;
-        default:
-            // std::cout << "\tstatus: UNKNOWN (ERROR)\n";
             break;
     }
 }

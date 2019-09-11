@@ -16,7 +16,6 @@ class VideoViewController: NSViewController, NSWindowDelegate {
 
     // instance variables
     var running = false
-    var dispatchGroup = DispatchGroup()
     let videoDecoderQueue = DispatchQueue.init(label: "in.ioshack.Trident", qos: .background)
     var formatDescription: CMVideoFormatDescription?
     var videoSession: VTDecompressionSession?
@@ -34,7 +33,6 @@ class VideoViewController: NSViewController, NSWindowDelegate {
     }
 
     func windowWillClose(_ notification: Notification) {
-        print("windowWillClose")
         stop()
         FastRTPS.stopRTPS()
     }
@@ -46,14 +44,12 @@ class VideoViewController: NSViewController, NSWindowDelegate {
 
     override func viewDidAppear() {
         super.viewDidAppear()
-        print("viewDidAppear")
         start()
     }
 
     override func viewWillDisappear() {
         super.viewWillDisappear()
-        print("viewWillDisappear")
-        FastRTPS.resignAll()
+        stop()
     }
 
     func start() {
@@ -101,7 +97,7 @@ class VideoViewController: NSViewController, NSWindowDelegate {
         destroyVideoSession()
 
         statusLabel.stringValue = "Disconnected"
-        statusLabel.textColor = NSColor(named: "errorColor")
+        statusLabel.textColor = NSColor.lightGray
         imageView.image = nil
     }
 
@@ -121,7 +117,6 @@ class VideoViewController: NSViewController, NSWindowDelegate {
         default:
             break
         }
-        print("nal type: \(nalType), size:", nal.count)
 
         if let sps = fullsps, let pps = fullpps {
             destroyVideoSession()
@@ -223,7 +218,6 @@ class VideoViewController: NSViewController, NSWindowDelegate {
             if let cgImage = context.createCGImage(ciImage, from: CGRect(origin: .zero, size: size)) {
                 DispatchQueue.main.async {
                     let uiImage = NSImage(cgImage: cgImage, size: self.imageView.frame.size)
-                    print("set image")
                     self.imageView.image = uiImage
                 }
             }

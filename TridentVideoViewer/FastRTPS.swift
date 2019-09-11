@@ -13,7 +13,6 @@ class FastRTPS {
     var fastRTPSBridge: FastRTPSBridge? = FastRTPSBridge()
 
     class func stopRTPS() {
-        print("FastRTPS stop")
         FastRTPS.shared.fastRTPSBridge?.stopRTPS()
         FastRTPS.shared.fastRTPSBridge = nil
     }

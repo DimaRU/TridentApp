@@ -14,6 +14,7 @@
 #import <Cocoa/Cocoa.h>
 #import "TridentVideoViewer-Swift.h"
 
+class CustomParticipantListener;
 class RovParticipant
 {
 public:
@@ -21,6 +22,7 @@ public:
     virtual ~RovParticipant();
     eprosima::fastrtps::rtps::RTPSParticipant* mp_participant;
     eprosima::fastrtps::rtps::ReaderHistory* mp_history;
+    CustomParticipantListener* mp_listener;
     std::map<std::string, eprosima::fastrtps::rtps::RTPSReader*> readerList;
     bool init(); //Initialization
     bool addReader(const char* name,

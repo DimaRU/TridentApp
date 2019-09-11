@@ -8,6 +8,7 @@
 
 #include "RovParticipant.h"
 #include "RovTopicListener.h"
+#include "CustomParticipantListener.h"
 
 #include <fastrtps/rtps/RTPSDomain.h>
 #include <fastrtps/rtps/participant/RTPSParticipant.h>
@@ -26,17 +27,20 @@ using namespace eprosima::fastrtps::rtps;
 
 RovParticipant::RovParticipant():
 mp_participant(nullptr),
-mp_history(nullptr)
+mp_history(nullptr),
+mp_listener(nullptr)
 {
 }
 
 RovParticipant::~RovParticipant()
 {
+    mp_participant->stopRTPSParticipantAnnouncement();
     std::cout << "Delete participant" << std::endl;
     resignAll();
     RTPSDomain::removeRTPSParticipant(mp_participant);
     delete(mp_history);
-//    mp_participant->stopRTPSParticipantAnnouncement();
+    delete(mp_listener);
+//    RTPSDomain::stopAll();
 }
 
 void RovParticipant::resignAll() {
@@ -63,7 +67,9 @@ bool RovParticipant::init()
     PParam.builtin.writerHistoryMemoryPolicy = PREALLOCATED_WITH_REALLOC_MEMORY_MODE;
     PParam.builtin.domainId = 0;
     PParam.setName("TridentVideoViewer");
-    mp_participant = RTPSDomain::createParticipant(PParam);
+    
+    mp_listener = new CustomParticipantListener();
+    mp_participant = RTPSDomain::createParticipant(PParam, mp_listener);
     if (mp_participant == nullptr)
         return false;
 
@@ -104,7 +110,6 @@ bool RovParticipant::addReader(const char* name,
     TopicAttributes Tatt(name, dataType, tKind);
     ReaderQos Rqos;
     Rqos.m_partition.push_back("*");
-//    Rqos.m_durability.kind = VOLATILE_DURABILITY_QOS;
     auto rezult = mp_participant->registerReader(reader, Tatt, Rqos);
     if (!rezult) {
         RTPSDomain::removeRTPSReader(reader);

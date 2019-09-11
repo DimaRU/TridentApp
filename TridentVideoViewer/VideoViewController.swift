@@ -11,18 +11,29 @@ import Cocoa
 import VideoToolbox
 
 class VideoViewController: NSViewController, NSWindowDelegate {
-    @IBOutlet var imageView: NSImageView!
-    @IBOutlet var statusLabel: NSTextField!
+    @IBOutlet weak var imageView: NSImageView!
+    @IBOutlet weak var statusLabel: NSTextField!
+    @IBOutlet weak var depthLabel: NSTextField!
+    @IBOutlet weak var tempLabel: NSTextField!
+    
+    let NalStart = Data([0, 0, 0, 1])
+    let videoDecoderQueue = DispatchQueue.init(label: "in.ioshack.Trident", qos: .background)
 
     // instance variables
     var running = false
-    let videoDecoderQueue = DispatchQueue.init(label: "in.ioshack.Trident", qos: .background)
     var formatDescription: CMVideoFormatDescription?
     var videoSession: VTDecompressionSession?
     var fullsps: [UInt8]?
     var fullpps: [UInt8]?
 
-    let NalStart = Data([0, 0, 0, 1])
+    var depth: Float {
+        get { 0 }
+        set { depthLabel.stringValue = String(format: "Depth: %.1f", newValue) }
+    }
+    var temperature: Double {
+        get { 0 }
+        set { tempLabel.stringValue = String(format: "Temp: %.1f℃", newValue) }
+    }
 
     deinit {
         print("Deinit VideoViewController")
@@ -58,8 +69,12 @@ class VideoViewController: NSViewController, NSWindowDelegate {
 
 
         FastRTPS.registerReader(topic: .rovCamFwdH2640Video) { (videoData: RovVideoData) in
-            self.running = true
-            self.videoDecoderQueue.async {
+            if videoData.data.count < 4 {
+                print(videoData.frame_id, videoData.data.count)
+            }
+            self.videoDecoderQueue.async { [weak self] in
+                guard let self = self else { return }
+                self.running = true
                 let data = videoData.data
                 var startIndex = data.startIndex
                 repeat {
@@ -76,13 +91,18 @@ class VideoViewController: NSViewController, NSWindowDelegate {
             }
         }
         
-//        FastRTPS.registerReader(topic: .rovTempWater) { (temp: RovTemperature) in
-//            DispatchQueue.main.async {
-//                print(temp.temperature_.temperature)
-//                self.statusLabel.stringValue = "Connected"
-//                self.statusLabel.textColor = NSColor(named: "okColor")
-//            }
-//        }
+        FastRTPS.registerReader(topic: .rovTempWater) { (temp: RovTemperature) in
+            DispatchQueue.main.async { [weak self] in
+                self?.temperature = temp.temperature.temperature
+            }
+        }
+        
+        FastRTPS.registerReader(topic: .rovDepth) { (depth: RovDepth) in
+            DispatchQueue.main.async { [weak self] in
+                self?.depth = depth.depth
+            }
+        }
+
 
     }
 
@@ -181,8 +201,8 @@ class VideoViewController: NSViewController, NSWindowDelegate {
         if status != noErr {
             return false
         }
-        let dimensions = CMVideoFormatDescriptionGetDimensions(formatDescription!)
-        print("Dimensions:", dimensions)
+//        let dimensions = CMVideoFormatDescriptionGetDimensions(formatDescription!)
+//        print("Dimensions:", dimensions)
 
         // create the decoder parameters
         let decoderParameters = NSMutableDictionary()

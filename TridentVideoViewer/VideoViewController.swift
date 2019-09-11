@@ -67,11 +67,7 @@ class VideoViewController: NSViewController, NSWindowDelegate {
         statusLabel.stringValue = "Connecting to Trident..."
         statusLabel.textColor = NSColor.lightGray
 
-
         FastRTPS.registerReader(topic: .rovCamFwdH2640Video) { (videoData: RovVideoData) in
-            if videoData.data.count < 4 {
-                print(videoData.frame_id, videoData.data.count)
-            }
             self.videoDecoderQueue.async { [weak self] in
                 guard let self = self else { return }
                 self.running = true

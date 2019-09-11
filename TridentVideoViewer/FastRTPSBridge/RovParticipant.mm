@@ -27,6 +27,7 @@ using namespace eprosima::fastrtps::rtps;
 
 RovParticipant::RovParticipant():
 mp_participant(nullptr),
+mp_history(nullptr),
 mp_listener(nullptr)
 {
 }
@@ -37,6 +38,7 @@ RovParticipant::~RovParticipant()
     std::cout << "Delete participant" << std::endl;
     resignAll();
     RTPSDomain::removeRTPSParticipant(mp_participant);
+    delete(mp_history);
     delete(mp_listener);
 //    RTPSDomain::stopAll();
 }
@@ -47,10 +49,8 @@ void RovParticipant::resignAll() {
         std::cout << "Remove reader: " << it->first << std::endl;
         auto reader = it->second;
         auto listener = reader->getListener();
-        auto history = reader->getHistory();
         RTPSDomain::removeRTPSReader(reader);
         delete listener;
-        delete history;
     }
     readerList.clear();
 }
@@ -72,6 +72,14 @@ bool RovParticipant::init()
     mp_participant = RTPSDomain::createParticipant(PParam, mp_listener);
     if (mp_participant == nullptr)
         return false;
+
+    //CREATE READERHISTORY
+    HistoryAttributes hatt;
+    hatt.payloadMaxSize = 10000;
+    hatt.memoryPolicy = PREALLOCATED_WITH_REALLOC_MEMORY_MODE;
+    hatt.maximumReservedCaches = 0;
+    mp_history = new ReaderHistory(hatt);
+
     return true;
 }
 
@@ -87,25 +95,16 @@ bool RovParticipant::addReader(const char* name,
         return false;
     }
     //CREATE READER
-    //CREATE READERHISTORY
-    HistoryAttributes hatt;
-    hatt.payloadMaxSize = 20000;
-    hatt.memoryPolicy = PREALLOCATED_WITH_REALLOC_MEMORY_MODE;
-    hatt.maximumReservedCaches = 0;
-    auto history = new ReaderHistory(hatt);
-
     ReaderAttributes readerAttributes;
     readerAttributes.endpoint.topicKind = tKind;
     auto listener = new RovTopicListener(name, payloadDecoder);
-    auto reader = RTPSDomain::createRTPSReader(mp_participant, readerAttributes, history, listener);
+    auto reader = RTPSDomain::createRTPSReader(mp_participant, readerAttributes, mp_history, listener);
     if (reader == nullptr) {
         delete listener;
         return false;
     }
     readerList[topicName] = reader;
   
-    reader->enableMessagesFromUnkownWriters(true);
-    
     TopicAttributes Tatt(name, dataType, tKind);
     ReaderQos Rqos;
     Rqos.m_partition.push_back("*");
@@ -129,11 +128,9 @@ bool RovParticipant::removeReader(const char* name)
     }
     auto reader = readerList[topicName];
     auto listener = reader->getListener();
-    auto history = reader->getHistory();
     if (!RTPSDomain::removeRTPSReader(reader))
         return false;
     delete listener;
-    delete history;
     readerList.erase(topicName);
     return true;
 }

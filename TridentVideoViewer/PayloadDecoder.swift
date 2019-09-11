@@ -40,6 +40,7 @@ class PayloadDecoder<T: DDSType>:NSObject, PayloadDecoderInterface {
             let t = try decoder.decode(T.self, from: data)
             completion?(t)
         } catch {
+            print("\(topic.rawValue): \(sequence) \(payloadSize) error decoding")
             print(error)
         }
     }

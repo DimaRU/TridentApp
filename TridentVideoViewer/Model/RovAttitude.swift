@@ -8,13 +8,13 @@
 
 import Foundation
 
-struct RovAttitude: DDSType {
+struct RovAttitude: DDSKeyed {
     let header: RovHeader
     let orientation: RovQuaternion
     let angularVelocity: RovVector3
     
     let id: String
 
-    static var isKeyed: Bool { true }
+    var key: Data { id.data(using: .utf8)! }
     static var ddsTypeName: String { "orov::msg::sensor::Attitude" }
 }

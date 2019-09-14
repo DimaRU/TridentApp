@@ -8,12 +8,12 @@
 
 import Foundation
 
-struct RovDepth: DDSType {
+struct RovDepth: DDSKeyed {
     let pressure: FluidPressure
     let id: String      // @key
     let depth: Float    // Unit: meters
     
-    static var isKeyed: Bool { true }
+    var key: Data { id.data(using: .utf8)! }
     static var ddsTypeName: String { "orov::msg::sensor::Depth" }
 }
 

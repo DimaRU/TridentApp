@@ -9,7 +9,7 @@
 import Foundation
 
 
-struct RovCamera: DDSType
+struct RovCamera: DDSKeyed
 {
     let guid: String     //@key // Globally unique identifier within the domain/partition for a particular camera
     let driver: String   //@key // Name of the driver used by the camera, i.e. uvcvideo, gc6500, etc
@@ -23,7 +23,7 @@ struct RovCamera: DDSType
     let frame_id: String        // ID of the frame of reference associated with this camera
     let channel_ids: [String]   // List of channel IDs for this camera. Use these to find channel specific topics for this camera.
     
-    static var isKeyed: Bool { true }
-    static var ddsTypeName: String { "orov::image::Camera" }
+    var key: Data { (guid+driver+card+bus_info).data(using: .utf8)! }
+    static var ddsTypeName: String { "orov::msg::image::Camera" }
 
 }

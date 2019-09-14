@@ -13,8 +13,21 @@ protocol DDSType: Codable {
     static var isKeyed: Bool { get }
 }
 
+protocol DDSKeyed: DDSType {
+    var key: Data { get }
+}
+extension DDSKeyed {
+    static var isKeyed: Bool { true }
+}
+
+protocol DDSUnkeyed: DDSType {}
+extension DDSUnkeyed {
+    static var isKeyed: Bool { false }
+}
 
 extension String: DDSType {
     static var isKeyed: Bool { false }
     static var ddsTypeName: String { "DDS::String" }
 }
+
+

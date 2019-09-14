@@ -9,7 +9,7 @@
 import Foundation
 
 
-struct RovChannel: DDSType {
+struct RovChannel: DDSKeyed {
     // See V4L2 API for more details about fields
     struct RovPixelFormat: Codable {
         let pixel_format: UInt32       //@key // FOURCC which specifies the exact pixel format
@@ -31,6 +31,6 @@ struct RovChannel: DDSType {
     let format: RovPixelFormat  //@key
     let extra: [String]
 
-    static var isKeyed: Bool { true }
+    var key: Data { id.data(using: .utf8)! }    // ????
     static var ddsTypeName: String { "orov::msg::image::Channel" }
 }

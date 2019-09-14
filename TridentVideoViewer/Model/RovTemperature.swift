@@ -8,17 +8,17 @@
 
 import Foundation
 
-struct RovTemperature: DDSType {
-    struct RovTemperature_: Codable{
+struct RovTemperature: DDSKeyed {
+    struct Temperature_: Codable{
         let header: RovHeader
         let temperature: Double
         let variance: Double
     }
     
-    let temperature: RovTemperature_
+    let temperature: Temperature_
     let id: String
     
-    static var isKeyed: Bool { true }
+    var key: Data { id.data(using: .utf8)! }
     static var ddsTypeName: String { "orov::msg::sensor::Temperature" }
 
 }

@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct RovFuelgaugeStatus: DDSType {
+struct RovFuelgaugeStatus: DDSKeyed {
     let state: BatteryState
 
     let id: String //@key
@@ -16,11 +16,11 @@ struct RovFuelgaugeStatus: DDSType {
     let averagePower: Float
     let batteryTemperature: Float
 
-    static var isKeyed: Bool { true }
+    var key: Data { id.data(using: .utf8)! }
     static var ddsTypeName: String { "orov::msg::sensor::FuelgaugeStatus" }
 }
 
-struct RovFuelgaugeHealth: DDSType {
+struct RovFuelgaugeHealth: DDSKeyed {
     let state: BatteryState
 
     let id: String //@key
@@ -29,6 +29,6 @@ struct RovFuelgaugeHealth: DDSType {
     let cycle_count: Int32
     let state_of_health_pct: Float
 
-    static var isKeyed: Bool { true }
+    var key: Data { id.data(using: .utf8)! }
     static var ddsTypeName: String { "orov::msg::sensor::FuelgaugeHealth" }
 }

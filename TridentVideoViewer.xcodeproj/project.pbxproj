@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A172EC5232B9574003C2A90 /* RovWriterListener.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A172EC3232B9574003C2A90 /* RovWriterListener.cpp */; };
+		0A28A420232D573A00C4D04D /* RovLightPower.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A28A41F232D573A00C4D04D /* RovLightPower.swift */; };
+		0A28A422232D5D1F00C4D04D /* RovTridentMotorCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A28A421232D5D1F00C4D04D /* RovTridentMotorCommand.swift */; };
+		0A28A424232D614200C4D04D /* RovTridentControlTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A28A423232D614100C4D04D /* RovTridentControlTarget.swift */; };
 		0A28B707231AE067000FDA62 /* DDSType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A28B706231AE067000FDA62 /* DDSType.swift */; };
 		0A28B709231AE36F000FDA62 /* RovCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A28B708231AE36F000FDA62 /* RovCommon.swift */; };
 		0A649C9E2328C6EB00FAF9D1 /* CustomParticipantListener.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A649C9C2328C6EB00FAF9D1 /* CustomParticipantListener.cpp */; };
@@ -57,6 +61,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0A172EC3232B9574003C2A90 /* RovWriterListener.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RovWriterListener.cpp; sourceTree = "<group>"; };
+		0A172EC4232B9574003C2A90 /* RovWriterListener.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RovWriterListener.h; sourceTree = "<group>"; };
+		0A28A41F232D573A00C4D04D /* RovLightPower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RovLightPower.swift; sourceTree = "<group>"; };
+		0A28A421232D5D1F00C4D04D /* RovTridentMotorCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RovTridentMotorCommand.swift; sourceTree = "<group>"; };
+		0A28A423232D614100C4D04D /* RovTridentControlTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RovTridentControlTarget.swift; sourceTree = "<group>"; };
 		0A28B706231AE067000FDA62 /* DDSType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDSType.swift; sourceTree = "<group>"; };
 		0A28B708231AE36F000FDA62 /* RovCommon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RovCommon.swift; sourceTree = "<group>"; };
 		0A649C9C2328C6EB00FAF9D1 /* CustomParticipantListener.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CustomParticipantListener.cpp; sourceTree = "<group>"; };
@@ -167,6 +176,8 @@
 				0AD277F2231FFBC20014D555 /* FastRTPSBridge.h */,
 				0A7654A6231A685F00AF9488 /* RovTopicListener.mm */,
 				0A7654A5231A685F00AF9488 /* RovTopicListener.h */,
+				0A172EC3232B9574003C2A90 /* RovWriterListener.cpp */,
+				0A172EC4232B9574003C2A90 /* RovWriterListener.h */,
 				0A76549F231A685E00AF9488 /* TridentVideoViewer-Bridging-Header.h */,
 			);
 			path = FastRTPSBridge;
@@ -182,6 +193,7 @@
 				0A7654AE231A692400AF9488 /* RovChannel.swift */,
 				0A28B708231AE36F000FDA62 /* RovCommon.swift */,
 				0A7654B0231A692400AF9488 /* RovControlDescriptor.swift */,
+				0A28A41F232D573A00C4D04D /* RovLightPower.swift */,
 				0A7654B2231A692500AF9488 /* RovPoint.swift */,
 				0A7654B1231A692400AF9488 /* RovQuaternion.swift */,
 				0A7654AF231A692400AF9488 /* RovTemperature.swift */,
@@ -191,6 +203,8 @@
 				0AF11653232277B5000717F7 /* RovFuelgauge.swift */,
 				0AF1164F23226D32000717F7 /* RovDepth.swift */,
 				0AF1164D2322584E000717F7 /* RovTopic.swift */,
+				0A28A421232D5D1F00C4D04D /* RovTridentMotorCommand.swift */,
+				0A28A423232D614100C4D04D /* RovTridentControlTarget.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -281,7 +295,9 @@
 				0AF1164E2322584E000717F7 /* RovTopic.swift in Sources */,
 				0A7654BD231A693300AF9488 /* RovQuaternion.swift in Sources */,
 				0A7654BF231A693300AF9488 /* RovVector3.swift in Sources */,
+				0A172EC5232B9574003C2A90 /* RovWriterListener.cpp in Sources */,
 				0AF11654232277B5000717F7 /* RovFuelgauge.swift in Sources */,
+				0A28A424232D614200C4D04D /* RovTridentControlTarget.swift in Sources */,
 				0A7654C0231A693300AF9488 /* RovVideoData.swift in Sources */,
 				0A28B707231AE067000FDA62 /* DDSType.swift in Sources */,
 				0A7654842319C16900AF9488 /* AppDelegate.swift in Sources */,
@@ -292,9 +308,11 @@
 				0A6B1CA52324438A00D48305 /* FastRTPS.swift in Sources */,
 				0AF1165023226D32000717F7 /* RovDepth.swift in Sources */,
 				0A7654B9231A693300AF9488 /* RovCamera.swift in Sources */,
+				0A28A420232D573A00C4D04D /* RovLightPower.swift in Sources */,
 				0A7654B8231A693300AF9488 /* RovBarometer.swift in Sources */,
 				0A7654BA231A693300AF9488 /* RovChannel.swift in Sources */,
 				0A649C9E2328C6EB00FAF9D1 /* CustomParticipantListener.cpp in Sources */,
+				0A28A422232D5D1F00C4D04D /* RovTridentMotorCommand.swift in Sources */,
 				0A7654A7231A685F00AF9488 /* CustomLogConsumer.cpp in Sources */,
 				0A7654BE231A693300AF9488 /* RovTemperature.swift in Sources */,
 				0A7654B7231A693300AF9488 /* RovAttitude.swift in Sources */,

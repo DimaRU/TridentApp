@@ -11,7 +11,7 @@ import Foundation
 
 // Topic format: "<topicPrefix_rov_camChannels><channel_id>_ctrl_desc"
 // Ex: rov_cam_forward_H2640_ctrl_desc
-struct RovControlDescriptor: DDSType {
+struct RovControlDescriptor: DDSKeyed {
     struct RovMenuOption: Codable
     {
         let value_string: String
@@ -30,6 +30,6 @@ struct RovControlDescriptor: DDSType {
     let flags: UInt32
     let menu_options: [RovMenuOption]
 
-    static var isKeyed: Bool { true }
+    var key: Data { String(id).data(using: .utf8)! }
     static var ddsTypeName: String { "orov::msg::image::ControlDescriptor" }
 }

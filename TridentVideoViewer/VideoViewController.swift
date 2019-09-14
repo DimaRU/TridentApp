@@ -25,14 +25,15 @@ class VideoViewController: NSViewController, NSWindowDelegate {
     var videoSession: VTDecompressionSession?
     var fullsps: [UInt8]?
     var fullpps: [UInt8]?
+    
+    var lightOn = false
+    var sendTimer: Timer?
 
-    var depth: Float {
-        get { 0 }
-        set { depthLabel.stringValue = String(format: "Depth: %.1f", newValue) }
+    var depth: Float = 0 {
+        didSet { depthLabel.stringValue = String(format: "Depth: %.1f", depth) }
     }
-    var temperature: Double {
-        get { 0 }
-        set { tempLabel.stringValue = String(format: "Temp: %.1f℃", newValue) }
+    var temperature: Double = 0 {
+        didSet { tempLabel.stringValue = String(format: "Temp: %.1f℃", temperature) }
     }
 
     deinit {
@@ -41,6 +42,9 @@ class VideoViewController: NSViewController, NSWindowDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        statusLabel.stringValue = ""
+        depthLabel.stringValue = ""
+        tempLabel.stringValue = ""
     }
 
     func windowWillClose(_ notification: Notification) {
@@ -55,17 +59,21 @@ class VideoViewController: NSViewController, NSWindowDelegate {
 
     override func viewDidAppear() {
         super.viewDidAppear()
+
         start()
     }
 
     override func viewWillDisappear() {
         super.viewWillDisappear()
+       
         stop()
     }
 
     func start() {
         statusLabel.stringValue = "Connecting to Trident..."
         statusLabel.textColor = NSColor.lightGray
+
+        FastRTPS.registerWriter(topic: .rovLightPowerRequested, ddsType: RovLightPower.self)
 
         FastRTPS.registerReader(topic: .rovCamFwdH2640Video) { (videoData: RovVideoData) in
             self.videoDecoderQueue.async { [weak self] in

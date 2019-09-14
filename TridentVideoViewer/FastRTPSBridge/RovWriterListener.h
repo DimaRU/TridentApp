@@ -1,0 +1,25 @@
+//
+//  RovWriterListener.h
+//  TridentVideoViewer
+//
+//  Created by Dmitriy Borovikov on 13.09.2019.
+//  Copyright © 2019 Dmitriy Borovikov. All rights reserved.
+//
+
+#ifndef RovWriterListener_h
+#define RovWriterListener_h
+
+#include <fastrtps/rtps/writer/RTPSWriter.h>
+#include <fastrtps/rtps/writer/WriterListener.h>
+#include <fastrtps/rtps/history/WriterHistory.h>
+
+class RovWriterListener :public eprosima::fastrtps::rtps::WriterListener
+{
+public:
+    RovWriterListener();
+    ~RovWriterListener();
+    void onWriterMatched(eprosima::fastrtps::rtps::RTPSWriter*, eprosima::fastrtps::rtps::MatchingInfo& info);
+    int n_matched;
+};
+
+#endif /* RovWriterListener_h */

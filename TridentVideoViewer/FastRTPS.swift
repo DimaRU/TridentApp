@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CDRCodable
 
 class FastRTPS {
     private static let shared = FastRTPS()
@@ -17,7 +18,7 @@ class FastRTPS {
         FastRTPS.shared.fastRTPSBridge = nil
     }
 
-    class func registerReader<T: DDSType>(topic: RovTopic, completion: @escaping (T)->Void) {
+    class func registerReader<T: DDSType>(topic: RovPubTopic, completion: @escaping (T)->Void) {
         let payloadDecoder = PayloadDecoder(topic: topic, completion: completion)
         FastRTPS.shared.fastRTPSBridge?.registerReader(withTopicName: topic.rawValue,
                                                       typeName: T.ddsTypeName,
@@ -25,10 +26,34 @@ class FastRTPS {
                                                       payloadDecoder: payloadDecoder)
     }
     
-    class func removeReader(topic: RovTopic) {
+    class func removeReader(topic: RovPubTopic) {
         FastRTPS.shared.fastRTPSBridge?.removeReader(withTopicName: topic.rawValue)
     }
-    
+
+    class func registerWriter(topic: RovSubTopic, ddsType: DDSType.Type) {
+        FastRTPS.shared.fastRTPSBridge?.registerWriter(withTopicName: topic.rawValue,
+                                                      typeName: ddsType.ddsTypeName,
+                                                      keyed: ddsType.isKeyed)
+    }
+    class func removeWriter(topic: RovSubTopic) {
+        FastRTPS.shared.fastRTPSBridge?.removeWriter(withTopicName: topic.rawValue)
+    }
+
+    class func send<T: DDSType>(topic: RovSubTopic, ddsData: T) {
+        let encoder = CDREncoder()
+        do {
+            let data = try encoder.encode(ddsData)
+            if T.isKeyed {
+                let key = (ddsData as! DDSKeyed).key
+                FastRTPS.shared.fastRTPSBridge?.send(withTopicName: topic.rawValue, data: data, key: key)
+            } else {
+                FastRTPS.shared.fastRTPSBridge?.send(withTopicName: topic.rawValue, data: data)
+            }
+        } catch {
+            print(error)
+        }
+    }
+
     class func resignAll() {
         FastRTPS.shared.fastRTPSBridge?.resignAll()
     }

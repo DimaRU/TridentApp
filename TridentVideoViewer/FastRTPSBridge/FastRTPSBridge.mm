@@ -17,7 +17,9 @@ using namespace rtps;
 using namespace std;
 
 @interface FastRTPSBridge()
-@property RovParticipant* participant;
+{
+    RovParticipant* participant;
+}
 @end
 
 @implementation FastRTPSBridge
@@ -32,30 +34,55 @@ using namespace std;
     Log::SetVerbosity(Log::Kind::Info);
     Log::ReportFilenames(true);
     
-    _participant = new RovParticipant();
-    _participant->init();
+    participant = new RovParticipant();
+    participant->init();
     return self;
 }
 
 - (bool)registerReaderWithTopicName:(NSString *)topicName typeName:(NSString*)typeName keyed:(bool) keyed payloadDecoder: (NSObject<PayloadDecoderInterface>*) payloadDecoder {
 
-    return _participant->addReader([topicName cStringUsingEncoding:NSUTF8StringEncoding],
+    return participant->addReader([topicName cStringUsingEncoding:NSUTF8StringEncoding],
                                    [typeName cStringUsingEncoding:NSUTF8StringEncoding],
                                    keyed,
                                    payloadDecoder);
 }
 
 - (bool)removeReaderWithTopicName:(NSString *)topicName {
-    return _participant->removeReader([topicName cStringUsingEncoding:NSUTF8StringEncoding]);
+    return participant->removeReader([topicName cStringUsingEncoding:NSUTF8StringEncoding]);
+}
+
+- (bool)registerWriterWithTopicName:(NSString *)topicName typeName:(NSString*)typeName keyed:(bool) keyed {
+    return participant->addWriter([topicName cStringUsingEncoding:NSUTF8StringEncoding],
+                                   [typeName cStringUsingEncoding:NSUTF8StringEncoding],
+                                   keyed);
+}
+
+- (bool)removeWriterWithTopicName:(NSString *)topicName {
+    return participant->removeReader([topicName cStringUsingEncoding:NSUTF8StringEncoding]);
+}
+
+- (bool)sendWithTopicName:(NSString *)topicName data:(NSData*) data {
+    return participant->send([topicName cStringUsingEncoding:NSUTF8StringEncoding],
+                             static_cast<const uint8_t *>(data.bytes),
+                             static_cast<uint32_t>(data.length),
+                             NULL, 0);
+}
+
+- (bool)sendWithTopicName:(NSString *)topicName data:(NSData*) data key: (NSData*) key {
+    return participant->send([topicName cStringUsingEncoding:NSUTF8StringEncoding],
+                             static_cast<const uint8_t *>(data.bytes),
+                             static_cast<uint32_t>(data.length),
+                             static_cast<const uint8_t *>(key.bytes),
+                             static_cast<uint32_t>(key.length));
 }
 
 - (void)stopRTPS {
-    _participant->resignAll();
-    delete _participant;
+    participant->resignAll();
+    delete participant;
 }
 
 - (void)resignAll {
-    _participant->resignAll();
+    participant->resignAll();
 }
 
 @end

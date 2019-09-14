@@ -8,26 +8,30 @@
 
 #include "RovParticipant.h"
 #include "RovTopicListener.h"
+#include "RovWriterListener.h"
 #include "CustomParticipantListener.h"
 
 #include <fastrtps/rtps/RTPSDomain.h>
 #include <fastrtps/rtps/participant/RTPSParticipant.h>
-#include <fastrtps/rtps/reader/RTPSReader.h>
+
 #include <fastrtps/rtps/attributes/RTPSParticipantAttributes.h>
 #include <fastrtps/rtps/attributes/ReaderAttributes.h>
+#include <fastrtps/rtps/attributes/WriterAttributes.h>
 #include <fastrtps/rtps/attributes/HistoryAttributes.h>
 #include <fastrtps/rtps/history/ReaderHistory.h>
+#include "fastrtps/rtps/history/WriterHistory.h"
 
 #include <fastrtps/attributes/TopicAttributes.h>
 #include <fastrtps/qos/ReaderQos.h>
-
+#include <fastrtps/qos/WriterQos.h>
 
 using namespace eprosima::fastrtps;
 using namespace eprosima::fastrtps::rtps;
 
 RovParticipant::RovParticipant():
 mp_participant(nullptr),
-mp_history(nullptr),
+mp_reader_history(nullptr),
+mp_writer_history(nullptr),
 mp_listener(nullptr)
 {
 }
@@ -38,8 +42,9 @@ RovParticipant::~RovParticipant()
     std::cout << "Delete participant" << std::endl;
     resignAll();
     RTPSDomain::removeRTPSParticipant(mp_participant);
-    delete(mp_history);
-    delete(mp_listener);
+    delete mp_reader_history;
+    delete mp_writer_history;
+    delete mp_listener;
 //    RTPSDomain::stopAll();
 }
 
@@ -53,6 +58,14 @@ void RovParticipant::resignAll() {
         delete listener;
     }
     readerList.clear();
+
+    for(auto it = writerList.begin(); it != writerList.end(); it++)
+    {
+        std::cout << "Remove writer: " << it->first << std::endl;
+        auto writer = it->second;
+        RTPSDomain::removeRTPSWriter(writer);
+    }
+    writerList.clear();
 }
 
 bool RovParticipant::init()
@@ -73,13 +86,14 @@ bool RovParticipant::init()
     if (mp_participant == nullptr)
         return false;
 
-    //CREATE READERHISTORY
     HistoryAttributes hatt;
     hatt.payloadMaxSize = 10000;
     hatt.memoryPolicy = PREALLOCATED_WITH_REALLOC_MEMORY_MODE;
     hatt.maximumReservedCaches = 0;
-    mp_history = new ReaderHistory(hatt);
-
+    //CREATE READERHISTORY
+    mp_reader_history = new ReaderHistory(hatt);
+    //CREATE WRITERHISTORY
+    mp_writer_history = new WriterHistory(hatt);
     return true;
 }
 
@@ -98,7 +112,7 @@ bool RovParticipant::addReader(const char* name,
     ReaderAttributes readerAttributes;
     readerAttributes.endpoint.topicKind = tKind;
     auto listener = new RovTopicListener(name, payloadDecoder);
-    auto reader = RTPSDomain::createRTPSReader(mp_participant, readerAttributes, mp_history, listener);
+    auto reader = RTPSDomain::createRTPSReader(mp_participant, readerAttributes, mp_reader_history, listener);
     if (reader == nullptr) {
         delete listener;
         return false;
@@ -132,5 +146,98 @@ bool RovParticipant::removeReader(const char* name)
         return false;
     delete listener;
     readerList.erase(topicName);
+    return true;
+}
+
+bool RovParticipant::addWriter(const char* name,
+                               const char* dataType,
+                               const bool keyed)
+{
+    auto topicName = std::string(name);
+    auto tKind = keyed ? eprosima::fastrtps::rtps::WITH_KEY : eprosima::fastrtps::rtps::NO_KEY;
+    if (writerList.find(topicName) != writerList.end()) {
+        // aready registered
+        return false;
+    }
+
+    WriterAttributes watt;
+    watt.endpoint.reliabilityKind = BEST_EFFORT;
+    watt.endpoint.topicKind = tKind;
+    auto listener = new RovWriterListener();
+    auto writer = RTPSDomain::createRTPSWriter(mp_participant, watt, mp_writer_history, listener);
+    if (writer == nullptr) {
+        delete listener;
+        return false;
+    }
+
+    writerList[topicName] = writer;
+
+    TopicAttributes Tatt(name, dataType, tKind);
+    WriterQos Wqos;
+    Wqos.m_partition.push_back("*");
+    Wqos.m_disablePositiveACKs.enabled = true;
+    auto rezult = mp_participant->registerWriter(writer, Tatt, Wqos);
+    if (!rezult) {
+        RTPSDomain::removeRTPSWriter(writer);
+        writerList.erase(topicName);
+        return false;
+    }
+    std::cout << "Registered writer: " << name << " - " << dataType << std::endl;
+    return true;
+}
+
+bool RovParticipant::removeWriter(const char* name)
+{
+    std::cout << "Remove writer: " << name << std::endl;
+    auto topicName = std::string(name);
+    if (writerList.find(topicName) == writerList.end()) {
+        return false;
+    }
+    auto writer = writerList[topicName];
+    auto listener = writer->getListener();
+    if (!RTPSDomain::removeRTPSWriter(writer))
+        return false;
+    delete listener;
+    writerList.erase(topicName);
+    return true;
+}
+
+bool RovParticipant::send(const char* name, const uint8_t* data, uint32_t length, const void* key, uint32_t keyLenght)
+{
+    static const octet header[] = {0, 1, 0, 0};
+    auto topicName = std::string(name);
+    if (writerList.find(topicName) == writerList.end()) {
+        return false;
+    }
+    RTPSWriter* writer = writerList[topicName];
+    auto listener = dynamic_cast<RovWriterListener*>(writer->getListener());
+    if (listener->n_matched == 0) {
+        return false;
+    }
+
+    CacheChange_t * change;
+    if (key) {
+        InstanceHandle_t instanceHandle;
+        auto len = keyLenght < 16 ? keyLenght : 16;
+        memcpy(instanceHandle.value, key, len);
+        change = writer->new_change([length]() -> uint32_t { return length+sizeof(header);}, ALIVE, instanceHandle);
+        if (!change) {    // In the case history is full, remove some old changes
+            std::cout << "cleaning history...";
+            writer->remove_older_changes(2);
+            change = writer->new_change([length]() -> uint32_t { return length+sizeof(header);}, ALIVE, instanceHandle);
+        }
+    } else {
+        change = writer->new_change([length]() -> uint32_t { return length+sizeof(header);}, ALIVE);
+        if (!change) {    // In the case history is full, remove some old changes
+            std::cout << "cleaning history...";
+            writer->remove_older_changes(2);
+            change = writer->new_change([length]() -> uint32_t { return length+sizeof(header);}, ALIVE);
+        }
+    }
+    change->serializedPayload.length = length + sizeof(header);
+    memcpy(change->serializedPayload.data, header, sizeof(header));
+    memcpy(change->serializedPayload.data + sizeof(header), data, length);
+    mp_writer_history->add_change(change);
+
     return true;
 }

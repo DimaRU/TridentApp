@@ -15,8 +15,13 @@ NS_ASSUME_NONNULL_BEGIN
 - (id)init;
 - (bool)registerReaderWithTopicName:(NSString *)topicName typeName:(NSString*)typeName keyed:(bool) keyed payloadDecoder: (NSObject<PayloadDecoderInterface>*) payloadDecoder;
 - (bool)removeReaderWithTopicName:(NSString *)topicName;
+- (bool)registerWriterWithTopicName:(NSString *)topicName typeName:(NSString*)typeName keyed:(bool) keyed;
+- (bool)removeWriterWithTopicName:(NSString *)topicName;
+- (bool)sendWithTopicName:(NSString *)topicName data:(NSData*) data key: (NSData*) key;
+- (bool)sendWithTopicName:(NSString *)topicName data:(NSData*) data;
 - (void)stopRTPS;
 - (void)resignAll;
+
 @end
 
 NS_ASSUME_NONNULL_END

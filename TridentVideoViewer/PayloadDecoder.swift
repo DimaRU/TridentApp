@@ -18,10 +18,10 @@ import CDRCodable
 class PayloadDecoder<T: DDSType>:NSObject, PayloadDecoderInterface {
     typealias Completion = (T) -> Void
     let decoder = CDRDecoder()
-    var topic: RovTopic
+    var topic: RovPubTopic
     var completion: Completion?
     
-    init(topic: RovTopic, completion: Completion? = nil) {
+    init(topic: RovPubTopic, completion: Completion? = nil) {
         self.topic = topic
         self.completion = completion
         super.init()
@@ -33,7 +33,7 @@ class PayloadDecoder<T: DDSType>:NSObject, PayloadDecoderInterface {
     
     func decode(sequence: Int,
                 payloadSize: Int,
-                payload: UnsafePointer<CUnsignedChar>) {
+                payload: UnsafePointer<UInt8>) {
         
         let data = Data(bytes: payload + 4, count: payloadSize - 4)
         do {

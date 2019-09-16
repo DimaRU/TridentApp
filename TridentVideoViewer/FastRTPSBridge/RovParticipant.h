@@ -13,26 +13,48 @@
 #include <fastrtps/rtps/attributes/WriterAttributes.h>
 #include <fastrtps/rtps/reader/RTPSReader.h>
 #include "fastrtps/rtps/writer/RTPSWriter.h"
+#include <fastrtps/rtps/history/ReaderHistory.h>
+#include "fastrtps/rtps/history/WriterHistory.h"
 #include <string>
 #include <map>
 typedef unsigned char octet;
 
 #import <Cocoa/Cocoa.h>
+#import "RovTopicListener.h"
+#import "RovWriterListener.h"
 #import "TridentVideoViewer-Swift.h"
 
 class CustomParticipantListener;
 class RovParticipant
 {
+    struct ReaderInfo {
+        eprosima::fastrtps::rtps::RTPSReader* reader;
+        eprosima::fastrtps::rtps::ReaderHistory* history;
+        RovTopicListener* listener;
+        ~ReaderInfo() {
+            delete history;
+            delete listener;
+        }
+    };
+
+    struct WriterInfo {
+        eprosima::fastrtps::rtps::RTPSWriter* writer;
+        eprosima::fastrtps::rtps::WriterHistory* history;
+        RovWriterListener* listener;
+        ~WriterInfo() {
+            delete history;
+            delete listener;
+        }
+    };
 public:
     RovParticipant();
     virtual ~RovParticipant();
     eprosima::fastrtps::rtps::RTPSParticipant* mp_participant;
-    eprosima::fastrtps::rtps::ReaderHistory* mp_reader_history;
-    eprosima::fastrtps::rtps::WriterHistory* mp_writer_history;
-
     CustomParticipantListener* mp_listener;
-    std::map<std::string, eprosima::fastrtps::rtps::RTPSReader*> readerList;
-    std::map<std::string, eprosima::fastrtps::rtps::RTPSWriter*> writerList;
+    
+    std::map<std::string, ReaderInfo*> readerList;
+    std::map<std::string, WriterInfo*> writerList;
+
     bool init(); //Initialization
     bool addReader(const char* name,
                    const char* dataType,

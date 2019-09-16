@@ -11,6 +11,7 @@
 		0A28A420232D573A00C4D04D /* RovLightPower.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A28A41F232D573A00C4D04D /* RovLightPower.swift */; };
 		0A28A422232D5D1F00C4D04D /* RovTridentMotorCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A28A421232D5D1F00C4D04D /* RovTridentMotorCommand.swift */; };
 		0A28A424232D614200C4D04D /* RovTridentControlTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A28A423232D614100C4D04D /* RovTridentControlTarget.swift */; };
+		0A28A426232D965C00C4D04D /* VideoDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A28A425232D965C00C4D04D /* VideoDecoder.swift */; };
 		0A28B707231AE067000FDA62 /* DDSType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A28B706231AE067000FDA62 /* DDSType.swift */; };
 		0A28B709231AE36F000FDA62 /* RovCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A28B708231AE36F000FDA62 /* RovCommon.swift */; };
 		0A649C9E2328C6EB00FAF9D1 /* CustomParticipantListener.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A649C9C2328C6EB00FAF9D1 /* CustomParticipantListener.cpp */; };
@@ -66,6 +67,7 @@
 		0A28A41F232D573A00C4D04D /* RovLightPower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RovLightPower.swift; sourceTree = "<group>"; };
 		0A28A421232D5D1F00C4D04D /* RovTridentMotorCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RovTridentMotorCommand.swift; sourceTree = "<group>"; };
 		0A28A423232D614100C4D04D /* RovTridentControlTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RovTridentControlTarget.swift; sourceTree = "<group>"; };
+		0A28A425232D965C00C4D04D /* VideoDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDecoder.swift; sourceTree = "<group>"; };
 		0A28B706231AE067000FDA62 /* DDSType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDSType.swift; sourceTree = "<group>"; };
 		0A28B708231AE36F000FDA62 /* RovCommon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RovCommon.swift; sourceTree = "<group>"; };
 		0A649C9C2328C6EB00FAF9D1 /* CustomParticipantListener.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CustomParticipantListener.cpp; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 			children = (
 				0A7654832319C16900AF9488 /* AppDelegate.swift */,
 				0A7654C1231A6B1600AF9488 /* VideoViewController.swift */,
+				0A28A425232D965C00C4D04D /* VideoDecoder.swift */,
 				0A6B1CA42324438A00D48305 /* FastRTPS.swift */,
 				0A7654AA231A68F400AF9488 /* PayloadDecoder.swift */,
 				0A76549E231A681E00AF9488 /* FastRTPSBridge */,
@@ -315,6 +318,7 @@
 				0A28A422232D5D1F00C4D04D /* RovTridentMotorCommand.swift in Sources */,
 				0A7654A7231A685F00AF9488 /* CustomLogConsumer.cpp in Sources */,
 				0A7654BE231A693300AF9488 /* RovTemperature.swift in Sources */,
+				0A28A426232D965C00C4D04D /* VideoDecoder.swift in Sources */,
 				0A7654B7231A693300AF9488 /* RovAttitude.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

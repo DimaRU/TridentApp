@@ -22,7 +22,6 @@ RovTopicListener::RovTopicListener(const char* topicName, NSObject<PayloadDecode
 
 RovTopicListener::~RovTopicListener()
 {
-    std::cout << "Listener deinit" << std::endl;
 }
 
 void RovTopicListener::onNewCacheChangeAdded(RTPSReader* reader, const CacheChange_t * const change)

@@ -29,6 +29,8 @@ enum RovSubTopic: String {
     case rovVidSessionReq            = "rov_vid_session_req" // orov::msg::recording::VideoSessionCommand
     case rovVideoOverlayModeCommand  = "rov_video_overlay_mode_command" // DDS::String
     case tridentCommandTarget        = "trident_command_target" // orov::msg::control::TridentMotorCommand
+    case navTrackingTarget           = "nav_tracking_target" // orov::msg::image::CameraObjectTrack
+    case rovDepthConfigRequested     = "rov_depth_config_requested" // orov::msg::sensor::DepthConfig
 }
 
 enum RovPubTopic: String {
@@ -72,4 +74,8 @@ enum RovPubTopic: String {
     case rovVidSessionRep           = "rov_vid_session_rep" // orov::msg::recording::VideoSessionCommand
     case rovVideoOverlayModeCurrent = "rov_video_overlay_mode_current" // DDS::String
     case tridentCommandTarget       = "trident_command_target" // orov::msg::control::TridentMotorCommand
+    case mcuI2cStats                = "mcu_i2c_stats" // orov::msg::system::I2CStats
+    case navTrackingCurrent         = "nav_tracking_current" // orov::msg::image::CameraObjectTrack
+    case rovControlCurrent          = "rov_control_current" // orov::msg::control::TridentControlTarget
+    case rovDepthConfigCurrent      = "rov_depth_config_current" // orov::msg::sensor::DepthConfig
 }

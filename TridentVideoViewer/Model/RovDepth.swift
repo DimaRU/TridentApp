@@ -18,8 +18,8 @@ struct RovDepth: DDSKeyed {
 }
 
 
-struct DepthConfig {
-    enum WaterType: UInt8 {
+struct RovDepthConfig: DDSKeyed {
+    enum WaterType: UInt8, Codable {
         case fresh = 0
         case brackish = 1
         case salt = 2
@@ -31,4 +31,8 @@ struct DepthConfig {
     let user_offset_enabled: Bool
     let zero_offset: Float        // Determined by entity at startup. Used as the zero point to offset depth calculated from sensor outputs. Unit: meters
     let zero_offset_user: Float   // Zero offset provided by user to override the initially determined value. Unit: meters
+
+    var key: Data { id.data(using: .utf8)! }
+    static var ddsTypeName: String { "orov::msg::sensor::DepthConfig" }
 }
+

@@ -11,9 +11,10 @@
 using namespace eprosima::fastrtps;
 using namespace eprosima::fastrtps::rtps;
 
-RovWriterListener::RovWriterListener()
+RovWriterListener::RovWriterListener(const char* topicName)
 {
-    n_matched = 0;
+    RovWriterListener::n_matched = 0;
+    RovWriterListener::topicName = std::string(topicName);
 }
 
 RovWriterListener::~RovWriterListener()
@@ -25,11 +26,11 @@ void RovWriterListener::onWriterMatched(RTPSWriter* writer, MatchingInfo& info)
     switch (info.status)
     {
         case MATCHED_MATCHING:
-            std::cout << "\tWriter matched guid: " << info.remoteEndpointGuid <<  std::endl;
+            std::cout << "\tWriter matched:" << topicName <<  std::endl;
             n_matched++;
             break;
         case REMOVED_MATCHING:
-            std::cout << "\tWriter remove matched guid: " << info.remoteEndpointGuid << std::endl;
+            std::cout << "\tWriter remove matched:" << topicName << std::endl;
             n_matched--;
             break;
     }

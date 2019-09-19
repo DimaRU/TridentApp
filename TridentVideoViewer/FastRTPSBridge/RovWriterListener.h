@@ -16,10 +16,11 @@
 class RovWriterListener :public eprosima::fastrtps::rtps::WriterListener
 {
 public:
-    RovWriterListener();
+    RovWriterListener(const char* topicName);
     ~RovWriterListener();
     void onWriterMatched(eprosima::fastrtps::rtps::RTPSWriter*, eprosima::fastrtps::rtps::MatchingInfo& info);
     int n_matched;
+    std::string topicName;
 };
 
 #endif /* RovWriterListener_h */

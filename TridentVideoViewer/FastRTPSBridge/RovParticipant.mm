@@ -160,7 +160,7 @@ bool RovParticipant::addWriter(const char* name,
     WriterAttributes watt;
     watt.endpoint.reliabilityKind = BEST_EFFORT;
     watt.endpoint.topicKind = tKind;
-    auto listener = new RovWriterListener();
+    auto listener = new RovWriterListener(name);
     //CREATE WRITERHISTORY
     HistoryAttributes hatt;
     hatt.payloadMaxSize = 10000;

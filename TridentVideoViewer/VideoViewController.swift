@@ -75,6 +75,10 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
         
         registerReaders()
         registerWriters()
+
+        let timeMs = UInt(Date().timeIntervalSince1970 * 1000)
+        FastRTPS.send(topic: .rovDatetime, ddsData: String(timeMs))
+        FastRTPS.send(topic: .rovVideoOverlayModeCommand, ddsData: "on")
     }
 
     private func stop() {

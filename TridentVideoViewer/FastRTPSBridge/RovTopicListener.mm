@@ -42,12 +42,12 @@ void RovTopicListener::onReaderMatched(RTPSReader* reader, MatchingInfo& info)
     switch (info.status)
     {
         case MATCHED_MATCHING:
-            std::cout << "\tReader matched:" << topicName <<  std::endl;
             n_matched++;
+            std::cout << "\tReader matched:" << topicName << " count: " << n_matched << std::endl;
             break;
         case REMOVED_MATCHING:
-            std::cout << "\tReader remove matched:" << topicName << std::endl;
             n_matched--;
+            std::cout << "\tReader remove matched:" << topicName << " count: " << n_matched << std::endl;
             break;
     }
 }

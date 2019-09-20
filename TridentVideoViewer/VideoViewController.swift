@@ -72,30 +72,9 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
 
     private func start() {
         videoDecoder.delegate = self
-
-        FastRTPS.registerWriter(topic: .rovLightPowerRequested, ddsType: RovLightPower.self)
-        FastRTPS.registerReader(topic: .rovCamFwdH2640Video) { (videoData: RovVideoData) in
-            self.videoDecoderQueue.async { [weak self] in
-                self?.dispatchGroup.enter()
-                self?.videoDecoder.decodeVideo(data: videoData.data)
-                self?.dispatchGroup.leave()
-            }
-        }
         
-        FastRTPS.registerReader(topic: .rovTempWater) { (temp: RovTemperature) in
-            DispatchQueue.main.async { [weak self] in
-                self?.statusLabel.isHidden = true
-                self?.temperature = temp.temperature.temperature
-            }
-        }
-        
-        FastRTPS.registerReader(topic: .rovDepth) { (depth: RovDepth) in
-            DispatchQueue.main.async { [weak self] in
-                self?.depth = depth.depth
-            }
-        }
-
-
+        registerReaders()
+        registerWriters()
     }
 
     private func stop() {
@@ -118,5 +97,54 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
         DispatchQueue.main.async {
             self.imageView.image = nsImage
         }
+    }
+    
+    private func registerReaders() {
+                FastRTPS.registerReader(topic: .rovCamFwdH2640Video) { (videoData: RovVideoData) in
+                    self.videoDecoderQueue.async { [weak self] in
+                        self?.dispatchGroup.enter()
+                        self?.videoDecoder.decodeVideo(data: videoData.data)
+                        self?.dispatchGroup.leave()
+                    }
+                }
+                
+                FastRTPS.registerReader(topic: .rovTempWater) { (temp: RovTemperature) in
+                    DispatchQueue.main.async { [weak self] in
+                        self?.statusLabel.isHidden = true
+                        self?.temperature = temp.temperature.temperature
+                    }
+                }
+        
+                FastRTPS.registerReader(topic: .rovDepth) { (depth: RovDepth) in
+                    DispatchQueue.main.async { [weak self] in
+                        self?.depth = depth.depth
+                    }
+                }
+
+                FastRTPS.registerReader(topic: .rovFuelgaugeHealth) { (health: RovFuelgaugeHealth) in
+                    print("Health:", health)
+                }
+                
+                FastRTPS.registerReader(topic: .rovRecordingStats) { (recordingStats: RovRecordingStats) in
+                    print("RecordingStats:", recordingStats)
+                }
+                
+                FastRTPS.registerReader(topic: .rovVidSessionCurrent) { (videoSession: RovVideoSession) in
+                    print("rovVidSessionCurrent:", videoSession)
+                }
+                
+                FastRTPS.registerReader(topic: .rovVidSessionRep) { (videoSessionCommand: RovVideoSessionCommand) in
+                    print("rovVidSessionRep:", videoSessionCommand)
+                }
+
+    }
+    
+    private func registerWriters() {
+        FastRTPS.registerWriter(topic: .rovLightPowerRequested, ddsType: RovLightPower.self)
+        FastRTPS.registerWriter(topic: .rovDatetime, ddsType: String.self)
+        FastRTPS.registerWriter(topic: .rovVideoOverlayModeCommand, ddsType: String.self)
+        FastRTPS.registerWriter(topic: .rovVidSessionReq, ddsType: RovVideoSessionCommand.self)
+        FastRTPS.registerWriter(topic: .rovDepthConfigRequested, ddsType: RovDepthConfig.self)
+        FastRTPS.registerWriter(topic: .rovControlTarget, ddsType: RovTridentControlTarget.self)
     }
 }

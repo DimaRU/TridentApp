@@ -26,12 +26,12 @@ void RovWriterListener::onWriterMatched(RTPSWriter* writer, MatchingInfo& info)
     switch (info.status)
     {
         case MATCHED_MATCHING:
-            std::cout << "\tWriter matched:" << topicName <<  std::endl;
             n_matched++;
+            std::cout << "\tWriter matched:" << topicName << " count: " << n_matched << std::endl;
             break;
         case REMOVED_MATCHING:
-            std::cout << "\tWriter remove matched:" << topicName << std::endl;
             n_matched--;
+            std::cout << "\tWriter remove matched:" << topicName << " count: " << n_matched << std::endl;
             break;
     }
 }

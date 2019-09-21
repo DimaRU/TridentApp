@@ -190,8 +190,8 @@
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
             <objects>
-                <windowController id="B8D-0N-5wS" sceneMemberID="viewController">
-                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" titlebarAppearsTransparent="YES" titleVisibility="hidden" id="IQv-IB-iLA">
+                <windowController showSeguePresentationStyle="single" id="B8D-0N-5wS" sceneMemberID="viewController">
+                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="VideoWindow" animationBehavior="default" titlebarAppearsTransparent="YES" titleVisibility="hidden" id="IQv-IB-iLA">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" fullSizeContentView="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="196" y="240" width="480" height="270"/>
@@ -213,11 +213,18 @@
             <objects>
                 <viewController id="Wgr-FD-Jeg" customClass="VideoViewController" customModule="TridentVideoViewer" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" focusRingType="none" id="Rxz-w6-QWt">
-                        <rect key="frame" x="0.0" y="0.0" width="640" height="382"/>
+                        <rect key="frame" x="0.0" y="0.0" width="641" height="383"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" placeholderIntrinsicWidth="1000" placeholderIntrinsicHeight="562" translatesAutoresizingMaskIntoConstraints="NO" id="8S7-OO-7j4">
+                                <rect key="frame" x="0.0" y="0.0" width="641" height="361"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="8S7-OO-7j4" secondAttribute="height" multiplier="16:9" id="g3f-fw-4Aj"/>
+                                </constraints>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" image="Trident" id="lju-ac-TaH"/>
+                            </imageView>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xCn-7A-stl">
-                                <rect key="frame" x="579" y="364" width="43" height="16"/>
+                                <rect key="frame" x="580" y="365" width="43" height="16"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Status" id="XgG-1H-wB4">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -225,7 +232,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="q9i-df-4gu">
-                                <rect key="frame" x="114" y="364" width="84" height="16"/>
+                                <rect key="frame" x="98" y="365" width="84" height="16"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="80" id="ZJv-A3-Im6"/>
                                 </constraints>
@@ -236,7 +243,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zWM-Ae-qCL">
-                                <rect key="frame" x="202" y="364" width="84" height="16"/>
+                                <rect key="frame" x="186" y="365" width="84" height="16"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="80" id="MUc-6Y-3r2"/>
                                 </constraints>
@@ -246,29 +253,50 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" placeholderIntrinsicWidth="1000" placeholderIntrinsicHeight="562" translatesAutoresizingMaskIntoConstraints="NO" id="8S7-OO-7j4">
-                                <rect key="frame" x="0.0" y="0.0" width="640" height="360"/>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="q2s-ce-J2h">
+                                <rect key="frame" x="274" y="365" width="84" height="16"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="8S7-OO-7j4" secondAttribute="height" multiplier="16:9" id="g3f-fw-4Aj"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="80" id="sXr-lo-cM7"/>
                                 </constraints>
-                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" image="Trident" id="lju-ac-TaH"/>
-                            </imageView>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Batt: 1h25m" id="yiv-S7-HtI">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="knk-ef-7Td">
+                                <rect key="frame" x="362" y="365" width="84" height="16"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="80" id="oEZ-Bp-TiL"/>
+                                </constraints>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Cam: 2h left" id="BJn-kc-g4o">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="8S7-OO-7j4" secondAttribute="trailing" id="7tC-j4-uay"/>
                             <constraint firstItem="8S7-OO-7j4" firstAttribute="top" secondItem="Rxz-w6-QWt" secondAttribute="top" constant="22" id="9Fw-d5-c92"/>
+                            <constraint firstItem="knk-ef-7Td" firstAttribute="leading" secondItem="q2s-ce-J2h" secondAttribute="trailing" constant="8" symbolic="YES" id="DNz-eV-MHQ"/>
                             <constraint firstItem="zWM-Ae-qCL" firstAttribute="centerY" secondItem="q9i-df-4gu" secondAttribute="centerY" id="IJW-3p-5X5"/>
-                            <constraint firstItem="q9i-df-4gu" firstAttribute="leading" secondItem="Rxz-w6-QWt" secondAttribute="leading" constant="116" id="JXJ-yN-wpA"/>
+                            <constraint firstItem="q9i-df-4gu" firstAttribute="leading" secondItem="Rxz-w6-QWt" secondAttribute="leading" constant="100" id="JXJ-yN-wpA"/>
                             <constraint firstAttribute="trailing" secondItem="xCn-7A-stl" secondAttribute="trailing" constant="20" symbolic="YES" id="Tu2-Br-6iY"/>
                             <constraint firstItem="zWM-Ae-qCL" firstAttribute="leading" secondItem="q9i-df-4gu" secondAttribute="trailing" constant="8" symbolic="YES" id="Y7s-5A-R16"/>
                             <constraint firstItem="8S7-OO-7j4" firstAttribute="leading" secondItem="Rxz-w6-QWt" secondAttribute="leading" id="YYg-ey-g1Q"/>
+                            <constraint firstItem="q2s-ce-J2h" firstAttribute="centerY" secondItem="knk-ef-7Td" secondAttribute="centerY" id="d0A-aH-Jju"/>
+                            <constraint firstItem="q2s-ce-J2h" firstAttribute="leading" secondItem="zWM-Ae-qCL" secondAttribute="trailing" constant="8" symbolic="YES" id="eoK-Ul-rfS"/>
                             <constraint firstItem="zWM-Ae-qCL" firstAttribute="centerY" secondItem="xCn-7A-stl" secondAttribute="centerY" id="fDU-Na-Ft5"/>
+                            <constraint firstItem="zWM-Ae-qCL" firstAttribute="centerY" secondItem="q2s-ce-J2h" secondAttribute="centerY" id="gc9-os-Hvm"/>
                             <constraint firstAttribute="bottom" secondItem="8S7-OO-7j4" secondAttribute="bottom" id="oaa-gc-lHV"/>
                             <constraint firstItem="q9i-df-4gu" firstAttribute="top" secondItem="Rxz-w6-QWt" secondAttribute="top" constant="2" id="r1n-uL-5SI"/>
-                            <constraint firstItem="xCn-7A-stl" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="zWM-Ae-qCL" secondAttribute="trailing" constant="8" symbolic="YES" id="wlh-9B-jEU"/>
+                            <constraint firstItem="xCn-7A-stl" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="knk-ef-7Td" secondAttribute="trailing" constant="8" symbolic="YES" id="soe-Kd-Dsx"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="batteryTimeLabel" destination="q2s-ce-J2h" id="Yu0-94-l7R"/>
+                        <outlet property="cameraTimeLabel" destination="knk-ef-7Td" id="QJx-Xz-iU8"/>
                         <outlet property="depthLabel" destination="q9i-df-4gu" id="Ifw-7C-Vsk"/>
                         <outlet property="imageView" destination="8S7-OO-7j4" id="Ttq-fi-o1N"/>
                         <outlet property="statusLabel" destination="xCn-7A-stl" id="DzV-UX-C4n"/>

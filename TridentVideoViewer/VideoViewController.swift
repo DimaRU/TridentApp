@@ -15,7 +15,9 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
     @IBOutlet weak var statusLabel: NSTextField!
     @IBOutlet weak var depthLabel: NSTextField!
     @IBOutlet weak var tempLabel: NSTextField!
-
+    @IBOutlet weak var batteryTimeLabel: NSTextField!
+    @IBOutlet weak var cameraTimeLabel: NSTextField!
+    
     private var videoDecoder: VideoDecoder!
     private let videoDecoderQueue = DispatchQueue.init(label: "in.ioshack.Trident", qos: .background)
     private let dispatchGroup = DispatchGroup()
@@ -27,7 +29,33 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
     private var temperature: Double = 0 {
         didSet { tempLabel.stringValue = String(format: "Temp: %.1f℃", temperature) }
     }
+    
+    private var batteryTime: Int32 = 0 {
+        didSet {
+            var time = "Batt: "
+            if batteryTime / 60 != 0 {
+                time += String(batteryTime / 60) + "h "
+            }
+            if batteryTime % 60 != 0 {
+                time += String(batteryTime % 60) + "m"
+            }
+            batteryTimeLabel.stringValue = time
+        }
+    }
 
+    private var cameraTime: UInt32 = 0 {
+        didSet {
+            var time = "Cam: "
+            if cameraTime / 60 != 0 {
+                time += String(cameraTime / 60) + "h "
+            }
+            if cameraTime % 60 != 0 {
+                time += String(cameraTime % 60) + "m"
+            }
+            cameraTimeLabel.stringValue = time
+        }
+    }
+    
     deinit {
         print("Deinit VideoViewController")
     }
@@ -37,6 +65,9 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
         statusLabel.stringValue = ""
         depthLabel.stringValue = ""
         tempLabel.stringValue = ""
+        batteryTimeLabel.stringValue = ""
+        cameraTimeLabel.stringValue = ""
+
         
         videoDecoder = VideoDecoder()
     }
@@ -49,6 +80,7 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
     override func viewWillAppear() {
         super.viewWillAppear()
         view.window?.delegate = self
+        print("restorable:", view.window!.isRestorable)
         imageView.image = NSImage(named: "Trident")
         statusLabel.stringValue = "Connecting to Trident..."
         statusLabel.textColor = NSColor.lightGray
@@ -126,11 +158,15 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
                 }
 
                 FastRTPS.registerReader(topic: .rovFuelgaugeHealth) { (health: RovFuelgaugeHealth) in
-                    print("Health:", health)
+                    DispatchQueue.main.async {
+                        self.batteryTime = health.average_time_to_empty_mins
+                    }
                 }
                 
                 FastRTPS.registerReader(topic: .rovRecordingStats) { (recordingStats: RovRecordingStats) in
-                    print("RecordingStats:", recordingStats)
+                    DispatchQueue.main.async {
+                        self.cameraTime = recordingStats.estRemainingRecTimeS / 60
+                    }
                 }
                 
                 FastRTPS.registerReader(topic: .rovVidSessionCurrent) { (videoSession: RovVideoSession) in

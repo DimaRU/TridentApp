@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14868"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15400"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -224,7 +225,7 @@
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" image="Trident" id="lju-ac-TaH"/>
                             </imageView>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xCn-7A-stl">
-                                <rect key="frame" x="580" y="365" width="43" height="16"/>
+                                <rect key="frame" x="299" y="183" width="43" height="16"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Status" id="XgG-1H-wB4">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -264,43 +265,96 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="knk-ef-7Td">
-                                <rect key="frame" x="362" y="365" width="84" height="16"/>
+                            <visualEffectView blendingMode="behindWindow" material="underPageBackground" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="fGR-tu-1PC" customClass="CameraControlView" customModule="TestFloatWim" customModuleProvider="target">
+                                <rect key="frame" x="20" y="128" width="128" height="128"/>
+                                <subviews>
+                                    <button focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fux-7J-eaP" customClass="FlatButton" customModule="TestFloatWim" customModuleProvider="target">
+                                        <rect key="frame" x="39" y="58" width="50" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="9Yx-fk-f4E"/>
+                                            <constraint firstAttribute="width" constant="50" id="JgC-Cx-1Bf"/>
+                                        </constraints>
+                                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" alignment="center" borderStyle="border" focusRingType="none" imageScaling="proportionallyDown" inset="2" id="ESN-iQ-NhJ">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="25"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="onAnimationDuration">
+                                                <real key="value" value="0.10000000000000001"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="offAnimationDuration">
+                                                <real key="value" value="0.10000000000000001"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="buttonColor">
+                                                <color key="value" name="stopNActive"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                <real key="value" value="1"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="activeButtonColor">
+                                                <color key="value" name="stopActive"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="knk-ef-7Td">
+                                        <rect key="frame" x="25" y="8" width="78" height="16"/>
+                                        <textFieldCell key="cell" lineBreakMode="clipping" title="Cam: 2h left" id="BJn-kc-g4o">
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Gwh-Mo-Zp4">
+                                        <rect key="frame" x="34" y="34" width="61" height="16"/>
+                                        <textFieldCell key="cell" lineBreakMode="clipping" title="00:00:00" id="2T7-9b-ubA">
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="80" id="oEZ-Bp-TiL"/>
+                                    <constraint firstItem="fux-7J-eaP" firstAttribute="centerX" secondItem="fGR-tu-1PC" secondAttribute="centerX" id="0IX-ub-cgv"/>
+                                    <constraint firstItem="knk-ef-7Td" firstAttribute="centerX" secondItem="fGR-tu-1PC" secondAttribute="centerX" id="7Cf-kq-Vq7"/>
+                                    <constraint firstAttribute="height" constant="128" id="C8e-mH-Vms"/>
+                                    <constraint firstAttribute="width" constant="128" id="Hso-v0-h1c"/>
+                                    <constraint firstItem="Gwh-Mo-Zp4" firstAttribute="centerX" secondItem="fGR-tu-1PC" secondAttribute="centerX" id="Rda-ZE-Hny"/>
+                                    <constraint firstItem="Gwh-Mo-Zp4" firstAttribute="top" secondItem="fux-7J-eaP" secondAttribute="bottom" constant="8" id="anT-hf-Z7U"/>
+                                    <constraint firstAttribute="bottom" secondItem="knk-ef-7Td" secondAttribute="bottom" constant="8" id="rpW-eA-l8T"/>
+                                    <constraint firstItem="fux-7J-eaP" firstAttribute="top" secondItem="fGR-tu-1PC" secondAttribute="top" constant="20" symbolic="YES" id="vbI-Vn-OIU"/>
                                 </constraints>
-                                <textFieldCell key="cell" lineBreakMode="clipping" title="Cam: 2h left" id="BJn-kc-g4o">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
+                            </visualEffectView>
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="8S7-OO-7j4" secondAttribute="trailing" id="7tC-j4-uay"/>
                             <constraint firstItem="8S7-OO-7j4" firstAttribute="top" secondItem="Rxz-w6-QWt" secondAttribute="top" constant="22" id="9Fw-d5-c92"/>
-                            <constraint firstItem="knk-ef-7Td" firstAttribute="leading" secondItem="q2s-ce-J2h" secondAttribute="trailing" constant="8" symbolic="YES" id="DNz-eV-MHQ"/>
                             <constraint firstItem="zWM-Ae-qCL" firstAttribute="centerY" secondItem="q9i-df-4gu" secondAttribute="centerY" id="IJW-3p-5X5"/>
                             <constraint firstItem="q9i-df-4gu" firstAttribute="leading" secondItem="Rxz-w6-QWt" secondAttribute="leading" constant="100" id="JXJ-yN-wpA"/>
-                            <constraint firstAttribute="trailing" secondItem="xCn-7A-stl" secondAttribute="trailing" constant="20" symbolic="YES" id="Tu2-Br-6iY"/>
+                            <constraint firstItem="fGR-tu-1PC" firstAttribute="centerX" secondItem="Rxz-w6-QWt" secondAttribute="leading" constant="84" id="JgV-uy-StZ"/>
+                            <constraint firstItem="xCn-7A-stl" firstAttribute="centerY" secondItem="Rxz-w6-QWt" secondAttribute="centerY" id="L2Z-x1-rIA"/>
                             <constraint firstItem="zWM-Ae-qCL" firstAttribute="leading" secondItem="q9i-df-4gu" secondAttribute="trailing" constant="8" symbolic="YES" id="Y7s-5A-R16"/>
                             <constraint firstItem="8S7-OO-7j4" firstAttribute="leading" secondItem="Rxz-w6-QWt" secondAttribute="leading" id="YYg-ey-g1Q"/>
-                            <constraint firstItem="q2s-ce-J2h" firstAttribute="centerY" secondItem="knk-ef-7Td" secondAttribute="centerY" id="d0A-aH-Jju"/>
                             <constraint firstItem="q2s-ce-J2h" firstAttribute="leading" secondItem="zWM-Ae-qCL" secondAttribute="trailing" constant="8" symbolic="YES" id="eoK-Ul-rfS"/>
-                            <constraint firstItem="zWM-Ae-qCL" firstAttribute="centerY" secondItem="xCn-7A-stl" secondAttribute="centerY" id="fDU-Na-Ft5"/>
+                            <constraint firstItem="xCn-7A-stl" firstAttribute="centerX" secondItem="Rxz-w6-QWt" secondAttribute="centerX" id="frZ-fH-qNl"/>
                             <constraint firstItem="zWM-Ae-qCL" firstAttribute="centerY" secondItem="q2s-ce-J2h" secondAttribute="centerY" id="gc9-os-Hvm"/>
+                            <constraint firstAttribute="bottom" secondItem="fGR-tu-1PC" secondAttribute="centerY" constant="192" id="jhO-bw-2EH"/>
                             <constraint firstAttribute="bottom" secondItem="8S7-OO-7j4" secondAttribute="bottom" id="oaa-gc-lHV"/>
                             <constraint firstItem="q9i-df-4gu" firstAttribute="top" secondItem="Rxz-w6-QWt" secondAttribute="top" constant="2" id="r1n-uL-5SI"/>
-                            <constraint firstItem="xCn-7A-stl" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="knk-ef-7Td" secondAttribute="trailing" constant="8" symbolic="YES" id="soe-Kd-Dsx"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="batteryTimeLabel" destination="q2s-ce-J2h" id="Yu0-94-l7R"/>
+                        <outlet property="cameraControlView" destination="fGR-tu-1PC" id="0gd-tc-hfc"/>
                         <outlet property="cameraTimeLabel" destination="knk-ef-7Td" id="QJx-Xz-iU8"/>
                         <outlet property="depthLabel" destination="q9i-df-4gu" id="Ifw-7C-Vsk"/>
                         <outlet property="imageView" destination="8S7-OO-7j4" id="Ttq-fi-o1N"/>
                         <outlet property="statusLabel" destination="xCn-7A-stl" id="DzV-UX-C4n"/>
                         <outlet property="tempLabel" destination="zWM-Ae-qCL" id="gkP-lb-e06"/>
+                        <outlet property="xConstraint" destination="JgV-uy-StZ" id="0DS-2T-HGe"/>
+                        <outlet property="yConstraint" destination="jhO-bw-2EH" id="svm-Tm-gEG"/>
                     </connections>
                 </viewController>
                 <customObject id="Z09-aO-Sxq" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -310,5 +364,11 @@
     </scenes>
     <resources>
         <image name="Trident" width="640" height="360"/>
+        <namedColor name="stopActive">
+            <color white="0.10196078431372549" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </namedColor>
+        <namedColor name="stopNActive">
+            <color white="0.13333333333333333" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </namedColor>
     </resources>
 </document>

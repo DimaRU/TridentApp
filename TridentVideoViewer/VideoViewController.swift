@@ -17,7 +17,11 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
     @IBOutlet weak var tempLabel: NSTextField!
     @IBOutlet weak var batteryTimeLabel: NSTextField!
     @IBOutlet weak var cameraTimeLabel: NSTextField!
-    
+
+    @IBOutlet weak var cameraControlView: CameraControlView!
+    @IBOutlet weak var xConstraint: NSLayoutConstraint!
+    @IBOutlet weak var yConstraint: NSLayoutConstraint!
+
     private var videoDecoder: VideoDecoder!
     private let videoDecoderQueue = DispatchQueue.init(label: "in.ioshack.Trident", qos: .background)
     private let dispatchGroup = DispatchGroup()
@@ -68,8 +72,18 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
         batteryTimeLabel.stringValue = ""
         cameraTimeLabel.stringValue = ""
 
-        
+        cameraControlView.xConstraint = xConstraint
+        cameraControlView.yConstraint = yConstraint
+
         videoDecoder = VideoDecoder()
+//        view.wantsLayer = true
+//        view.layer?.contents = NSImage(named: "Trident")
+//        imageView.image = nil
+        imageView.image = NSImage(named: "Trident")
+        statusLabel.stringValue = "Connecting to Trident..."
+        statusLabel.textColor = NSColor.lightGray
+
+        start()
     }
 
     func windowWillClose(_ notification: Notification) {
@@ -80,31 +94,28 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
     override func viewWillAppear() {
         super.viewWillAppear()
         view.window?.delegate = self
-        print("restorable:", view.window!.isRestorable)
-        imageView.image = NSImage(named: "Trident")
-        statusLabel.stringValue = "Connecting to Trident..."
-        statusLabel.textColor = NSColor.lightGray
     }
 
     override func viewDidAppear() {
         super.viewDidAppear()
+        videoDecoder.delegate = self
 
-        start()
+        FastRTPS.registerReader(topic: .rovCamFwdH2640Video) { (videoData: RovVideoData) in
+            self.videoDecoderQueue.async { [weak self] in
+                self?.dispatchGroup.enter()
+                self?.videoDecoder.decodeVideo(data: videoData.data)
+                self?.dispatchGroup.leave()
+            }
+        }
     }
 
     override func viewWillDisappear() {
         super.viewWillDisappear()
-       
-        stop()
+        videoDecoder.delegate = nil
+        FastRTPS.removeReader(topic: .rovCamFwdH2640Video)
     }
     
-    override func viewDidDisappear() {
-        super.viewDidDisappear()
-    }
-
     private func start() {
-        videoDecoder.delegate = self
-        
         registerReaders()
         registerWriters()
 
@@ -136,14 +147,6 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
     }
     
     private func registerReaders() {
-                FastRTPS.registerReader(topic: .rovCamFwdH2640Video) { (videoData: RovVideoData) in
-                    self.videoDecoderQueue.async { [weak self] in
-                        self?.dispatchGroup.enter()
-                        self?.videoDecoder.decodeVideo(data: videoData.data)
-                        self?.dispatchGroup.leave()
-                    }
-                }
-                
                 FastRTPS.registerReader(topic: .rovTempWater) { (temp: RovTemperature) in
                     DispatchQueue.main.async { [weak self] in
                         self?.statusLabel.isHidden = true

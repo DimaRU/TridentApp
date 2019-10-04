@@ -22,7 +22,7 @@ class CameraControlView: NSView {
     override func awakeFromNib() {
         self.roundCorners(withRadius: 6)
         self.translatesAutoresizingMaskIntoConstraints = false
-        self.layer?.backgroundColor = NSColor.black.withAlphaComponent(0.1).cgColor
+        self.layer?.backgroundColor = NSColor(named: "cameraControlBackground")!.cgColor
     }
 
     override func mouseDown(with event: NSEvent) {

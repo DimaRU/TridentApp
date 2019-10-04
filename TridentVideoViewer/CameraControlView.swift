@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class CameraControlView: NSVisualEffectView {
+class CameraControlView: NSView {
     @IBOutlet weak var xConstraint: NSLayoutConstraint!
     @IBOutlet weak var yConstraint: NSLayoutConstraint!
 
@@ -22,20 +22,23 @@ class CameraControlView: NSVisualEffectView {
     override func awakeFromNib() {
         self.roundCorners(withRadius: 6)
         self.translatesAutoresizingMaskIntoConstraints = false
+        self.layer?.backgroundColor = NSColor.black.withAlphaComponent(0.1).cgColor
     }
 
     override func mouseDown(with event: NSEvent) {
-        let titlebarHeight = window!.titlebarHeight
+        guard let window = window else { return }
+        let titlebarHeight = window.titlebarHeight
         mousePosRelatedToView = NSEvent.mouseLocation
         mousePosRelatedToView!.x -= frame.origin.x
         mousePosRelatedToView!.y -= frame.origin.y
-        isAlignFeedbackSent = abs(frame.origin.y - (window!.frame.height - frame.height - titlebarHeight) / 2) <= alignConst
+        isAlignFeedbackSent = abs(frame.origin.y - (window.frame.height - frame.height - titlebarHeight) / 2) <= alignConst
         isDragging = true
     }
 
     override func mouseDragged(with event: NSEvent) {
-        let titlebarHeight = window!.titlebarHeight
+        if (!isDragging) { return }
         guard let mousePos = mousePosRelatedToView, let windowFrame = window?.frame else { return }
+        let titlebarHeight = window!.titlebarHeight
         let currentLocation = NSEvent.mouseLocation
         var newOrigin = CGPoint(
             x: currentLocation.x - mousePos.x,
@@ -98,6 +101,5 @@ class CameraControlView: NSVisualEffectView {
 
         xConstraint.constant = xPos
         yConstraint.constant = yPos
-
     }
 }

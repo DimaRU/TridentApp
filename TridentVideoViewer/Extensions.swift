@@ -49,13 +49,10 @@ extension NSImage {
 }
 
 
-extension NSVisualEffectView {
+extension NSView {
   func roundCorners(withRadius cornerRadius: CGFloat) {
-    if #available(macOS 10.14, *) {
-      maskImage = .maskImage(cornerRadius: cornerRadius)
-    } else {
-      layer?.cornerRadius = cornerRadius
-    }
+    wantsLayer = true
+    layer?.cornerRadius = cornerRadius
   }
 }
 

@@ -17,11 +17,14 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
     @IBOutlet weak var tempLabel: NSTextField!
     @IBOutlet weak var batteryTimeLabel: NSTextField!
     @IBOutlet weak var cameraTimeLabel: NSTextField!
+    @IBOutlet weak var recordingTimeLabel: NSTextField!
 
+    @IBOutlet weak var indicatorsView: NSView!
     @IBOutlet weak var cameraControlView: CameraControlView!
     @IBOutlet weak var xConstraint: NSLayoutConstraint!
     @IBOutlet weak var yConstraint: NSLayoutConstraint!
-
+    @IBOutlet weak var lightButton: NSButton!
+    
     private var videoDecoder: VideoDecoder!
     private let videoDecoderQueue = DispatchQueue.init(label: "in.ioshack.Trident", qos: .background)
     private let dispatchGroup = DispatchGroup()
@@ -31,12 +34,12 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
         didSet { depthLabel.stringValue = String(format: "Depth: %.1f", depth) }
     }
     private var temperature: Double = 0 {
-        didSet { tempLabel.stringValue = String(format: "Temp: %.1f℃", temperature) }
+        didSet { tempLabel.stringValue = String(format: "\u{1001ec} %.1f℃", temperature) }
     }
     
     private var batteryTime: Int32 = 0 {
         didSet {
-            var time = "Batt: "
+            var time = "\u{1006e8} "
             if batteryTime / 60 != 0 {
                 time += String(batteryTime / 60) + "h "
             }
@@ -71,14 +74,14 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
         tempLabel.stringValue = ""
         batteryTimeLabel.stringValue = ""
         cameraTimeLabel.stringValue = ""
+        recordingTimeLabel.stringValue = ""
 
         cameraControlView.xConstraint = xConstraint
         cameraControlView.yConstraint = yConstraint
+        indicatorsView.wantsLayer = true
+        indicatorsView.layer?.backgroundColor = NSColor.black.withAlphaComponent(0.1).cgColor
 
         videoDecoder = VideoDecoder()
-//        view.wantsLayer = true
-//        view.layer?.contents = NSImage(named: "Trident")
-//        imageView.image = nil
         imageView.image = NSImage(named: "Trident")
         statusLabel.stringValue = "Connecting to Trident..."
         statusLabel.textColor = NSColor.lightGray
@@ -190,4 +193,12 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
         FastRTPS.registerWriter(topic: .rovDepthConfigRequested, ddsType: RovDepthConfig.self)
         FastRTPS.registerWriter(topic: .rovControlTarget, ddsType: RovTridentControlTarget.self)
     }
+    
+    
+    @IBAction func recordingButtonPress(_ sender: Any) {
+    }
+    
+    @IBAction func lightButtonPress(_ sender: Any) {
+    }
+    
 }

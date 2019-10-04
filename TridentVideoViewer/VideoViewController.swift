@@ -24,12 +24,15 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
     @IBOutlet weak var xConstraint: NSLayoutConstraint!
     @IBOutlet weak var yConstraint: NSLayoutConstraint!
     @IBOutlet weak var lightButton: NSButton!
+    @IBOutlet weak var recordingButton: FlatButton!
     
     private var videoDecoder: VideoDecoder!
     private let videoDecoderQueue = DispatchQueue.init(label: "in.ioshack.Trident", qos: .background)
     private let dispatchGroup = DispatchGroup()
     
     private var lightOn = false
+    private var videoSessionId: UUID?
+    
     private var depth: Float = 0 {
         didSet { depthLabel.stringValue = String(format: "Depth: %.1f", depth) }
     }
@@ -39,6 +42,10 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
     
     private var batteryTime: Int32 = 0 {
         didSet {
+           guard batteryTime != 65535 else {
+                batteryTimeLabel.stringValue = ""
+                return
+            }
             var time = "\u{1006e8} "
             if batteryTime / 60 != 0 {
                 time += String(batteryTime / 60) + "h "
@@ -126,9 +133,13 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
         registerReaders()
         registerWriters()
 
-        let timeMs = UInt(Date().timeIntervalSince1970 * 1000)
-        FastRTPS.send(topic: .rovDatetime, ddsData: String(timeMs))
-        FastRTPS.send(topic: .rovVideoOverlayModeCommand, ddsData: "on")
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            let timeMs = UInt(Date().timeIntervalSince1970 * 1000)
+            FastRTPS.send(topic: .rovDatetime, ddsData: String(timeMs))
+            FastRTPS.send(topic: .rovVideoOverlayModeCommand, ddsData: "on")
+            let videoReq = RovVideoSessionCommand(sessionID: "", metadata: "", request: .stopped, response: .unknown, reason: "")
+            FastRTPS.send(topic: .rovVidSessionReq, ddsData: videoReq)
+        }
     }
 
     private func stop() {
@@ -180,7 +191,28 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
         }
         
         FastRTPS.registerReader(topic: .rovVidSessionCurrent) { (videoSession: RovVideoSession) in
-            print("rovVidSessionCurrent:", videoSession)
+            DispatchQueue.main.async {
+                switch videoSession.state {
+                case .unknown:
+                    break
+                case .recording:
+                    let sec = videoSession.totalDurationS % 60
+                    let min = (videoSession.totalDurationS / 60)
+                    let hour = videoSession.totalDurationS / 3600
+                    self.recordingTimeLabel.stringValue = String(format: "%2.2d:%2.2d:%2.2d", hour, min, sec)
+                    
+                    self.recordingButton.activeButtonColor = NSColor(named: "recordActive")!
+                    self.recordingButton.buttonColor = NSColor(named: "recordNActive")!
+                    self.cameraTimeLabel.textColor = .white
+
+                case .stopped:
+                    self.videoSessionId = nil
+                    self.recordingTimeLabel.stringValue = ""
+                    self.cameraTimeLabel.textColor = .systemGray
+                    self.recordingButton.activeButtonColor = NSColor(named: "stopActive")!
+                    self.recordingButton.buttonColor = NSColor(named: "stopNActive")!
+                }
+            }
         }
         
         FastRTPS.registerReader(topic: .rovVidSessionRep) { (videoSessionCommand: RovVideoSessionCommand) in
@@ -212,11 +244,41 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
         FastRTPS.registerWriter(topic: .rovVidSessionReq, ddsType: RovVideoSessionCommand.self)
         FastRTPS.registerWriter(topic: .rovDepthConfigRequested, ddsType: RovDepthConfig.self)
         FastRTPS.registerWriter(topic: .rovControlTarget, ddsType: RovTridentControlTarget.self)
-        FastRTPS.registerWriter(topic: .rovLightPowerRequested, ddsType: RovLightPower.self)
     }
     
+    private func startRecordingSession(id: UUID) {
+        videoSessionId = id
+        let formatter = ISO8601DateFormatter()
+        formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        let isoDate = formatter.string(from: Date())
+        let metadata = #"{"start_ts":"\#(isoDate)"}"#
+
+        let videoSessionCommand = RovVideoSessionCommand(sessionID: id.uuidString.lowercased(),
+                                                         metadata: metadata,
+                                                         request: .recording,
+                                                         response: .unknown,
+                                                         reason: "")
+        print("Start:", videoSessionCommand)
+        FastRTPS.send(topic: .rovVidSessionReq, ddsData: videoSessionCommand)
+    }
     
+    private func stopRecordingSession(id: UUID) {
+        let videoSessionCommand = RovVideoSessionCommand(sessionID: id.uuidString.lowercased(),
+                                                         metadata: "",
+                                                         request: .stopped,
+                                                         response: .unknown,
+                                                         reason: "")
+        print("Stop:", videoSessionCommand)
+        FastRTPS.send(topic: .rovVidSessionReq, ddsData: videoSessionCommand)
+        videoSessionId = nil
+    }
+
     @IBAction func recordingButtonPress(_ sender: Any) {
+        if let videoSessionId = videoSessionId {
+            stopRecordingSession(id: videoSessionId)
+        } else {
+            startRecordingSession(id: UUID())
+        }
     }
     
     @IBAction func lightButtonPress(_ sender: Any) {

@@ -288,10 +288,10 @@
                                 </connections>
                             </button>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="7zE-p2-EwH" customClass="CameraControlView" customModule="TridentVideoViewer" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="116" width="100" height="128"/>
+                                <rect key="frame" x="-5" y="114" width="110" height="132"/>
                                 <subviews>
                                     <button focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fux-7J-eaP" customClass="FlatButton" customModule="TridentVideoViewer" customModuleProvider="target">
-                                        <rect key="frame" x="25" y="58" width="50" height="50"/>
+                                        <rect key="frame" x="30" y="62" width="50" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="9Yx-fk-f4E"/>
                                             <constraint firstAttribute="width" constant="50" id="JgC-Cx-1Bf"/>
@@ -325,26 +325,29 @@
                                         </connections>
                                     </button>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Gwh-Mo-Zp4">
-                                        <rect key="frame" x="17" y="39" width="67" height="15"/>
+                                        <rect key="frame" x="22" y="43" width="67" height="15"/>
                                         <textFieldCell key="cell" lineBreakMode="clipping" title="00:00:00" id="2T7-9b-ubA">
                                             <font key="font" size="13" name="Menlo-Regular"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="knk-ef-7Td">
-                                        <rect key="frame" x="11" y="8" width="78" height="16"/>
-                                        <textFieldCell key="cell" lineBreakMode="clipping" title="Cam: 2h left" id="BJn-kc-g4o">
+                                        <rect key="frame" x="2" y="4" width="106" height="32"/>
+                                        <textFieldCell key="cell" alignment="center" title="Remaining time: 2h left" id="BJn-kc-g4o">
                                             <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="systemGrayColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="fux-7J-eaP" firstAttribute="top" secondItem="7zE-p2-EwH" secondAttribute="top" constant="20" symbolic="YES" id="5tE-UX-KaX"/>
-                                    <constraint firstAttribute="height" constant="128" id="NQP-wj-spc"/>
-                                    <constraint firstAttribute="width" constant="100" id="UbS-eL-zQl"/>
-                                    <constraint firstAttribute="bottom" secondItem="knk-ef-7Td" secondAttribute="bottom" constant="8" id="bft-wZ-Qqr"/>
+                                    <constraint firstAttribute="height" constant="132" id="NQP-wj-spc"/>
+                                    <constraint firstAttribute="width" constant="110" id="UbS-eL-zQl"/>
+                                    <constraint firstItem="knk-ef-7Td" firstAttribute="leading" secondItem="7zE-p2-EwH" secondAttribute="leading" constant="4" id="WTC-pd-7jg"/>
+                                    <constraint firstAttribute="bottom" secondItem="knk-ef-7Td" secondAttribute="bottom" constant="4" id="bft-wZ-Qqr"/>
                                     <constraint firstItem="Gwh-Mo-Zp4" firstAttribute="centerX" secondItem="7zE-p2-EwH" secondAttribute="centerX" id="dts-VL-ZK1"/>
+                                    <constraint firstAttribute="trailing" secondItem="knk-ef-7Td" secondAttribute="trailing" constant="4" id="ikF-U9-iJd"/>
                                     <constraint firstItem="knk-ef-7Td" firstAttribute="centerX" secondItem="7zE-p2-EwH" secondAttribute="centerX" id="luK-PH-Azy"/>
                                     <constraint firstItem="Gwh-Mo-Zp4" firstAttribute="top" secondItem="fux-7J-eaP" secondAttribute="bottom" constant="4" id="p7g-hH-Ezk"/>
                                     <constraint firstItem="fux-7J-eaP" firstAttribute="centerX" secondItem="7zE-p2-EwH" secondAttribute="centerX" id="xqC-bg-B3V"/>

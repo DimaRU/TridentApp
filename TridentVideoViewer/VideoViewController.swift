@@ -40,11 +40,11 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
     
     private var batteryTime: Int32 = 0 {
         didSet {
-           guard batteryTime != 65535 else {
-                batteryTimeLabel.stringValue = ""
+            var time = "\u{1006e8} "
+            guard batteryTime != 65535 else {
+                batteryTimeLabel.stringValue = time + "charging"
                 return
             }
-            var time = "\u{1006e8} "
             if batteryTime / 60 != 0 {
                 time += String(batteryTime / 60) + "h "
             }
@@ -57,7 +57,7 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
 
     private var cameraTime: UInt32 = 0 {
         didSet {
-            var time = "Cam: "
+            var time = "Remaining time:\n"
             if cameraTime / 60 != 0 {
                 time += String(cameraTime / 60) + "h "
             }
@@ -215,7 +215,6 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
         }
         
         FastRTPS.registerReader(topic: .rovVidSessionRep) { (videoSessionCommand: RovVideoSessionCommand) in
-            print("rovVidSessionRep:", videoSessionCommand)
             DispatchQueue.main.async {
                 switch videoSessionCommand.response {
                     
@@ -281,7 +280,6 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
                                                          request: .recording,
                                                          response: .unknown,
                                                          reason: "")
-        print("Start:", videoSessionCommand)
         FastRTPS.send(topic: .rovVidSessionReq, ddsData: videoSessionCommand)
     }
     
@@ -291,7 +289,6 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
                                                          request: .stopped,
                                                          response: .unknown,
                                                          reason: "")
-        print("Stop:", videoSessionCommand)
         FastRTPS.send(topic: .rovVidSessionReq, ddsData: videoSessionCommand)
     }
 

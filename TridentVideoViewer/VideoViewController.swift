@@ -7,8 +7,6 @@
 //
 
 import Cocoa
-import AVFoundation
-import VideoToolbox
 
 class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDelegate {
     @IBOutlet weak var imageView: NSImageView!
@@ -82,6 +80,7 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
         batteryTimeLabel.stringValue = ""
         cameraTimeLabel.stringValue = ""
         recordingTimeLabel.stringValue = ""
+        self.cameraTimeLabel.textColor = .systemGray
 
         cameraControlView.xConstraint = xConstraint
         cameraControlView.yConstraint = yConstraint
@@ -217,6 +216,31 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
         
         FastRTPS.registerReader(topic: .rovVidSessionRep) { (videoSessionCommand: RovVideoSessionCommand) in
             print("rovVidSessionRep:", videoSessionCommand)
+            DispatchQueue.main.async {
+                switch videoSessionCommand.response {
+                    
+                case .unknown:
+                    break
+                case .accepted:
+                    self.videoSessionId = UUID(uuidString: videoSessionCommand.sessionID)
+                case .rejectedGeneric:
+                    self.videoSessionId = nil
+                case .rejectedInvalidSession:
+                    self.videoSessionId = nil
+                case .rejectedSessionInProgress:
+                    self.videoSessionId = nil
+                    let alert = NSAlert()
+                    alert.messageText = "Recording"
+                    alert.informativeText = "Already in progress"
+                    alert.runModal()
+                case .rejectedNoSpace:
+                    self.videoSessionId = nil
+                    let alert = NSAlert()
+                    alert.messageText = "Recording"
+                    alert.informativeText = "No space left"
+                    alert.runModal()
+                }
+            }
         }
         
         FastRTPS.registerReader(topic: .rovLightPowerCurrent) { (lightPower: RovLightPower) in
@@ -247,7 +271,6 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
     }
     
     private func startRecordingSession(id: UUID) {
-        videoSessionId = id
         let formatter = ISO8601DateFormatter()
         formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
         let isoDate = formatter.string(from: Date())
@@ -270,7 +293,6 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
                                                          reason: "")
         print("Stop:", videoSessionCommand)
         FastRTPS.send(topic: .rovVidSessionReq, ddsData: videoSessionCommand)
-        videoSessionId = nil
     }
 
     @IBAction func recordingButtonPress(_ sender: Any) {

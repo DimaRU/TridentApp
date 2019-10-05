@@ -325,9 +325,9 @@
                                         </connections>
                                     </button>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Gwh-Mo-Zp4">
-                                        <rect key="frame" x="20" y="38" width="61" height="16"/>
+                                        <rect key="frame" x="17" y="39" width="67" height="15"/>
                                         <textFieldCell key="cell" lineBreakMode="clipping" title="00:00:00" id="2T7-9b-ubA">
-                                            <font key="font" metaFont="system"/>
+                                            <font key="font" size="13" name="Menlo-Regular"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>

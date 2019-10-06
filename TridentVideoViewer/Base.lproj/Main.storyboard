@@ -294,7 +294,7 @@
                                         <rect key="frame" x="30" y="62" width="50" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="9Yx-fk-f4E"/>
-                                            <constraint firstAttribute="width" constant="50" id="JgC-Cx-1Bf"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="JgC-Cx-1Bf"/>
                                         </constraints>
                                         <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" alignment="center" borderStyle="border" focusRingType="none" imageScaling="proportionallyDown" inset="2" id="ESN-iQ-NhJ">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
@@ -348,7 +348,6 @@
                                     <constraint firstAttribute="bottom" secondItem="knk-ef-7Td" secondAttribute="bottom" constant="4" id="bft-wZ-Qqr"/>
                                     <constraint firstItem="Gwh-Mo-Zp4" firstAttribute="centerX" secondItem="7zE-p2-EwH" secondAttribute="centerX" id="dts-VL-ZK1"/>
                                     <constraint firstAttribute="trailing" secondItem="knk-ef-7Td" secondAttribute="trailing" constant="4" id="ikF-U9-iJd"/>
-                                    <constraint firstItem="knk-ef-7Td" firstAttribute="centerX" secondItem="7zE-p2-EwH" secondAttribute="centerX" id="luK-PH-Azy"/>
                                     <constraint firstItem="Gwh-Mo-Zp4" firstAttribute="top" secondItem="fux-7J-eaP" secondAttribute="bottom" constant="4" id="p7g-hH-Ezk"/>
                                     <constraint firstItem="fux-7J-eaP" firstAttribute="centerX" secondItem="7zE-p2-EwH" secondAttribute="centerX" id="xqC-bg-B3V"/>
                                 </constraints>

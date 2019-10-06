@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import Carbon.HIToolbox
 
 class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDelegate {
     @IBOutlet weak var imageView: NSImageView!
@@ -27,6 +28,8 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
     private var videoDecoder: VideoDecoder!
     private let videoDecoderQueue = DispatchQueue.init(label: "in.ioshack.Trident", qos: .background)
     private let dispatchGroup = DispatchGroup()
+    
+    private var tridentCommandTimer: Timer?
     
     private var lightOn = false
     private var videoSessionId: UUID?
@@ -120,6 +123,14 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
                 self?.dispatchGroup.leave()
             }
         }
+        
+        tridentCommandTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { timer in
+            let thrust = self.forwardLever - self.backwardLever
+            let yaw = self.leftLever - self.rightLever
+            let pitch = self.upLever - self.downLever
+            let tridentCommand = RovTridentControlTarget(id: "control", pitch: pitch, yaw: yaw, thrust: thrust, lift: 0)
+            FastRTPS.send(topic: .rovControlTarget, ddsData: tridentCommand)
+        }
     }
 
     override func viewWillDisappear() {
@@ -189,12 +200,19 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
             }
         }
         
+        FastRTPS.registerReader(topic: .rovControlCurrent) { (tridentControlTarget: RovTridentControlTarget) in
+            print(tridentControlTarget)
+        }
+        
         FastRTPS.registerReader(topic: .rovVidSessionCurrent) { (videoSession: RovVideoSession) in
             DispatchQueue.main.async {
                 switch videoSession.state {
                 case .unknown:
                     break
                 case .recording:
+                    if self.videoSessionId == nil {
+                        self.videoSessionId = UUID(uuidString: videoSession.sessionID)
+                    }
                     let sec = videoSession.totalDurationS % 60
                     let min = (videoSession.totalDurationS / 60)
                     let hour = videoSession.totalDurationS / 3600
@@ -217,7 +235,6 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
         FastRTPS.registerReader(topic: .rovVidSessionRep) { (videoSessionCommand: RovVideoSessionCommand) in
             DispatchQueue.main.async {
                 switch videoSessionCommand.response {
-                    
                 case .unknown:
                     break
                 case .accepted:
@@ -304,5 +321,78 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
         let lightPower = RovLightPower.init(id: "fwd", power: lightOn ? 0:1)
         FastRTPS.send(topic: .rovLightPowerRequested, ddsData: lightPower)
     }
+ 
+   
+    override func keyUp(with event: NSEvent) {
+        processKeyEvent(event: event)
+    }
     
+    override func keyDown(with event: NSEvent) {
+        processKeyEvent(event: event)
+    }
+    
+    private var leftLever: Float = 0
+    private var rightLever: Float = 0
+    private var forwardLever: Float = 0
+    private var backwardLever: Float = 0
+    private var upLever: Float = 0
+    private var downLever: Float = 0
+
+    private func processKeyEvent(event: NSEvent) {
+        var lever: Float = 0.1
+        if NSEvent.modifierFlags.contains(.option) { lever = 0.25 }
+        if NSEvent.modifierFlags.contains(.control) { lever = 0.50 }
+        if NSEvent.modifierFlags.contains(.shift) { lever = 1 }
+
+        if event.type == .keyDown {
+            switch event.specialKey {
+            case .upArrow?:
+                forwardLever = lever
+                backwardLever = 0
+            case .downArrow?:
+                backwardLever = lever
+                forwardLever = 0
+            case .leftArrow?:
+                leftLever = lever
+                rightLever = 0
+            case .rightArrow?:
+                rightLever = lever
+                leftLever = 0
+            default:
+                switch Int(event.keyCode) {
+                case kVK_ANSI_W:
+                    upLever = lever
+                    downLever = 0
+                case kVK_ANSI_S:
+                    downLever = lever
+                    upLever = 0
+                default:
+                    break
+                }
+            }
+        }
+        
+        if event.type == .keyUp {
+            switch event.specialKey {
+            case .upArrow?:
+                forwardLever = 0
+            case .downArrow?:
+                backwardLever = 0
+            case .leftArrow?:
+                leftLever = 0
+            case .rightArrow?:
+                rightLever = 0
+            default:
+                switch Int(event.keyCode) {
+                case kVK_ANSI_W:
+                    upLever = 0
+                case kVK_ANSI_S:
+                    downLever = 0
+                default:
+                    break
+                }
+            }
+        }
+
+    }
 }

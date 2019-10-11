@@ -8,6 +8,7 @@
 
 import Cocoa
 import Carbon.HIToolbox
+import SceneKit
 
 class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDelegate {
     @IBOutlet weak var imageView: NSImageView!
@@ -24,7 +25,8 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
     @IBOutlet weak var yConstraint: NSLayoutConstraint!
     @IBOutlet weak var lightButton: NSButton!
     @IBOutlet weak var recordingButton: FlatButton!
-    
+    @IBOutlet weak var tridentView: SCNView!
+
     private var videoDecoder: VideoDecoder!
     private let videoDecoderQueue = DispatchQueue.init(label: "in.ioshack.Trident", qos: .background)
     private let dispatchGroup = DispatchGroup()
@@ -94,10 +96,24 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
         imageView.image = NSImage(named: "Trident")
         statusLabel.stringValue = "Connecting to Trident..."
         statusLabel.textColor = NSColor.lightGray
-
+        initScene()
+        
         start()
     }
 
+    private func initScene() {
+        let scene = SCNScene(named: "trident.scn")
+        tridentView.allowsCameraControl = false
+        tridentView.autoenablesDefaultLighting = true
+        // Show FPS logs and timming
+        //        tridentView.showsStatistics = true
+        
+        // Allow user translate image
+        tridentView.cameraControlConfiguration.allowsTranslation = false
+        tridentView.scene = scene
+        
+    }
+    
     func windowWillClose(_ notification: Notification) {
         stop()
         FastRTPS.stopRTPS()
@@ -202,6 +218,15 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
         
         FastRTPS.registerReader(topic: .rovControlCurrent) { (tridentControlTarget: RovTridentControlTarget) in
             print(tridentControlTarget)
+        }
+        
+        FastRTPS.registerReader(topic: .rovAttitude) { (attitude: RovAttitude) in
+            guard let node = self.tridentView.scene?.rootNode.childNode(withName: "trident", recursively: true) else {
+                return
+            }
+            let orientation = attitude.orientation
+            let quaternion = SCNQuaternion(-orientation.x, -orientation.z, -orientation.y, orientation.w)
+            node.orientation = quaternion
         }
         
         FastRTPS.registerReader(topic: .rovVidSessionCurrent) { (videoSession: RovVideoSession) in

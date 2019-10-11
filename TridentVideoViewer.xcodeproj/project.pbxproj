@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A10C5DC234E80BD00D20E36 /* trident.scn in Resources */ = {isa = PBXBuildFile; fileRef = 0A10C5DB234E80BD00D20E36 /* trident.scn */; };
 		0A172EC5232B9574003C2A90 /* RovWriterListener.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A172EC3232B9574003C2A90 /* RovWriterListener.cpp */; };
 		0A28A420232D573A00C4D04D /* RovLightPower.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A28A41F232D573A00C4D04D /* RovLightPower.swift */; };
 		0A28A422232D5D1F00C4D04D /* RovTridentMotorCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A28A421232D5D1F00C4D04D /* RovTridentMotorCommand.swift */; };
@@ -39,6 +40,7 @@
 		0A7654BF231A693300AF9488 /* RovVector3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7654B5231A692500AF9488 /* RovVector3.swift */; };
 		0A7654C0231A693300AF9488 /* RovVideoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7654B6231A692500AF9488 /* RovVideoData.swift */; };
 		0A861E962327E9EF00A54F72 /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7654C1231A6B1600AF9488 /* VideoViewController.swift */; };
+		0A9B64EA2350C91600041FBD /* Camera-Lens.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A5632FB234D2D230037D012 /* Camera-Lens.png */; };
 		0AAD92F82322B4B1000EAE4E /* RovParticipant.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0AAD92F62322B4B1000EAE4E /* RovParticipant.mm */; };
 		0ACD6F5823433E0800E5BDED /* CameraControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ACD6F5723433E0800E5BDED /* CameraControlView.swift */; };
 		0ACD6F5A23433E2300E5BDED /* FlatButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ACD6F5923433E2300E5BDED /* FlatButton.swift */; };
@@ -66,6 +68,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0A10C5DB234E80BD00D20E36 /* trident.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = trident.scn; sourceTree = "<group>"; };
 		0A172EC3232B9574003C2A90 /* RovWriterListener.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RovWriterListener.cpp; sourceTree = "<group>"; };
 		0A172EC4232B9574003C2A90 /* RovWriterListener.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RovWriterListener.h; sourceTree = "<group>"; };
 		0A28A41F232D573A00C4D04D /* RovLightPower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RovLightPower.swift; sourceTree = "<group>"; };
@@ -74,6 +77,7 @@
 		0A28A425232D965C00C4D04D /* VideoDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDecoder.swift; sourceTree = "<group>"; };
 		0A28B706231AE067000FDA62 /* DDSType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDSType.swift; sourceTree = "<group>"; };
 		0A28B708231AE36F000FDA62 /* RovCommon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RovCommon.swift; sourceTree = "<group>"; };
+		0A5632FB234D2D230037D012 /* Camera-Lens.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Camera-Lens.png"; sourceTree = "<group>"; };
 		0A649C9C2328C6EB00FAF9D1 /* CustomParticipantListener.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CustomParticipantListener.cpp; sourceTree = "<group>"; };
 		0A649C9D2328C6EB00FAF9D1 /* CustomParticipantListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomParticipantListener.h; sourceTree = "<group>"; };
 		0A6B1CA42324438A00D48305 /* FastRTPS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastRTPS.swift; sourceTree = "<group>"; };
@@ -162,6 +166,8 @@
 				0A7654AC231A691500AF9488 /* Model */,
 				0A7654872319C16900AF9488 /* Assets.xcassets */,
 				0A7654892319C16900AF9488 /* Main.storyboard */,
+				0A10C5DB234E80BD00D20E36 /* trident.scn */,
+				0A5632FB234D2D230037D012 /* Camera-Lens.png */,
 				0A76548C2319C16900AF9488 /* Info.plist */,
 				0A76548D2319C16900AF9488 /* TridentVideoViewer.entitlements */,
 			);
@@ -292,6 +298,8 @@
 			files = (
 				0A7654882319C16900AF9488 /* Assets.xcassets in Resources */,
 				0A76548B2319C16900AF9488 /* Main.storyboard in Resources */,
+				0A9B64EA2350C91600041FBD /* Camera-Lens.png in Resources */,
+				0A10C5DC234E80BD00D20E36 /* trident.scn in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

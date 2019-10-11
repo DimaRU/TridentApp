@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15400"/>
+        <plugIn identifier="com.apple.SceneKitIBPlugin" version="15400"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -352,15 +353,25 @@
                                     <constraint firstItem="fux-7J-eaP" firstAttribute="centerX" secondItem="7zE-p2-EwH" secondAttribute="centerX" id="xqC-bg-B3V"/>
                                 </constraints>
                             </customView>
+                            <sceneView focusRingType="none" wantsMultisampling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d0c-IA-Aeu">
+                                <rect key="frame" x="491" y="0.0" width="150" height="150"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="LQA-SM-oBn"/>
+                                    <constraint firstAttribute="height" constant="150" id="aUN-5J-PCu"/>
+                                </constraints>
+                                <color key="backgroundColor" name="cameraControlBackground"/>
+                            </sceneView>
                         </subviews>
                         <constraints>
                             <constraint firstItem="7zE-p2-EwH" firstAttribute="centerX" secondItem="Rxz-w6-QWt" secondAttribute="leading" constant="50" id="7hO-mL-Lru"/>
                             <constraint firstAttribute="trailing" secondItem="8S7-OO-7j4" secondAttribute="trailing" id="7tC-j4-uay"/>
                             <constraint firstItem="8S7-OO-7j4" firstAttribute="top" secondItem="Rxz-w6-QWt" secondAttribute="top" id="9Fw-d5-c92"/>
+                            <constraint firstAttribute="bottom" secondItem="d0c-IA-Aeu" secondAttribute="bottom" id="DlY-wW-mAm"/>
                             <constraint firstItem="rbs-P3-fsr" firstAttribute="top" secondItem="Rxz-w6-QWt" secondAttribute="top" id="GyC-3o-XNs"/>
                             <constraint firstAttribute="trailing" secondItem="aaa-wW-Mjv" secondAttribute="trailing" constant="16" id="IaW-ua-6Y9"/>
                             <constraint firstAttribute="trailing" secondItem="rbs-P3-fsr" secondAttribute="trailing" id="KYl-Vq-bNe"/>
                             <constraint firstItem="xCn-7A-stl" firstAttribute="centerY" secondItem="Rxz-w6-QWt" secondAttribute="centerY" id="L2Z-x1-rIA"/>
+                            <constraint firstAttribute="trailing" secondItem="d0c-IA-Aeu" secondAttribute="trailing" id="VSF-iz-9IR"/>
                             <constraint firstItem="8S7-OO-7j4" firstAttribute="leading" secondItem="Rxz-w6-QWt" secondAttribute="leading" id="YYg-ey-g1Q"/>
                             <constraint firstItem="xCn-7A-stl" firstAttribute="centerX" secondItem="Rxz-w6-QWt" secondAttribute="centerX" id="frZ-fH-qNl"/>
                             <constraint firstAttribute="bottom" secondItem="8S7-OO-7j4" secondAttribute="bottom" id="oaa-gc-lHV"/>
@@ -380,6 +391,7 @@
                         <outlet property="recordingTimeLabel" destination="Gwh-Mo-Zp4" id="uDw-VB-bHO"/>
                         <outlet property="statusLabel" destination="xCn-7A-stl" id="DzV-UX-C4n"/>
                         <outlet property="tempLabel" destination="zWM-Ae-qCL" id="gkP-lb-e06"/>
+                        <outlet property="tridentView" destination="d0c-IA-Aeu" id="ZJM-Ta-X40"/>
                         <outlet property="xConstraint" destination="7hO-mL-Lru" id="TBo-gb-4IS"/>
                         <outlet property="yConstraint" destination="thZ-VK-pfM" id="A4e-iU-ZVq"/>
                     </connections>
@@ -391,6 +403,9 @@
     </scenes>
     <resources>
         <image name="Trident" width="640" height="360"/>
+        <namedColor name="cameraControlBackground">
+            <color red="0.0" green="0.0" blue="0.0" alpha="0.20000000298023224" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="stopActive">
             <color white="0.10199999809265137" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </namedColor>

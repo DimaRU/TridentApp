@@ -40,12 +40,12 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
         didSet { depthLabel.stringValue = String(format: "Depth: %.1f", depth) }
     }
     private var temperature: Double = 0 {
-        didSet { tempLabel.stringValue = String(format: "\u{1001ec} %.1f℃", temperature) }
+        didSet { tempLabel.stringValue = String(format: "%.1f℃", temperature) }
     }
     
     private var batteryTime: Int32 = 0 {
         didSet {
-            var time = "\u{1006e8} "
+            var time = ""
             guard batteryTime != 65535 else {
                 batteryTimeLabel.stringValue = time + "charging"
                 return
@@ -225,8 +225,8 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
                 return
             }
             let orientation = attitude.orientation
-            let quaternion = SCNQuaternion(-orientation.x, -orientation.z, -orientation.y, orientation.w)
-            node.orientation = quaternion
+            node.orientation = orientation.scnQuaternion()
+            print((1 + orientation.yaw / .pi) * 180)
         }
         
         FastRTPS.registerReader(topic: .rovVidSessionCurrent) { (videoSession: RovVideoSession) in

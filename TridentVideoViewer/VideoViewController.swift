@@ -37,10 +37,10 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
     private var videoSessionId: UUID?
     
     private var depth: Float = 0 {
-        didSet { depthLabel.stringValue = String(format: "Depth: %.1f", depth) }
+        didSet { depthLabel.stringValue = String(format: "%.1f", depth) }
     }
     private var temperature: Double = 0 {
-        didSet { tempLabel.stringValue = String(format: "%.1f℃", temperature) }
+        didSet { tempLabel.stringValue = String(format: "%.1f", temperature) }
     }
     
     private var batteryTime: Int32 = 0 {
@@ -51,7 +51,7 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
                 return
             }
             if batteryTime / 60 != 0 {
-                time += String(batteryTime / 60) + "h "
+                time += String(batteryTime / 60) + "h"
             }
             if batteryTime % 60 != 0 {
                 time += String(batteryTime % 60) + "m"

@@ -41,7 +41,7 @@
 		0A7654C0231A693300AF9488 /* RovVideoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7654B6231A692500AF9488 /* RovVideoData.swift */; };
 		0A861E962327E9EF00A54F72 /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7654C1231A6B1600AF9488 /* VideoViewController.swift */; };
 		0A9B64EA2350C91600041FBD /* Camera-Lens.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A5632FB234D2D230037D012 /* Camera-Lens.png */; };
-		0A9B64EC2350E0FF00041FBD /* Quaternion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9B64EB2350E0FE00041FBD /* Quaternion.swift */; };
+		0A9B64EC2350E0FF00041FBD /* RovQuaternion+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9B64EB2350E0FE00041FBD /* RovQuaternion+extensions.swift */; };
 		0AAD92F82322B4B1000EAE4E /* RovParticipant.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0AAD92F62322B4B1000EAE4E /* RovParticipant.mm */; };
 		0ACD6F5823433E0800E5BDED /* CameraControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ACD6F5723433E0800E5BDED /* CameraControlView.swift */; };
 		0ACD6F5A23433E2300E5BDED /* FlatButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ACD6F5923433E2300E5BDED /* FlatButton.swift */; };
@@ -108,7 +108,7 @@
 		0A7654B5231A692500AF9488 /* RovVector3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RovVector3.swift; sourceTree = "<group>"; };
 		0A7654B6231A692500AF9488 /* RovVideoData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RovVideoData.swift; sourceTree = "<group>"; };
 		0A7654C1231A6B1600AF9488 /* VideoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
-		0A9B64EB2350E0FE00041FBD /* Quaternion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Quaternion.swift; sourceTree = "<group>"; };
+		0A9B64EB2350E0FE00041FBD /* RovQuaternion+extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RovQuaternion+extensions.swift"; sourceTree = "<group>"; };
 		0AAD92F62322B4B1000EAE4E /* RovParticipant.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RovParticipant.mm; sourceTree = "<group>"; };
 		0AAD92F72322B4B1000EAE4E /* RovParticipant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RovParticipant.h; sourceTree = "<group>"; };
 		0ACD6F5723433E0800E5BDED /* CameraControlView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraControlView.swift; sourceTree = "<group>"; };
@@ -161,7 +161,6 @@
 				0A28A425232D965C00C4D04D /* VideoDecoder.swift */,
 				0ACD6F5723433E0800E5BDED /* CameraControlView.swift */,
 				0ACD6F5923433E2300E5BDED /* FlatButton.swift */,
-				0A9B64EB2350E0FE00041FBD /* Quaternion.swift */,
 				0ACD6F5B23433E2D00E5BDED /* Extensions.swift */,
 				0A6B1CA42324438A00D48305 /* FastRTPS.swift */,
 				0A7654AA231A68F400AF9488 /* PayloadDecoder.swift */,
@@ -220,6 +219,7 @@
 				0A28A41F232D573A00C4D04D /* RovLightPower.swift */,
 				0A7654B2231A692500AF9488 /* RovPoint.swift */,
 				0A7654B1231A692400AF9488 /* RovQuaternion.swift */,
+				0A9B64EB2350E0FE00041FBD /* RovQuaternion+extensions.swift */,
 				0A7654AF231A692400AF9488 /* RovTemperature.swift */,
 				0A7654B5231A692500AF9488 /* RovVector3.swift */,
 				0A7654B6231A692500AF9488 /* RovVideoData.swift */,
@@ -338,7 +338,7 @@
 				0A28A420232D573A00C4D04D /* RovLightPower.swift in Sources */,
 				0ACD6F5823433E0800E5BDED /* CameraControlView.swift in Sources */,
 				0A7654B8231A693300AF9488 /* RovBarometer.swift in Sources */,
-				0A9B64EC2350E0FF00041FBD /* Quaternion.swift in Sources */,
+				0A9B64EC2350E0FF00041FBD /* RovQuaternion+extensions.swift in Sources */,
 				0A7654BA231A693300AF9488 /* RovChannel.swift in Sources */,
 				0A649C9E2328C6EB00FAF9D1 /* CustomParticipantListener.cpp in Sources */,
 				0ACD6F5A23433E2300E5BDED /* FlatButton.swift in Sources */,

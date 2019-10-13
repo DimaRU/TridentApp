@@ -350,16 +350,14 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
     }
  
     @IBAction func absoluteYawAction(_ sender: Any) {
-        print("Abs yaw")
         setCameraPos(yaw: .pi)
     }
 
     @IBAction func relativeYawAction(_ sender: Any) {
-        print("Rel yaw")
         guard let node = tridentView.scene?.rootNode.childNode(withName: "trident", recursively: true) else { return }
         let o = node.orientation
-        let q = RovQuaternion(Scalar(-o.x), Scalar(-o.z), Scalar(-o.y), Scalar(o.w))
-        print((0 + q.yaw / .pi) * 180)
+        let q = RovQuaternion(x: Double(-o.x), y: Double(-o.z), z: Double(-o.y), w: Double(o.w))
+//        print((1 + q.yaw / .pi) * 180)
         setCameraPos(yaw: Float(-q.yaw))
     }
     

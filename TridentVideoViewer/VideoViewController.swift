@@ -85,13 +85,16 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
         batteryTimeLabel.stringValue = ""
         cameraTimeLabel.stringValue = ""
         recordingTimeLabel.stringValue = ""
-        self.cameraTimeLabel.textColor = .systemGray
+        cameraTimeLabel.textColor = .systemGray
 
         cameraControlView.xConstraint = xConstraint
         cameraControlView.yConstraint = yConstraint
         indicatorsView.wantsLayer = true
         indicatorsView.layer?.backgroundColor = NSColor(named: "cameraControlBackground")!.cgColor
-
+        lightButton.roundCorners(withRadius: 5)
+        lightButton.layer?.backgroundColor = NSColor.white.withAlphaComponent(0.1).cgColor
+        
+        
         videoDecoder = VideoDecoder()
         imageView.image = NSImage(named: "Trident")
         statusLabel.stringValue = "Connecting to Trident..."
@@ -293,11 +296,13 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
                     self.lightOn = true
                     self.lightButton.title = "\u{10078B}"
                     self.lightButton.contentTintColor = .white
+                    self.lightButton.layer?.backgroundColor = NSColor.black.withAlphaComponent(0.1).cgColor
                 } else {
                     // Light Off
                     self.lightOn = false
                     self.lightButton.title = "\u{10074C}"
                     self.lightButton.contentTintColor = nil
+                    self.lightButton.layer?.backgroundColor = NSColor.white.withAlphaComponent(0.1).cgColor
                 }
             }
         }

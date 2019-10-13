@@ -9,8 +9,8 @@
 import Cocoa
 
 protocol FloatingViewProtocol: NSView {
-    var xConstraint: NSLayoutConstraint! { get set }
-    var yConstraint: NSLayoutConstraint! { get set }
+    var xConstraint: NSLayoutConstraint? { get set }
+    var yConstraint: NSLayoutConstraint? { get set }
 
     var mousePosRelatedToView: CGPoint? { get set }
     var isDragging: Bool { get set }
@@ -21,8 +21,22 @@ protocol FloatingViewProtocol: NSView {
 }
 
 extension FloatingViewProtocol {
+    func addConstraints() {
+        guard let superview = superview, let window = window else { return }
+        let x = frame.midX
+        let y = frame.midY
+        xConstraint = self.centerXAnchor.constraint(equalTo: superview.leadingAnchor, constant: x)
+        yConstraint = superview.bottomAnchor.constraint(equalTo: self.centerYAnchor, constant: y)
+        NSLayoutConstraint.activate([xConstraint!, yConstraint!])
+        cph = xConstraint!.constant / window.frame.width
+        cpv = yConstraint!.constant / window.frame.height
+    }
+    
     func mouseDownAct(with event: NSEvent) {
         guard let window = window else { return }
+        if xConstraint == nil {
+            addConstraints()
+        }
         let titlebarHeight = window.titlebarHeight
         mousePosRelatedToView = NSEvent.mouseLocation
         mousePosRelatedToView!.x -= frame.origin.x
@@ -56,16 +70,16 @@ extension FloatingViewProtocol {
         let yMax = windowFrame.height - frame.height - titlebarHeight
         newOrigin = newOrigin.constrained(to: NSRect(x: 0, y: 0, width: xMax, height: yMax))
         // apply position
-        xConstraint.constant = newOrigin.x + frame.width / 2
-        yConstraint.constant = newOrigin.y + frame.height / 2
+        xConstraint?.constant = newOrigin.x + frame.width / 2
+        yConstraint?.constant = newOrigin.y + frame.height / 2
     }
 
     func mouseUpAct(with event: NSEvent) {
         isDragging = false
         guard let windowFrame = window?.frame else { return }
         //         save final position
-        cph = xConstraint.constant / windowFrame.width
-        cpv = yConstraint.constant / windowFrame.height
+        cph = (xConstraint?.constant ?? 0) / windowFrame.width
+        cpv = (yConstraint?.constant ?? 0) / windowFrame.height
         //        Preference.set(xConstraint.constant / windowFrame.width, for: .controlBarPositionHorizontal)
         //        Preference.set(yConstraint.constant / windowFrame.height, for: .controlBarPositionVertical)
     }
@@ -75,6 +89,7 @@ extension FloatingViewProtocol {
         //        let cph = Preference.float(for: .controlBarPositionHorizontal)
         //        let cpv = Preference.float(for: .controlBarPositionVertical)
         guard let window = window else { return }
+        print(cph, cpv)
         let windowWidth = window.frame.width
         let oscHalfWidth: CGFloat = frame.width / 2
 
@@ -95,8 +110,8 @@ extension FloatingViewProtocol {
             yPos = windowHeight - oscHalHeight
         }
 
-        xConstraint.constant = xPos
-        yConstraint.constant = yPos
+        xConstraint?.constant = xPos
+        yConstraint?.constant = yPos
     }
 
 }

@@ -1,14 +1,15 @@
 //
-//  CameraControlView.swift
-//  TestFloatWim
+//  RovModelView.swift
+//  TridentVideoViewer
 //
-//  Created by Dmitriy Borovikov on 22/09/2019.
+//  Created by Dmitriy Borovikov on 13.10.2019.
 //  Copyright © 2019 Dmitriy Borovikov. All rights reserved.
 //
 
 import Cocoa
+import SceneKit
 
-class CameraControlView: NSView, FloatingViewProtocol {
+class RovModelView: SCNView, FloatingViewProtocol {
     weak var xConstraint: NSLayoutConstraint?
     weak var yConstraint: NSLayoutConstraint?
 
@@ -16,14 +17,12 @@ class CameraControlView: NSView, FloatingViewProtocol {
     var isDragging: Bool = false
     var cpv: CGFloat = 0
     var cph: CGFloat = 0
-    let alignConst: CGFloat = 10
+    let alignConst: CGFloat = -1
     var isAlignFeedbackSent = false
 
     override func awakeFromNib() {
         super.awakeFromNib()
         self.roundCorners(withRadius: 6)
-        self.translatesAutoresizingMaskIntoConstraints = false
-        self.layer?.backgroundColor = NSColor(named: "cameraControlBackground")!.cgColor
     }
 
     override func mouseDown(with event: NSEvent) {
@@ -37,5 +36,4 @@ class CameraControlView: NSView, FloatingViewProtocol {
     override func mouseUp(with event: NSEvent) {
         mouseUpAct(with: event)
     }
-
 }

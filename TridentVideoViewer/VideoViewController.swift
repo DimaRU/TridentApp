@@ -21,11 +21,9 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
 
     @IBOutlet weak var indicatorsView: NSView!
     @IBOutlet weak var cameraControlView: CameraControlView!
-    @IBOutlet weak var xConstraint: NSLayoutConstraint!
-    @IBOutlet weak var yConstraint: NSLayoutConstraint!
     @IBOutlet weak var lightButton: NSButton!
     @IBOutlet weak var recordingButton: FlatButton!
-    @IBOutlet weak var tridentView: SCNView!
+    @IBOutlet weak var tridentView: RovModelView!
 
     private var videoDecoder: VideoDecoder!
     private let videoDecoderQueue = DispatchQueue.init(label: "in.ioshack.Trident", qos: .background)
@@ -87,8 +85,6 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
         recordingTimeLabel.stringValue = ""
         cameraTimeLabel.textColor = .systemGray
 
-        cameraControlView.xConstraint = xConstraint
-        cameraControlView.yConstraint = yConstraint
         indicatorsView.wantsLayer = true
         indicatorsView.layer?.backgroundColor = NSColor(named: "cameraControlBackground")!.cgColor
         lightButton.roundCorners(withRadius: 5)
@@ -126,6 +122,7 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
     
     func windowDidResize(_ notification: Notification) {
         cameraControlView.windowDidResize()
+        tridentView.windowDidResize()
     }
 
     override func viewWillAppear() {

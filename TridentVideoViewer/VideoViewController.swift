@@ -105,7 +105,7 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
     }
 
     private func initScene() {
-        guard let scene = SCNScene(named: "trident.scn") else {
+        guard let scene = SCNScene(named: "TridentApp.scnassets/trident.scn") else {
             fatalError("No scene file")
         }
         tridentView.allowsCameraControl = false

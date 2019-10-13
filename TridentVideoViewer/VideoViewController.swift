@@ -102,16 +102,18 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
     }
 
     private func initScene() {
-        let scene = SCNScene(named: "trident.scn")
+        guard let scene = SCNScene(named: "trident.scn") else {
+            fatalError("No scene file")
+        }
         tridentView.allowsCameraControl = false
         tridentView.autoenablesDefaultLighting = true
-        // Show FPS logs and timming
         //        tridentView.showsStatistics = true
         
-        // Allow user translate image
         tridentView.cameraControlConfiguration.allowsTranslation = false
         tridentView.scene = scene
-        
+        let node = self.tridentView.scene!.rootNode.childNode(withName: "trident", recursively: true)!
+        node.pivot = SCNMatrix4MakeRotation(.pi, 0, 0, 1)
+        setCameraPos(yaw: .pi)
     }
     
     func windowWillClose(_ notification: Notification) {
@@ -226,7 +228,7 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
             }
             let orientation = attitude.orientation
             node.orientation = orientation.scnQuaternion()
-            print((1 + orientation.yaw / .pi) * 180)
+//            print((1 + orientation.yaw / .pi) * 180)
         }
         
         FastRTPS.registerReader(topic: .rovVidSessionCurrent) { (videoSession: RovVideoSession) in
@@ -347,7 +349,30 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
         FastRTPS.send(topic: .rovLightPowerRequested, ddsData: lightPower)
     }
  
-   
+    @IBAction func absoluteYawAction(_ sender: Any) {
+        print("Abs yaw")
+        setCameraPos(yaw: .pi)
+    }
+
+    @IBAction func relativeYawAction(_ sender: Any) {
+        print("Rel yaw")
+        guard let node = tridentView.scene?.rootNode.childNode(withName: "trident", recursively: true) else { return }
+        let o = node.orientation
+        let q = RovQuaternion(Scalar(-o.x), Scalar(-o.z), Scalar(-o.y), Scalar(o.w))
+        print((0 + q.yaw / .pi) * 180)
+        setCameraPos(yaw: Float(-q.yaw))
+    }
+    
+    func setCameraPos(yaw: Float) {
+        let distance: Float = 100
+        let cz: Float = distance * cos(yaw)
+        let cx: Float = distance * sin(yaw)
+        let cy: Float = distance * sin(15.0 / 180 * .pi)
+        let camera = tridentView.pointOfView!
+        camera.simdPosition = simd_float3(x: cx, y: cy, z: cz)
+        camera.simdLook(at: simd_float3(x: 0, y: 0, z: 0))
+    }
+
     override func keyUp(with event: NSEvent) {
         processKeyEvent(event: event)
     }

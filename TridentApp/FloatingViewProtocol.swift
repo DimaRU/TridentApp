@@ -22,6 +22,7 @@ protocol FloatingViewProtocol: NSView {
 
 extension FloatingViewProtocol {
     func addConstraints() {
+        guard xConstraint == nil else { return }
         guard let superview = superview, let window = window else { return }
         let x = frame.midX
         let y = frame.midY
@@ -34,9 +35,6 @@ extension FloatingViewProtocol {
     
     func mouseDownAct(with event: NSEvent) {
         guard let window = window else { return }
-        if xConstraint == nil {
-            addConstraints()
-        }
         let titlebarHeight = window.titlebarHeight
         mousePosRelatedToView = NSEvent.mouseLocation
         mousePosRelatedToView!.x -= frame.origin.x
@@ -89,7 +87,6 @@ extension FloatingViewProtocol {
         //        let cph = Preference.float(for: .controlBarPositionHorizontal)
         //        let cpv = Preference.float(for: .controlBarPositionVertical)
         guard let window = window else { return }
-        print(cph, cpv)
         let windowWidth = window.frame.width
         let oscHalfWidth: CGFloat = frame.width / 2
 

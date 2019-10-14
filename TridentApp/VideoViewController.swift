@@ -128,6 +128,8 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
     override func viewWillAppear() {
         super.viewWillAppear()
         view.window?.delegate = self
+        cameraControlView.addConstraints()
+        tridentView.addConstraints()
     }
 
     override func viewDidAppear() {

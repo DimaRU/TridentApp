@@ -32,7 +32,7 @@
                                             <menu key="submenu" title="Services" systemMenu="services" id="hz9-B4-Xy5"/>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="4je-JR-u6R"/>
-                                        <menuItem title="Hide TridentVideoViewer" keyEquivalent="h" id="Olw-nP-bQN">
+                                        <menuItem title="Hide TridentApp" keyEquivalent="h" id="Olw-nP-bQN">
                                             <connections>
                                                 <action selector="hide:" target="Ady-hI-5gd" id="PnN-Uc-m68"/>
                                             </connections>
@@ -50,7 +50,7 @@
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="kCx-OE-vgT"/>
-                                        <menuItem title="Quit TridentVideoViewer" keyEquivalent="q" id="4sb-4s-VLi">
+                                        <menuItem title="Quit TridentApp" keyEquivalent="q" id="4sb-4s-VLi">
                                             <connections>
                                                 <action selector="terminate:" target="Ady-hI-5gd" id="Te7-pn-YzF"/>
                                             </connections>
@@ -166,7 +166,7 @@ DQ
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Help" systemMenu="help" id="F2S-fz-NVQ">
                                     <items>
-                                        <menuItem title="TridentVideoViewer Help" keyEquivalent="?" id="FKE-Sm-Kum">
+                                        <menuItem title="TridentApp Help" keyEquivalent="?" id="FKE-Sm-Kum">
                                             <connections>
                                                 <action selector="showHelp:" target="Ady-hI-5gd" id="y7X-2Q-9no"/>
                                             </connections>
@@ -180,7 +180,7 @@ DQ
                         <outlet property="delegate" destination="Voe-Tx-rLC" id="PrD-fu-P6m"/>
                     </connections>
                 </application>
-                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="TridentVideoViewer" customModuleProvider="target"/>
+                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="TridentApp" customModuleProvider="target"/>
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -210,7 +210,7 @@ DQ
         <!--Video View Controller-->
         <scene sceneID="jBG-fP-4Z9">
             <objects>
-                <viewController id="Wgr-FD-Jeg" customClass="VideoViewController" customModule="TridentVideoViewer" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Wgr-FD-Jeg" customClass="VideoViewController" customModule="TridentApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" focusRingType="none" id="Rxz-w6-QWt">
                         <rect key="frame" x="0.0" y="0.0" width="641" height="361"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -220,7 +220,7 @@ DQ
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="8S7-OO-7j4" secondAttribute="height" multiplier="16:9" id="g3f-fw-4Aj"/>
                                 </constraints>
-                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" image="Trident" id="lju-ac-TaH"/>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="Trident" id="lju-ac-TaH"/>
                             </imageView>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xCn-7A-stl">
                                 <rect key="frame" x="299" y="172" width="43" height="16"/>
@@ -315,7 +315,7 @@ DQ
                                     <action selector="lightButtonPress:" target="Wgr-FD-Jeg" id="HBF-is-gNp"/>
                                 </connections>
                             </button>
-                            <sceneView focusRingType="none" wantsMultisampling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d0c-IA-Aeu" customClass="RovModelView" customModule="TridentVideoViewer" customModuleProvider="target">
+                            <sceneView focusRingType="none" wantsMultisampling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d0c-IA-Aeu" customClass="RovModelView" customModule="TridentApp" customModuleProvider="target">
                                 <rect key="frame" x="491" y="0.0" width="150" height="150"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="150" id="LQA-SM-oBn"/>
@@ -323,10 +323,10 @@ DQ
                                 </constraints>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.054366438356164386" colorSpace="custom" customColorSpace="sRGB"/>
                             </sceneView>
-                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="7zE-p2-EwH" customClass="CameraControlView" customModule="TridentVideoViewer" customModuleProvider="target">
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="7zE-p2-EwH" customClass="CameraControlView" customModule="TridentApp" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="114" width="110" height="132"/>
                                 <subviews>
-                                    <button focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fux-7J-eaP" customClass="FlatButton" customModule="TridentVideoViewer" customModuleProvider="target">
+                                    <button focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fux-7J-eaP" customClass="FlatButton" customModule="TridentApp" customModuleProvider="target">
                                         <rect key="frame" x="30" y="62" width="50" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="9Yx-fk-f4E"/>
@@ -427,7 +427,7 @@ DQ
         </scene>
     </scenes>
     <resources>
-        <image name="Trident" width="640" height="360"/>
+        <image name="Trident" width="600" height="600"/>
         <namedColor name="stopActive">
             <color white="0.10199999809265137" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </namedColor>

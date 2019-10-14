@@ -14,7 +14,7 @@
 #include "fastrtps/rtps/reader/ReaderListener.h"
 #import <Cocoa/Cocoa.h>
 #import <SceneKit/SceneKit.h>
-#import "TridentVideoViewer-Swift.h"
+#import "TridentApp-Swift.h"
 
 
 class RovTopicListener:public eprosima::fastrtps::rtps::ReaderListener

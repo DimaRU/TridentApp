@@ -22,7 +22,7 @@ typedef unsigned char octet;
 #import <Cocoa/Cocoa.h>
 #import "RovTopicListener.h"
 #import "RovWriterListener.h"
-#import "TridentVideoViewer-Swift.h"
+#import "TridentApp-Swift.h"
 
 class CustomParticipantListener;
 class RovParticipant

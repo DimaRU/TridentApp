@@ -355,6 +355,12 @@ DQ
                                             <userDefinedRuntimeAttribute type="color" keyPath="activeButtonColor">
                                                 <color key="value" name="stopActive"/>
                                             </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="activeBorderColor">
+                                                <color key="value" white="0.13300000131130219" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                <color key="value" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="recordingButtonPress:" target="Wgr-FD-Jeg" id="355-C2-AOq"/>
@@ -427,7 +433,7 @@ DQ
         </scene>
     </scenes>
     <resources>
-        <image name="Trident" width="600" height="600"/>
+        <image name="Trident" width="1000" height="562"/>
         <namedColor name="stopActive">
             <color white="0.10199999809265137" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </namedColor>

@@ -36,4 +36,17 @@ class RovModelView: SCNView, FloatingViewProtocol {
     override func mouseUp(with event: NSEvent) {
         mouseUpAct(with: event)
     }
+    
+    func savePosition(cph: CGFloat, cpv: CGFloat) {
+        Preference.rovModelViewCPH = cph
+        Preference.rovModelViewCPV = cpv
+    }
+    
+    func loadPosition() -> (cph: CGFloat?, cpv: CGFloat?) {
+        return (
+            Preference.rovModelViewCPH,
+            Preference.rovModelViewCPV
+        )
+    }
+    
 }

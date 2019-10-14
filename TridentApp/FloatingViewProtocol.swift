@@ -18,19 +18,31 @@ protocol FloatingViewProtocol: NSView {
     var cph: CGFloat { get set }
     var alignConst: CGFloat { get }
     var isAlignFeedbackSent: Bool { get set }
+    
+    func savePosition(cph: CGFloat, cpv: CGFloat)
+    func loadPosition() -> (cph: CGFloat?, cpv: CGFloat?)
 }
 
 extension FloatingViewProtocol {
     func addConstraints() {
         guard xConstraint == nil else { return }
         guard let superview = superview, let window = window else { return }
-        let x = frame.midX
-        let y = frame.midY
+        let (defcph, defcpv) = loadPosition()
+        let x, y: CGFloat
+        if defcph != nil, defcpv != nil {
+            cph = defcph!
+            cpv = defcpv!
+            x = cph * window.frame.width
+            y = cpv * window.frame.height
+        } else {
+            x = frame.midX
+            y = frame.midY
+            cph = x / window.frame.width
+            cpv = y / window.frame.height
+        }
         xConstraint = self.centerXAnchor.constraint(equalTo: superview.leadingAnchor, constant: x)
         yConstraint = superview.bottomAnchor.constraint(equalTo: self.centerYAnchor, constant: y)
         NSLayoutConstraint.activate([xConstraint!, yConstraint!])
-        cph = xConstraint!.constant / window.frame.width
-        cpv = yConstraint!.constant / window.frame.height
     }
     
     func mouseDownAct(with event: NSEvent) {
@@ -78,14 +90,11 @@ extension FloatingViewProtocol {
         //         save final position
         cph = (xConstraint?.constant ?? 0) / windowFrame.width
         cpv = (yConstraint?.constant ?? 0) / windowFrame.height
-        //        Preference.set(xConstraint.constant / windowFrame.width, for: .controlBarPositionHorizontal)
-        //        Preference.set(yConstraint.constant / windowFrame.height, for: .controlBarPositionVertical)
+        savePosition(cph: cph, cpv: cpv)
     }
 
     func windowDidResize() {
         // update control bar position
-        //        let cph = Preference.float(for: .controlBarPositionHorizontal)
-        //        let cpv = Preference.float(for: .controlBarPositionVertical)
         guard let window = window else { return }
         let windowWidth = window.frame.width
         let oscHalfWidth: CGFloat = frame.width / 2

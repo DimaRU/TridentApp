@@ -38,4 +38,16 @@ class CameraControlView: NSView, FloatingViewProtocol {
         mouseUpAct(with: event)
     }
 
+    func savePosition(cph: CGFloat, cpv: CGFloat) {
+        Preference.cameraControlViewCPH = cph
+        Preference.cameraControlViewCPV = cpv
+    }
+    
+    func loadPosition() -> (cph: CGFloat?, cpv: CGFloat?) {
+        return (
+            Preference.cameraControlViewCPH,
+            Preference.cameraControlViewCPV
+        )
+    }
+    
 }

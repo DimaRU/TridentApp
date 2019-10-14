@@ -90,7 +90,6 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
         lightButton.roundCorners(withRadius: 5)
         lightButton.layer?.backgroundColor = NSColor.white.withAlphaComponent(0.1).cgColor
         
-        
         videoDecoder = VideoDecoder()
         imageView.image = NSImage(named: "Trident")
         statusLabel.stringValue = "Connecting to Trident..."
@@ -106,8 +105,6 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
         }
         tridentView.allowsCameraControl = false
         tridentView.autoenablesDefaultLighting = true
-        //        tridentView.showsStatistics = true
-        
         tridentView.cameraControlConfiguration.allowsTranslation = false
         tridentView.scene = scene
         let node = self.tridentView.scene!.rootNode.childNode(withName: "trident", recursively: true)!
@@ -136,15 +133,16 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
         super.viewDidAppear()
         videoDecoder.delegate = self
 
-        FastRTPS.registerReader(topic: .rovCamFwdH2640Video) { (videoData: RovVideoData) in
-            self.videoDecoderQueue.async { [weak self] in
+        FastRTPS.registerReader(topic: .rovCamFwdH2640Video) { [weak self] (videoData: RovVideoData) in
+            self?.videoDecoderQueue.async {
                 self?.dispatchGroup.enter()
                 self?.videoDecoder.decodeVideo(data: videoData.data)
                 self?.dispatchGroup.leave()
             }
         }
         
-        tridentCommandTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { timer in
+        tridentCommandTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { [weak self] timer in
+            guard let self = self else { return }
             let thrust = self.forwardLever - self.backwardLever
             let yaw = self.leftLever - self.rightLever
             let pitch = self.upLever - self.downLever
@@ -195,37 +193,37 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
     }
     
     private func registerReaders() {
-        FastRTPS.registerReader(topic: .rovTempWater) { (temp: RovTemperature) in
-            DispatchQueue.main.async { [weak self] in
+        FastRTPS.registerReader(topic: .rovTempWater) { [weak self] (temp: RovTemperature) in
+            DispatchQueue.main.async {
                 self?.statusLabel.isHidden = true
                 self?.temperature = temp.temperature.temperature
             }
         }
         
-        FastRTPS.registerReader(topic: .rovDepth) { (depth: RovDepth) in
-            DispatchQueue.main.async { [weak self] in
+        FastRTPS.registerReader(topic: .rovDepth) { [weak self] (depth: RovDepth) in
+            DispatchQueue.main.async {
                 self?.depth = depth.depth
             }
         }
         
-        FastRTPS.registerReader(topic: .rovFuelgaugeHealth) { (health: RovFuelgaugeHealth) in
-            DispatchQueue.main.async { [weak self] in
+        FastRTPS.registerReader(topic: .rovFuelgaugeHealth) { [weak self] (health: RovFuelgaugeHealth) in
+            DispatchQueue.main.async {
                 self?.batteryTime = health.average_time_to_empty_mins
             }
         }
         
-        FastRTPS.registerReader(topic: .rovRecordingStats) { (recordingStats: RovRecordingStats) in
-            DispatchQueue.main.async { [weak self] in
+        FastRTPS.registerReader(topic: .rovRecordingStats) { [weak self] (recordingStats: RovRecordingStats) in
+            DispatchQueue.main.async {
                 self?.cameraTime = recordingStats.estRemainingRecTimeS / 60
             }
         }
         
-        FastRTPS.registerReader(topic: .rovControlCurrent) { (tridentControlTarget: RovTridentControlTarget) in
-            print(tridentControlTarget)
-        }
-        
-        FastRTPS.registerReader(topic: .rovAttitude) { (attitude: RovAttitude) in
-            guard let node = self.tridentView.scene?.rootNode.childNode(withName: "trident", recursively: true) else {
+//        FastRTPS.registerReader(topic: .rovControlCurrent) { (tridentControlTarget: RovTridentControlTarget) in
+//            print(tridentControlTarget)
+//        }
+//
+        FastRTPS.registerReader(topic: .rovAttitude) { [weak self] (attitude: RovAttitude) in
+            guard let node = self?.tridentView.scene?.rootNode.childNode(withName: "trident", recursively: true) else {
                 return
             }
             let orientation = attitude.orientation
@@ -233,7 +231,8 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
 //            print((1 + orientation.yaw / .pi) * 180)
         }
         
-        FastRTPS.registerReader(topic: .rovVidSessionCurrent) { (videoSession: RovVideoSession) in
+        FastRTPS.registerReader(topic: .rovVidSessionCurrent) { [weak self] (videoSession: RovVideoSession) in
+            guard let self = self else { return }
             DispatchQueue.main.async {
                 switch videoSession.state {
                 case .unknown:
@@ -261,7 +260,8 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
             }
         }
         
-        FastRTPS.registerReader(topic: .rovVidSessionRep) { (videoSessionCommand: RovVideoSessionCommand) in
+        FastRTPS.registerReader(topic: .rovVidSessionRep) { [weak self] (videoSessionCommand: RovVideoSessionCommand) in
+            guard let self = self else { return }
             DispatchQueue.main.async {
                 switch videoSessionCommand.response {
                 case .unknown:
@@ -288,7 +288,8 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
             }
         }
         
-        FastRTPS.registerReader(topic: .rovLightPowerCurrent) { (lightPower: RovLightPower) in
+        FastRTPS.registerReader(topic: .rovLightPowerCurrent) { [weak self] (lightPower: RovLightPower) in
+            guard let self = self else { return }
             DispatchQueue.main.async {
                 if lightPower.power > 0 {
                     // Light On
@@ -361,7 +362,6 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
         guard let node = tridentView.scene?.rootNode.childNode(withName: "trident", recursively: true) else { return }
         let o = node.orientation
         let q = RovQuaternion(x: Double(-o.x), y: Double(-o.z), z: Double(-o.y), w: Double(o.w))
-//        print((1 + q.yaw / .pi) * 180)
         setCameraPos(yaw: Float(-q.yaw))
     }
     

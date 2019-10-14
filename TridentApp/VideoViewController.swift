@@ -376,11 +376,15 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
     }
 
     override func keyUp(with event: NSEvent) {
-        processKeyEvent(event: event)
+        if !processKeyEvent(event: event) {
+            super.keyUp(with: event)
+        }
     }
     
     override func keyDown(with event: NSEvent) {
-        processKeyEvent(event: event)
+        if !processKeyEvent(event: event) {
+            super.keyDown(with: event)
+        }
     }
     
     private var leftLever: Float = 0
@@ -390,7 +394,7 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
     private var upLever: Float = 0
     private var downLever: Float = 0
 
-    private func processKeyEvent(event: NSEvent) {
+    private func processKeyEvent(event: NSEvent) -> Bool {
         var lever: Float = 0.1
         if NSEvent.modifierFlags.contains(.option) { lever = 0.25 }
         if NSEvent.modifierFlags.contains(.control) { lever = 0.50 }
@@ -419,7 +423,7 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
                     downLever = lever
                     upLever = 0
                 default:
-                    break
+                    return false
                 }
             }
         }
@@ -441,10 +445,10 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
                 case kVK_ANSI_S:
                     downLever = 0
                 default:
-                    break
+                    return false
                 }
             }
         }
-
+        return true
     }
 }

@@ -24,10 +24,3 @@ protocol DDSUnkeyed: DDSType {}
 extension DDSUnkeyed {
     static var isKeyed: Bool { false }
 }
-
-extension String: DDSType {
-    static var isKeyed: Bool { false }
-    static var ddsTypeName: String { "DDS::String" }
-}
-
-

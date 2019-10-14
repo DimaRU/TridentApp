@@ -44,6 +44,7 @@
 		0A861E962327E9EF00A54F72 /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7654C1231A6B1600AF9488 /* VideoViewController.swift */; };
 		0A9B64EC2350E0FF00041FBD /* RovQuaternion+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9B64EB2350E0FE00041FBD /* RovQuaternion+extensions.swift */; };
 		0AAD92F82322B4B1000EAE4E /* RovParticipant.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0AAD92F62322B4B1000EAE4E /* RovParticipant.mm */; };
+		0ACC21CD2353CA6100B3CEB7 /* DDSTypeString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ACC21CC2353CA6100B3CEB7 /* DDSTypeString.swift */; };
 		0ACD6F5823433E0800E5BDED /* CameraControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ACD6F5723433E0800E5BDED /* CameraControlView.swift */; };
 		0ACD6F5A23433E2300E5BDED /* FlatButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ACD6F5923433E2300E5BDED /* FlatButton.swift */; };
 		0ACD6F5C23433E2D00E5BDED /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ACD6F5B23433E2D00E5BDED /* Extensions.swift */; };
@@ -113,6 +114,7 @@
 		0A9B64EB2350E0FE00041FBD /* RovQuaternion+extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RovQuaternion+extensions.swift"; sourceTree = "<group>"; };
 		0AAD92F62322B4B1000EAE4E /* RovParticipant.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RovParticipant.mm; sourceTree = "<group>"; };
 		0AAD92F72322B4B1000EAE4E /* RovParticipant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RovParticipant.h; sourceTree = "<group>"; };
+		0ACC21CC2353CA6100B3CEB7 /* DDSTypeString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDSTypeString.swift; sourceTree = "<group>"; };
 		0ACD6F5723433E0800E5BDED /* CameraControlView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraControlView.swift; sourceTree = "<group>"; };
 		0ACD6F5923433E2300E5BDED /* FlatButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlatButton.swift; sourceTree = "<group>"; };
 		0ACD6F5B23433E2D00E5BDED /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -189,6 +191,7 @@
 		0A76549E231A681E00AF9488 /* FastRTPSBridge */ = {
 			isa = PBXGroup;
 			children = (
+				0A28B706231AE067000FDA62 /* DDSType.swift */,
 				0A6B1CA42324438A00D48305 /* FastRTPS.swift */,
 				0A7654AA231A68F400AF9488 /* PayloadDecoder.swift */,
 				0A7654A1231A685E00AF9488 /* CustomLogConsumer.cpp */,
@@ -211,7 +214,7 @@
 		0A7654AC231A691500AF9488 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				0A28B706231AE067000FDA62 /* DDSType.swift */,
+				0ACC21CC2353CA6100B3CEB7 /* DDSTypeString.swift */,
 				0AF1164D2322584E000717F7 /* RovTopic.swift */,
 				0A7654B3231A692500AF9488 /* RovAttitude.swift */,
 				0A7654B4231A692500AF9488 /* RovBarometer.swift */,
@@ -315,6 +318,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0ACC21CD2353CA6100B3CEB7 /* DDSTypeString.swift in Sources */,
 				0A28B709231AE36F000FDA62 /* RovCommon.swift in Sources */,
 				0A7654A9231A685F00AF9488 /* RovTopicListener.mm in Sources */,
 				0A861E962327E9EF00A54F72 /* VideoViewController.swift in Sources */,

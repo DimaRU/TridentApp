@@ -23,6 +23,30 @@ class RovModelView: SCNView, FloatingViewProtocol {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.roundCorners(withRadius: 6)
+        initScene()
+    }
+    
+    private func initScene() {
+        guard let scene = SCNScene(named: "TridentApp.scnassets/trident.scn") else {
+            fatalError("No scene file")
+        }
+        allowsCameraControl = false
+        autoenablesDefaultLighting = true
+        cameraControlConfiguration.allowsTranslation = false
+        self.scene = scene
+        let node = modelNode()
+        node.pivot = SCNMatrix4MakeRotation(.pi, 0, 0, 1)
+        setCameraPos(yaw: .pi)
+    }
+
+    func setCameraPos(yaw: Float) {
+        let distance: Float = 100
+        let cz: Float = distance * cos(yaw)
+        let cx: Float = distance * sin(yaw)
+        let cy: Float = distance * sin(15.0 / 180 * .pi)
+        let camera = pointOfView!
+        camera.simdPosition = simd_float3(x: cx, y: cy, z: cz)
+        camera.simdLook(at: simd_float3(x: 0, y: 0, z: 0))
     }
 
     override func mouseDown(with event: NSEvent) {
@@ -47,6 +71,10 @@ class RovModelView: SCNView, FloatingViewProtocol {
             Preference.rovModelViewCPH,
             Preference.rovModelViewCPV
         )
+    }
+    
+    func modelNode() -> SCNNode {
+        self.scene!.rootNode.childNode(withName: "trident", recursively: true)!
     }
     
 }

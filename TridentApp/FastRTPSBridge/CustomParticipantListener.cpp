@@ -6,6 +6,7 @@
 //  Copyright © 2019 Dmitriy Borovikov. All rights reserved.
 //
 
+#include <fastrtps/log/Log.h>
 #include "CustomParticipantListener.h"
 
 using namespace eprosima::fastrtps;
@@ -16,12 +17,12 @@ void CustomParticipantListener::onReaderDiscovery(RTPSParticipant *participant, 
     (void)participant;
     switch(info.status) {
         case ReaderDiscoveryInfo::DISCOVERED_READER:
-            std::cout << "Reader for topic '" << info.info.topicName() << "' type '" << info.info.typeName() << "' discovered" << std::endl;
+            logWarning(PARTICIPANT_LISTENER, "Reader for topic '" << info.info.topicName() << "' type '" << info.info.typeName() << "' discovered")
             break;
         case ReaderDiscoveryInfo::CHANGED_QOS_READER:
             break;
         case ReaderDiscoveryInfo::REMOVED_READER:
-            std::cout << "Reader for topic '" << info.info.topicName() << "' type '" << info.info.typeName() << "' left the domain." << std::endl;
+            logWarning(PARTICIPANT_LISTENER, "Reader for topic '" << info.info.topicName() << "' type '" << info.info.typeName() << "' left the domain.")
             break;
     }
 }
@@ -31,12 +32,12 @@ void CustomParticipantListener::onWriterDiscovery(RTPSParticipant *participant, 
     (void)participant;
     switch(info.status) {
         case WriterDiscoveryInfo::DISCOVERED_WRITER:
-            std::cout << "Writer for topic '" << info.info.topicName() << "' type '" << info.info.typeName() << "' discovered" << std::endl;
+            logWarning(PARTICIPANT_LISTENER, "Writer for topic '" << info.info.topicName() << "' type '" << info.info.typeName() << "' discovered")
             break;
         case WriterDiscoveryInfo::CHANGED_QOS_WRITER:
             break;
         case WriterDiscoveryInfo::REMOVED_WRITER:
-            std::cout << "Writer for topic '" << info.info.topicName() << "' type '" << info.info.typeName() << "' left the domain." << std::endl;
+            logWarning(PARTICIPANT_LISTENER, "Writer for topic '" << info.info.topicName() << "' type '" << info.info.typeName() << "' left the domain.")
             break;
     }
 }
@@ -46,13 +47,13 @@ void CustomParticipantListener::onParticipantDiscovery(RTPSParticipant *particip
     (void)participant;
     switch(info.status) {
         case ParticipantDiscoveryInfo::DISCOVERED_PARTICIPANT:
-            std::cout << "Participant '" << info.info.m_participantName << "' discovered" << std::endl;
+            logWarning(PARTICIPANT_LISTENER, "Participant '" << info.info.m_participantName << "' discovered")
             break;
         case ParticipantDiscoveryInfo::DROPPED_PARTICIPANT:
-            std::cout << "Participant '" << info.info.m_participantName << "' dropped" << std::endl;
+            logWarning(PARTICIPANT_LISTENER, "Participant '" << info.info.m_participantName << "' dropped")
             break;
         case ParticipantDiscoveryInfo::REMOVED_PARTICIPANT:
-            std::cout << "Participant '" << info.info.m_participantName << "' removed" << std::endl;
+            logWarning(PARTICIPANT_LISTENER, "Participant '" << info.info.m_participantName << "' removed")
             break;
         case ParticipantDiscoveryInfo::CHANGED_QOS_PARTICIPANT:
             break;

@@ -24,14 +24,24 @@ using namespace std;
 
 @implementation FastRTPSBridge
 
-- (id)init {
+- (id)initWithLogLevel:(LogLevel)logLevel {
     if (!(self = [super init])) {
         return nil;
     }
     
     Log::ClearConsumers();
     Log::RegisterConsumer(std::unique_ptr<LogConsumer>(new CustomLogConsumer));
-    Log::SetVerbosity(Log::Kind::Info);
+    switch (logLevel) {
+        case error:
+            Log::SetVerbosity(Log::Kind::Error);
+            break;
+        case warning:
+            Log::SetVerbosity(Log::Kind::Warning);
+            break;
+        case info:
+            Log::SetVerbosity(Log::Kind::Info);
+            break;
+    }
     Log::ReportFilenames(true);
     
     participant = new RovParticipant();

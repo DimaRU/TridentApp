@@ -22,6 +22,7 @@
 #include <fastrtps/attributes/TopicAttributes.h>
 #include <fastrtps/qos/ReaderQos.h>
 #include <fastrtps/qos/WriterQos.h>
+#include <fastrtps/log/Log.h>
 
 using namespace eprosima::fastrtps;
 using namespace eprosima::fastrtps::rtps;
@@ -35,7 +36,7 @@ mp_listener(nullptr)
 RovParticipant::~RovParticipant()
 {
     mp_participant->stopRTPSParticipantAnnouncement();
-    std::cout << "Delete participant" << std::endl;
+    logInfo(ROV_PARTICIPANT, "Delete participant")
     resignAll();
     RTPSDomain::removeRTPSParticipant(mp_participant);
     delete mp_listener;
@@ -45,7 +46,7 @@ RovParticipant::~RovParticipant()
 void RovParticipant::resignAll() {
     for(auto it = readerList.begin(); it != readerList.end(); it++)
     {
-        std::cout << "Remove reader: " << it->first << std::endl;
+        logInfo(ROV_PARTICIPANT, "Remove reader: " << it->first)
         auto readerInfo = it->second;
         RTPSDomain::removeRTPSReader(readerInfo->reader);
         delete readerInfo;
@@ -54,7 +55,7 @@ void RovParticipant::resignAll() {
 
     for(auto it = writerList.begin(); it != writerList.end(); it++)
     {
-        std::cout << "Remove writer: " << it->first << std::endl;
+        logInfo(ROV_PARTICIPANT, "Remove writer: " << it->first)
         auto writerInfo = it->second;
         RTPSDomain::removeRTPSWriter(writerInfo->writer);
         delete writerInfo;
@@ -127,13 +128,13 @@ bool RovParticipant::addReader(const char* name,
         delete readerInfo;
         return false;
     }
-    std::cout << "Registered reader: " << name << " - " << dataType << std::endl;
+    logInfo(ROV_PARTICIPANT, "Registered reader: " << name << " - " << dataType)
     return true;
 }
 
 bool RovParticipant::removeReader(const char* name)
 {
-    std::cout << "Remove reader: " << name << std::endl;
+    logInfo(ROV_PARTICIPANT, "Remove reader: " << name)
     auto topicName = std::string(name);
     if (readerList.find(topicName) == readerList.end()) {
         return false;
@@ -191,13 +192,13 @@ bool RovParticipant::addWriter(const char* name,
         delete writerInfo;
         return false;
     }
-    std::cout << "Registered writer: " << name << " - " << dataType << std::endl;
+    logInfo(ROV_PARTICIPANT, "Registered writer: " << name << " - " << dataType)
     return true;
 }
 
 bool RovParticipant::removeWriter(const char* name)
 {
-    std::cout << "Remove writer: " << name << std::endl;
+    logInfo(ROV_PARTICIPANT, "Remove writer: " << name)
     auto topicName = std::string(name);
     if (writerList.find(topicName) == writerList.end()) {
         return false;
@@ -230,14 +231,14 @@ bool RovParticipant::send(const char* name, const uint8_t* data, uint32_t length
         memcpy(instanceHandle.value, key, len);
         change = writer->new_change([length]() -> uint32_t { return length+sizeof(header);}, ALIVE, instanceHandle);
         if (!change) {    // In the case history is full, remove some old changes
-            std::cout << "cleaning history...";
+            logWarning(ROV_PARTICIPANT, "cleaning history...")
             writer->remove_older_changes(2);
             change = writer->new_change([length]() -> uint32_t { return length+sizeof(header);}, ALIVE, instanceHandle);
         }
     } else {
         change = writer->new_change([length]() -> uint32_t { return length+sizeof(header);}, ALIVE);
         if (!change) {    // In the case history is full, remove some old changes
-            std::cout << "cleaning history...";
+            logWarning(ROV_PARTICIPANT, "cleaning history...")
             writer->remove_older_changes(2);
             change = writer->new_change([length]() -> uint32_t { return length+sizeof(header);}, ALIVE);
         }

@@ -6,6 +6,7 @@
 //  Copyright © 2019 Dmitriy Borovikov. All rights reserved.
 //
 
+#include <fastrtps/log/Log.h>
 #include "RovWriterListener.h"
 
 using namespace eprosima::fastrtps;
@@ -27,11 +28,11 @@ void RovWriterListener::onWriterMatched(RTPSWriter* writer, MatchingInfo& info)
     {
         case MATCHED_MATCHING:
             n_matched++;
-            std::cout << "\tWriter matched:" << topicName << " count: " << n_matched << std::endl;
+            logWarning(WRITER_LISTENER, "\tWriter matched:" << topicName << " count: " << n_matched)
             break;
         case REMOVED_MATCHING:
             n_matched--;
-            std::cout << "\tWriter remove matched:" << topicName << " count: " << n_matched << std::endl;
+            logWarning(WRITER_LISTENER, "\tWriter remove matched:" << topicName << " count: " << n_matched)
             break;
     }
 }

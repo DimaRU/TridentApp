@@ -10,6 +10,7 @@
 
 #include <fastrtps/rtps/reader/RTPSReader.h>
 #include <fastrtps/rtps/history/ReaderHistory.h>
+#include <fastrtps/log/Log.h>
 
 using namespace eprosima::fastrtps;
 using namespace eprosima::fastrtps::rtps;
@@ -34,7 +35,7 @@ void RovTopicListener::onNewCacheChangeAdded(RTPSReader* reader, const CacheChan
 
 void RovTopicListener::on_liveliness_changed(RTPSReader *reader, const LivelinessChangedStatus &status)
 {
-    std::cout << "Liveliness: " << status.alive_count_change << std::endl;
+    logWarning(READER_LISTENER, "Liveliness: " << status.alive_count_change)
 }
 
 void RovTopicListener::onReaderMatched(RTPSReader* reader, MatchingInfo& info)
@@ -43,11 +44,11 @@ void RovTopicListener::onReaderMatched(RTPSReader* reader, MatchingInfo& info)
     {
         case MATCHED_MATCHING:
             n_matched++;
-            std::cout << "\tReader matched:" << topicName << " count: " << n_matched << std::endl;
+            logWarning(READER_LISTENER, "\tReader matched:" << topicName << " count: " << n_matched)
             break;
         case REMOVED_MATCHING:
             n_matched--;
-            std::cout << "\tReader remove matched:" << topicName << " count: " << n_matched << std::endl;
+            logWarning(READER_LISTENER, "\tReader remove matched:" << topicName << " count: " << n_matched)
             break;
     }
 }

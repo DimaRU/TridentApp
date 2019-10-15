@@ -12,7 +12,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol PayloadDecoderInterface;
 @interface FastRTPSBridge : NSObject
-- (id)init;
+typedef NS_CLOSED_ENUM(NSInteger, LogLevel) {
+    error, warning, info
+};
+
+- (id)initWithLogLevel:(LogLevel)logLevel;
 - (bool)registerReaderWithTopicName:(NSString *)topicName typeName:(NSString*)typeName keyed:(bool) keyed payloadDecoder: (NSObject<PayloadDecoderInterface>*) payloadDecoder;
 - (bool)removeReaderWithTopicName:(NSString *)topicName;
 - (bool)registerWriterWithTopicName:(NSString *)topicName typeName:(NSString*)typeName keyed:(bool) keyed;

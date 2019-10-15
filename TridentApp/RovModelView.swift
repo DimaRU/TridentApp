@@ -46,7 +46,9 @@ class RovModelView: SCNView, FloatingViewProtocol {
         let cy: Float = distance * sin(15.0 / 180 * .pi)
         let camera = pointOfView!
         camera.simdPosition = simd_float3(x: cx, y: cy, z: cz)
-        camera.simdLook(at: simd_float3(x: 0, y: 0, z: 0))
+        camera.simdLook(at: simd_float3(x: 0, y: 0, z: 0),
+                        up: SCNNode.simdLocalUp,
+                        localFront: SCNNode.simdLocalFront)
     }
 
     override func mouseDown(with event: NSEvent) {

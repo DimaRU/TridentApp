@@ -68,10 +68,12 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
             cameraTimeLabel.stringValue = time
         }
     }
-    
+
+    #if DEBUG
     deinit {
         print("Deinit VideoViewController")
     }
+    #endif
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -79,7 +79,7 @@ class VideoDecoder: NSObject {
         // decode the video NALs
         if videoSession != nil, nalType == 1 || nalType == 5 {
             if !decodeNal(nal) {
-                print("Decode error")
+                print("Nel decode error")
             }
         }
     }

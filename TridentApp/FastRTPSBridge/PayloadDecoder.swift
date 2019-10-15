@@ -27,10 +27,6 @@ class PayloadDecoder<T: DDSType>:NSObject, PayloadDecoderInterface {
         super.init()
     }
 
-    deinit {
-        print("deinit PayloadDecoder")
-    }
-    
     func decode(sequence: Int,
                 payloadSize: Int,
                 payload: UnsafePointer<UInt8>) {

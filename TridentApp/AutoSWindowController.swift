@@ -12,7 +12,6 @@ class AutoSWindowController: NSWindowController {
 
     override func windowDidLoad() {
         super.windowDidLoad()
-        print(self.windowFrameAutosaveName)
         self.windowFrameAutosaveName = "TridentVideoWindow"
     }
 

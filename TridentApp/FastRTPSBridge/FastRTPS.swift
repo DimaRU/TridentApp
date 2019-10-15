@@ -9,10 +9,14 @@
 import Foundation
 import CDRCodable
 
-class FastRTPS {
+final class FastRTPS {
     private static let shared = FastRTPS()
+#if DEBUG
     lazy var fastRTPSBridge: FastRTPSBridge? = FastRTPSBridge.init(logLevel: .warning)
-
+#else
+    lazy var fastRTPSBridge: FastRTPSBridge? = FastRTPSBridge.init(logLevel: .error)
+#endif
+    
     class func stopRTPS() {
         FastRTPS.shared.fastRTPSBridge?.stopRTPS()
         FastRTPS.shared.fastRTPSBridge = nil

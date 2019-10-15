@@ -152,6 +152,9 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
             FastRTPS.send(topic: .rovVideoOverlayModeCommand, ddsData: "on")
             let videoReq = RovVideoSessionCommand(sessionID: "", metadata: "", request: .stopped, response: .unknown, reason: "")
             FastRTPS.send(topic: .rovVidSessionReq, ddsData: videoReq)
+            let lightPower = RovLightPower(id: "fwd", power: 0)
+            FastRTPS.send(topic: .rovLightPowerRequested, ddsData: lightPower)
+
         }
     }
 

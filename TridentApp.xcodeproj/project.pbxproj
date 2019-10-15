@@ -14,6 +14,7 @@
 		0A28A426232D965C00C4D04D /* VideoDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A28A425232D965C00C4D04D /* VideoDecoder.swift */; };
 		0A28B707231AE067000FDA62 /* DDSType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A28B706231AE067000FDA62 /* DDSType.swift */; };
 		0A28B709231AE36F000FDA62 /* RovCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A28B708231AE36F000FDA62 /* RovCommon.swift */; };
+		0A3456262355B98800BF65EE /* TridentDrive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3456252355B98800BF65EE /* TridentDrive.swift */; };
 		0A45C91723539AE000D15334 /* TridentApp.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A45C91623539AE000D15334 /* TridentApp.scnassets */; };
 		0A45C91923539F0300D15334 /* FloatingViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A45C91823539F0300D15334 /* FloatingViewProtocol.swift */; };
 		0A45C91B2353A25800D15334 /* RovModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A45C91A2353A25800D15334 /* RovModelView.swift */; };
@@ -81,6 +82,7 @@
 		0A28A425232D965C00C4D04D /* VideoDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDecoder.swift; sourceTree = "<group>"; };
 		0A28B706231AE067000FDA62 /* DDSType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDSType.swift; sourceTree = "<group>"; };
 		0A28B708231AE36F000FDA62 /* RovCommon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RovCommon.swift; sourceTree = "<group>"; };
+		0A3456252355B98800BF65EE /* TridentDrive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TridentDrive.swift; sourceTree = "<group>"; };
 		0A45C91623539AE000D15334 /* TridentApp.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = TridentApp.scnassets; sourceTree = "<group>"; };
 		0A45C91823539F0300D15334 /* FloatingViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingViewProtocol.swift; sourceTree = "<group>"; };
 		0A45C91A2353A25800D15334 /* RovModelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RovModelView.swift; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 			children = (
 				0A7654832319C16900AF9488 /* AppDelegate.swift */,
 				0A7654C1231A6B1600AF9488 /* VideoViewController.swift */,
+				0A3456252355B98800BF65EE /* TridentDrive.swift */,
 				0A28A425232D965C00C4D04D /* VideoDecoder.swift */,
 				0ACD6F5723433E0800E5BDED /* CameraControlView.swift */,
 				0A45C91A2353A25800D15334 /* RovModelView.swift */,
@@ -354,6 +357,7 @@
 				0A9B64EC2350E0FF00041FBD /* RovQuaternion+extensions.swift in Sources */,
 				0A45C91B2353A25800D15334 /* RovModelView.swift in Sources */,
 				0A7654BA231A693300AF9488 /* RovChannel.swift in Sources */,
+				0A3456262355B98800BF65EE /* TridentDrive.swift in Sources */,
 				0A649C9E2328C6EB00FAF9D1 /* CustomParticipantListener.cpp in Sources */,
 				0ACD6F5A23433E2300E5BDED /* FlatButton.swift in Sources */,
 				0A28A422232D5D1F00C4D04D /* RovTridentMotorCommand.swift in Sources */,

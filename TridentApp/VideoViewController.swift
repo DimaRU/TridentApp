@@ -7,7 +7,6 @@
 //
 
 import Cocoa
-import Carbon.HIToolbox
 import SceneKit
 
 class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDelegate {
@@ -28,8 +27,7 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
     private var videoDecoder: VideoDecoder!
     private let videoDecoderQueue = DispatchQueue.init(label: "in.ioshack.Trident", qos: .background)
     private let dispatchGroup = DispatchGroup()
-    
-    private var tridentCommandTimer: Timer?
+    private let tridentDrive = TridentDrive()
     
     private var lightOn = false
     private var videoSessionId: UUID?
@@ -94,12 +92,13 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
         imageView.image = NSImage(named: "Trident")
         statusLabel.stringValue = "Connecting to Trident..."
         statusLabel.textColor = NSColor.lightGray
+
         
         start()
     }
 
     func windowWillClose(_ notification: Notification) {
-        tridentCommandTimer?.invalidate()
+        tridentDrive.stop()
         stop()
         FastRTPS.stopRTPS()
     }
@@ -128,18 +127,12 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
             }
         }
         
-        tridentCommandTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { [weak self] timer in
-            guard let self = self else { return }
-            let thrust = self.forwardLever - self.backwardLever
-            let yaw = self.leftLever - self.rightLever
-            let pitch = self.upLever - self.downLever
-            let tridentCommand = RovTridentControlTarget(id: "control", pitch: pitch, yaw: yaw, thrust: thrust, lift: 0)
-            FastRTPS.send(topic: .rovControlTarget, ddsData: tridentCommand)
-        }
+        tridentDrive.start()
     }
 
     override func viewWillDisappear() {
         super.viewWillDisappear()
+        tridentDrive.stop()
         videoDecoder.delegate = nil
         FastRTPS.removeReader(topic: .rovCamFwdH2640Video)
     }
@@ -205,16 +198,10 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
             }
         }
         
-//        FastRTPS.registerReader(topic: .rovControlCurrent) { (tridentControlTarget: RovTridentControlTarget) in
-//            print(tridentControlTarget)
-//        }
-//
         FastRTPS.registerReader(topic: .rovAttitude) { [weak self] (attitude: RovAttitude) in
-            guard let node = self?.tridentView.modelNode() else {
-                return
-            }
+            let node = self?.tridentView.modelNode()
             let orientation = attitude.orientation
-            node.orientation = orientation.scnQuaternion()
+            node?.orientation = orientation.scnQuaternion()
 //            print((1 + orientation.yaw / .pi) * 180)
         }
         
@@ -353,79 +340,15 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
     }
     
     override func keyUp(with event: NSEvent) {
-        if !processKeyEvent(event: event) {
+        if !tridentDrive.processKeyEvent(event: event) {
             super.keyUp(with: event)
         }
     }
     
     override func keyDown(with event: NSEvent) {
-        if !processKeyEvent(event: event) {
+        if !tridentDrive.processKeyEvent(event: event) {
             super.keyDown(with: event)
         }
     }
     
-    private var leftLever: Float = 0
-    private var rightLever: Float = 0
-    private var forwardLever: Float = 0
-    private var backwardLever: Float = 0
-    private var upLever: Float = 0
-    private var downLever: Float = 0
-
-    private func processKeyEvent(event: NSEvent) -> Bool {
-        var lever: Float = 0.1
-        if NSEvent.modifierFlags.contains(.option) { lever = 0.25 }
-        if NSEvent.modifierFlags.contains(.control) { lever = 0.50 }
-        if NSEvent.modifierFlags.contains(.shift) { lever = 1 }
-
-        if event.type == .keyDown {
-            switch event.specialKey {
-            case .upArrow?:
-                forwardLever = lever
-                backwardLever = 0
-            case .downArrow?:
-                backwardLever = lever
-                forwardLever = 0
-            case .leftArrow?:
-                leftLever = lever
-                rightLever = 0
-            case .rightArrow?:
-                rightLever = lever
-                leftLever = 0
-            default:
-                switch Int(event.keyCode) {
-                case kVK_ANSI_W:
-                    upLever = lever
-                    downLever = 0
-                case kVK_ANSI_S:
-                    downLever = lever
-                    upLever = 0
-                default:
-                    return false
-                }
-            }
-        }
-        
-        if event.type == .keyUp {
-            switch event.specialKey {
-            case .upArrow?:
-                forwardLever = 0
-            case .downArrow?:
-                backwardLever = 0
-            case .leftArrow?:
-                leftLever = 0
-            case .rightArrow?:
-                rightLever = 0
-            default:
-                switch Int(event.keyCode) {
-                case kVK_ANSI_W:
-                    upLever = 0
-                case kVK_ANSI_S:
-                    downLever = 0
-                default:
-                    return false
-                }
-            }
-        }
-        return true
-    }
 }

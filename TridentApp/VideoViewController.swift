@@ -103,6 +103,7 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
         tridentDrive.stop()
         stop()
         FastRTPS.stopRTPS()
+        DisplayManage.enableSleep()
     }
     
     func windowDidResize(_ notification: Notification) {
@@ -120,6 +121,7 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
     override func viewDidAppear() {
         super.viewDidAppear()
         videoDecoder.delegate = self
+        DisplayManage.disableSleep()
 
         FastRTPS.registerReader(topic: .rovCamFwdH2640Video) { [weak self] (videoData: RovVideoData) in
             self?.videoDecoderQueue.async {
@@ -137,6 +139,7 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
         tridentDrive.stop()
         videoDecoder.delegate = nil
         FastRTPS.removeReader(topic: .rovCamFwdH2640Video)
+        DisplayManage.enableSleep()
     }
     
     private func start() {

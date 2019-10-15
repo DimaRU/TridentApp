@@ -46,6 +46,7 @@
 		0A7654C0231A693300AF9488 /* RovVideoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7654B6231A692500AF9488 /* RovVideoData.swift */; };
 		0A861E962327E9EF00A54F72 /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7654C1231A6B1600AF9488 /* VideoViewController.swift */; };
 		0A9B64EC2350E0FF00041FBD /* RovQuaternion+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9B64EB2350E0FE00041FBD /* RovQuaternion+extensions.swift */; };
+		0AA77B4D2355E7F90099ACFB /* DisplayManage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA77B4C2355E7F90099ACFB /* DisplayManage.swift */; };
 		0AAD92F82322B4B1000EAE4E /* RovParticipant.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0AAD92F62322B4B1000EAE4E /* RovParticipant.mm */; };
 		0ACC21CD2353CA6100B3CEB7 /* DDSTypeString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ACC21CC2353CA6100B3CEB7 /* DDSTypeString.swift */; };
 		0ACD6F5823433E0800E5BDED /* CameraControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ACD6F5723433E0800E5BDED /* CameraControlView.swift */; };
@@ -118,6 +119,7 @@
 		0A7654B6231A692500AF9488 /* RovVideoData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RovVideoData.swift; sourceTree = "<group>"; };
 		0A7654C1231A6B1600AF9488 /* VideoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
 		0A9B64EB2350E0FE00041FBD /* RovQuaternion+extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RovQuaternion+extensions.swift"; sourceTree = "<group>"; };
+		0AA77B4C2355E7F90099ACFB /* DisplayManage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayManage.swift; sourceTree = "<group>"; };
 		0AAD92F62322B4B1000EAE4E /* RovParticipant.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RovParticipant.mm; sourceTree = "<group>"; };
 		0AAD92F72322B4B1000EAE4E /* RovParticipant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RovParticipant.h; sourceTree = "<group>"; };
 		0ACC21CC2353CA6100B3CEB7 /* DDSTypeString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDSTypeString.swift; sourceTree = "<group>"; };
@@ -170,6 +172,7 @@
 				0A7654C1231A6B1600AF9488 /* VideoViewController.swift */,
 				0A3456252355B98800BF65EE /* TridentDrive.swift */,
 				0A28A425232D965C00C4D04D /* VideoDecoder.swift */,
+				0AA77B4C2355E7F90099ACFB /* DisplayManage.swift */,
 				0ACD6F5723433E0800E5BDED /* CameraControlView.swift */,
 				0A45C91A2353A25800D15334 /* RovModelView.swift */,
 				0A45C91823539F0300D15334 /* FloatingViewProtocol.swift */,
@@ -350,6 +353,7 @@
 				0AD277F4231FFBC30014D555 /* FastRTPSBridge.mm in Sources */,
 				0A6B1CA52324438A00D48305 /* FastRTPS.swift in Sources */,
 				0AF1165023226D32000717F7 /* RovDepth.swift in Sources */,
+				0AA77B4D2355E7F90099ACFB /* DisplayManage.swift in Sources */,
 				0A7654B9231A693300AF9488 /* RovCamera.swift in Sources */,
 				0A28A420232D573A00C4D04D /* RovLightPower.swift in Sources */,
 				0ACD6F5823433E0800E5BDED /* CameraControlView.swift in Sources */,

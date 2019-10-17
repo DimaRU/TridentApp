@@ -31,6 +31,8 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
     
     private var lightOn = false
     private var videoSessionId: UUID?
+    private var vehicleId: String?
+    private var rovBeacon: ROVBeacon?
     
     private var depth: Float = 0 {
         didSet { depthLabel.stringValue = String(format: "%.1f", depth) }
@@ -96,13 +98,12 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
         statusLabel.textColor = NSColor.lightGray
 
         
-        start()
+        startRTPS()
     }
 
     func windowWillClose(_ notification: Notification) {
         tridentDrive.stop()
-        stop()
-        FastRTPS.stopRTPS()
+        stopRTPS()
         DisplayManage.enableSleep()
     }
     
@@ -142,28 +143,108 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
         DisplayManage.enableSleep()
     }
     
-    private func start() {
-        registerReaders()
-        registerWriters()
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            let timeMs = UInt(Date().timeIntervalSince1970 * 1000)
-            FastRTPS.send(topic: .rovDatetime, ddsData: String(timeMs))
-            FastRTPS.send(topic: .rovVideoOverlayModeCommand, ddsData: "on")
-            let videoReq = RovVideoSessionCommand(sessionID: "", metadata: "", request: .stopped, response: .unknown, reason: "")
-            FastRTPS.send(topic: .rovVidSessionReq, ddsData: videoReq)
-            let lightPower = RovLightPower(id: "fwd", power: 0)
-            FastRTPS.send(topic: .rovLightPowerRequested, ddsData: lightPower)
-
+    @IBAction func recordingButtonPress(_ sender: Any) {
+        if let videoSessionId = videoSessionId {
+            stopRecordingSession(id: videoSessionId)
+        } else {
+            startRecordingSession(id: UUID())
         }
     }
-
-    private func stop() {
+    
+    @IBAction func lightButtonPress(_ sender: Any) {
+        let lightPower = RovLightPower.init(id: "fwd", power: lightOn ? 0:1)
+        FastRTPS.send(topic: .rovLightPowerRequested, ddsData: lightPower)
+    }
+    
+    @IBAction func absoluteYawAction(_ sender: Any) {
+        tridentView.setCameraPos(yaw: .pi)
+    }
+    
+    @IBAction func relativeYawAction(_ sender: Any) {
+        let node = tridentView.modelNode()
+        let o = node.orientation
+        let q = RovQuaternion(x: Double(-o.x), y: Double(-o.z), z: Double(-o.y), w: Double(o.w))
+        tridentView.setCameraPos(yaw: Float(-q.yaw))
+    }
+    
+    @IBAction func stabilizeAction(_ sender: Any) {
+        let controllerStatus = RovControllerStatus(vehicleId: vehicleId ?? "",
+                                                   controllerId: .trident,
+                                                   state: !Preference.tridentStabilize ? .enabled : .disabled)
+        FastRTPS.send(topic: .rovControllerStateRequested, ddsData: controllerStatus)
+    }
+    
+    @IBAction func telemetryOverlayAction(_ sender: Any) {
+        FastRTPS.send(topic: .rovVideoOverlayModeCommand, ddsData: !Preference.videoOverlayMode ? "on" : "off")
+    }
+    
+    override func keyUp(with event: NSEvent) {
+        if !tridentDrive.processKeyEvent(event: event) {
+            super.keyUp(with: event)
+        }
+    }
+    
+    override func keyDown(with event: NSEvent) {
+        if !tridentDrive.processKeyEvent(event: event) {
+            super.keyDown(with: event)
+        }
+    }
+    
+    private func setTelemetryOverlay(mode: String) {
+        switch mode {
+        case "on":
+            Preference.videoOverlayMode = true
+        case "off":
+            Preference.videoOverlayMode = false
+        default:
+            print("illegal mode:", mode)
+        }
+        
+        let menuItem = NSApplication.shared.mainMenu?.recursiveSearch(tag: 4)
+        menuItem!.state = Preference.videoOverlayMode ? .on:.off
+    }
+    
+    private func setController(status: RovControllerStatus) {
+        guard status.controllerId == .trident else { return }
+        Preference.tridentStabilize = (status.state == .enabled)
+        
+        let menuItem = NSApplication.shared.mainMenu?.recursiveSearch(tag: 3)
+        menuItem!.state = Preference.tridentStabilize ? .on:.off
+    }
+       
+    private func startRTPS() {
+        registerReaders()
+        registerWriters()
+    }
+    
+    private func stopRTPS() {
         FastRTPS.resignAll()
+        FastRTPS.stopRTPS()
         stopVideo()
     }
 
-    private func stopVideo() {
+    
+    private func rovProvision(rovBeacon: ROVBeacon) {
+        self.rovBeacon = rovBeacon
+        self.vehicleId = rovBeacon.uuid
+        self.statusLabel.isHidden = true
+
+        let timeMs = UInt(Date().timeIntervalSince1970 * 1000)
+        FastRTPS.send(topic: .rovDatetime, ddsData: String(timeMs))
+        FastRTPS.send(topic: .rovVideoOverlayModeCommand, ddsData: Preference.videoOverlayMode ? "on" : "off")
+        let videoReq = RovVideoSessionCommand(sessionID: "", metadata: "", request: .stopped, response: .unknown, reason: "")
+        FastRTPS.send(topic: .rovVidSessionReq, ddsData: videoReq)
+        let lightPower = RovLightPower(id: "fwd", power: 0)
+        FastRTPS.send(topic: .rovLightPowerRequested, ddsData: lightPower)
+        let controllerStatus = RovControllerStatus(vehicleId: vehicleId ?? "",
+                                                   controllerId: .trident,
+                                                   state: Preference.tridentStabilize ? .enabled : .disabled)
+        FastRTPS.send(topic: .rovControllerStateRequested, ddsData: controllerStatus)
+        
+        FastRTPS.removeReader(topic: .rovBeacon)
+    }
+    
+   private func stopVideo() {
         // terminate the video processing
         dispatchGroup.wait()
         videoDecoder.delegate = nil
@@ -183,7 +264,6 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
     private func registerReaders() {
         FastRTPS.registerReader(topic: .rovTempWater) { [weak self] (temp: RovTemperature) in
             DispatchQueue.main.async {
-                self?.statusLabel.isHidden = true
                 self?.temperature = temp.temperature.temperature
             }
         }
@@ -289,6 +369,38 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
             }
         }
         
+        FastRTPS.registerReader(topic: .rovVideoOverlayModeCurrent) { [weak self] (overlayMode: String) in
+            DispatchQueue.main.async {
+                self?.setTelemetryOverlay(mode: overlayMode)
+            }
+        }
+
+        FastRTPS.registerReader(topic: .rovControllerStateCurrent) { [weak self] (controllerStatus: RovControllerStatus) in
+            DispatchQueue.main.async {
+                self?.setController(status: controllerStatus)
+            }
+        }
+
+        FastRTPS.registerReader(topic: .rovBeacon) { [weak self] (rovBeacon: ROVBeacon) in
+            guard self?.vehicleId == nil else { return }
+            DispatchQueue.main.async {
+                self?.rovProvision(rovBeacon: rovBeacon)
+            }
+        }
+
+//        FastRTPS.registerReader(topic: .rovSubsystemStatus) { (status: RovSubsystemStatus) in
+//            print("status:", status.subsystemId.rawValue, status.substate)
+//        }
+//        FastRTPS.registerReader(topic: .rovFirmwareStatus) { (firmwareStatus: RovFirmwareStatus) in
+//            print(firmwareStatus)
+//        }
+//        FastRTPS.registerReader(topic: .rovFirmwareServiceStatus) { (firmwareServiceStatus: RovFirmwareServiceStatus) in
+//            print(firmwareServiceStatus)
+//        }
+//        FastRTPS.registerReader(topic: .rovFirmwareCommandRep) { (command: RovFirmwareCommand) in
+//            print(command)
+//        }
+
     }
     
     private func registerWriters() {
@@ -298,6 +410,8 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
         FastRTPS.registerWriter(topic: .rovVidSessionReq, ddsType: RovVideoSessionCommand.self)
         FastRTPS.registerWriter(topic: .rovDepthConfigRequested, ddsType: RovDepthConfig.self)
         FastRTPS.registerWriter(topic: .rovControlTarget, ddsType: RovTridentControlTarget.self)
+        FastRTPS.registerWriter(topic: .rovControllerStateRequested, ddsType: RovControllerStatus.self)
+        FastRTPS.registerWriter(topic: .rovFirmwareCommandReq, ddsType: RovFirmwareCommand.self)
     }
     
     private func startRecordingSession(id: UUID) {
@@ -323,40 +437,16 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
         FastRTPS.send(topic: .rovVidSessionReq, ddsData: videoSessionCommand)
     }
 
-    @IBAction func recordingButtonPress(_ sender: Any) {
-        if let videoSessionId = videoSessionId {
-            stopRecordingSession(id: videoSessionId)
-        } else {
-            startRecordingSession(id: UUID())
-        }
-    }
-    
-    @IBAction func lightButtonPress(_ sender: Any) {
-        let lightPower = RovLightPower.init(id: "fwd", power: lightOn ? 0:1)
-        FastRTPS.send(topic: .rovLightPowerRequested, ddsData: lightPower)
-    }
- 
-    @IBAction func absoluteYawAction(_ sender: Any) {
-        tridentView.setCameraPos(yaw: .pi)
-    }
+}
 
-    @IBAction func relativeYawAction(_ sender: Any) {
-        let node = tridentView.modelNode()
-        let o = node.orientation
-        let q = RovQuaternion(x: Double(-o.x), y: Double(-o.z), z: Double(-o.y), w: Double(o.w))
-        tridentView.setCameraPos(yaw: Float(-q.yaw))
-    }
-    
-    override func keyUp(with event: NSEvent) {
-        if !tridentDrive.processKeyEvent(event: event) {
-            super.keyUp(with: event)
+extension NSMenu {
+    func recursiveSearch(tag: Int) -> NSMenuItem? {
+        for item in items {
+            if item.tag == tag { return item }
+            if item.hasSubmenu, let item = item.submenu?.recursiveSearch(tag: tag) {
+                return item
+            }
         }
+        return nil
     }
-    
-    override func keyDown(with event: NSEvent) {
-        if !tridentDrive.processKeyEvent(event: event) {
-            super.keyDown(with: event)
-        }
-    }
-    
 }

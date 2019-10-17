@@ -1,5 +1,5 @@
 //
-//  UserDefaults.swift
+//  Preferences.swift
 //  TridentApp
 //
 //  Created by Dmitriy Borovikov on 14.10.2019.
@@ -59,4 +59,9 @@ struct Preference {
     @UserPreference("RovModelViewCPH")
     static var rovModelViewCPH: CGFloat?
 
+    @UserPreferenceWithDefault("TridentStabilize", defaultValue: true)
+    static var tridentStabilize: Bool
+    
+    @UserPreferenceWithDefault("VideoOverlayMode", defaultValue: true)
+    static var videoOverlayMode: Bool
 }

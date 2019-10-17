@@ -42,7 +42,7 @@ using namespace std;
             Log::SetVerbosity(Log::Kind::Info);
             break;
     }
-    Log::ReportFilenames(true);
+    Log::ReportFilenames(false);
     
     participant = new RovParticipant();
     participant->init();

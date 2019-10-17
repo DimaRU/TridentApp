@@ -62,13 +62,13 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Control" id="Pzw-9A-SGv">
                                     <items>
-                                        <menuItem title="Light" keyEquivalent="l" id="kIp-UZ-POT">
+                                        <menuItem title="Light" tag="1" keyEquivalent="l" id="kIp-UZ-POT">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="lightButtonPress:" target="Ady-hI-5gd" id="KFk-at-Qk2"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Camera rec" id="R5I-As-yal">
+                                        <menuItem title="Camera rec" tag="2" id="R5I-As-yal">
                                             <string key="keyEquivalent" base64-UTF8="YES">
 DQ
 </string>
@@ -78,6 +78,25 @@ DQ
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="u2n-uv-rcm"/>
+                                        <menuItem title="Stabilize" tag="3" id="occ-Ag-sUp">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="stabilizeAction:" target="Ady-hI-5gd" id="RaT-7S-saL"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Telemetry overlay" tag="4" id="x8W-Mp-XRY">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="telemetryOverlayAction:" target="Ady-hI-5gd" id="IZr-b8-XuF"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
+                            <menuItem title="Trident view" id="QEi-z4-t38" userLabel="Trident view">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Trident view" id="9Rg-Yx-IoP">
+                                    <items>
                                         <menuItem title="Relative Yaw" keyEquivalent="r" id="vaE-qm-q3j">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>

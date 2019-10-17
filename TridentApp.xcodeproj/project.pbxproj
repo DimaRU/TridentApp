@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A05EF722357A50900486B9F /* RovSubsystemStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A05EF712357A50900486B9F /* RovSubsystemStatus.swift */; };
+		0A05EF742357C28400486B9F /* ROVBeacon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A05EF732357C28400486B9F /* ROVBeacon.swift */; };
+		0A05EF772357CB2E00486B9F /* RovControllerStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A05EF752357CA8500486B9F /* RovControllerStatus.swift */; };
+		0A0BF9B623586E27002F527E /* RovFirmware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0BF9B523586E27002F527E /* RovFirmware.swift */; };
 		0A172EC5232B9574003C2A90 /* RovWriterListener.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A172EC3232B9574003C2A90 /* RovWriterListener.cpp */; };
 		0A28A420232D573A00C4D04D /* RovLightPower.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A28A41F232D573A00C4D04D /* RovLightPower.swift */; };
 		0A28A422232D5D1F00C4D04D /* RovTridentMotorCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A28A421232D5D1F00C4D04D /* RovTridentMotorCommand.swift */; };
@@ -75,6 +79,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0A05EF712357A50900486B9F /* RovSubsystemStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RovSubsystemStatus.swift; sourceTree = "<group>"; };
+		0A05EF732357C28400486B9F /* ROVBeacon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ROVBeacon.swift; sourceTree = "<group>"; };
+		0A05EF752357CA8500486B9F /* RovControllerStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RovControllerStatus.swift; sourceTree = "<group>"; };
+		0A0BF9B523586E27002F527E /* RovFirmware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RovFirmware.swift; sourceTree = "<group>"; };
 		0A172EC3232B9574003C2A90 /* RovWriterListener.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RovWriterListener.cpp; sourceTree = "<group>"; };
 		0A172EC4232B9574003C2A90 /* RovWriterListener.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RovWriterListener.h; sourceTree = "<group>"; };
 		0A28A41F232D573A00C4D04D /* RovLightPower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RovLightPower.swift; sourceTree = "<group>"; };
@@ -247,6 +255,10 @@
 				0A28A421232D5D1F00C4D04D /* RovTridentMotorCommand.swift */,
 				0A28A423232D614100C4D04D /* RovTridentControlTarget.swift */,
 				0A6F176D2330FD3900A35506 /* RovRecording.swift */,
+				0A05EF752357CA8500486B9F /* RovControllerStatus.swift */,
+				0A05EF712357A50900486B9F /* RovSubsystemStatus.swift */,
+				0A05EF732357C28400486B9F /* ROVBeacon.swift */,
+				0A0BF9B523586E27002F527E /* RovFirmware.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -339,6 +351,7 @@
 				0AF1164E2322584E000717F7 /* RovTopic.swift in Sources */,
 				0A7654BD231A693300AF9488 /* RovQuaternion.swift in Sources */,
 				0A7654BF231A693300AF9488 /* RovVector3.swift in Sources */,
+				0A05EF772357CB2E00486B9F /* RovControllerStatus.swift in Sources */,
 				0A172EC5232B9574003C2A90 /* RovWriterListener.cpp in Sources */,
 				0A6F176E2330FD3900A35506 /* RovRecording.swift in Sources */,
 				0AF11654232277B5000717F7 /* RovFuelgauge.swift in Sources */,
@@ -361,7 +374,10 @@
 				0A9B64EC2350E0FF00041FBD /* RovQuaternion+extensions.swift in Sources */,
 				0A45C91B2353A25800D15334 /* RovModelView.swift in Sources */,
 				0A7654BA231A693300AF9488 /* RovChannel.swift in Sources */,
+				0A0BF9B623586E27002F527E /* RovFirmware.swift in Sources */,
 				0A3456262355B98800BF65EE /* TridentDrive.swift in Sources */,
+				0A05EF722357A50900486B9F /* RovSubsystemStatus.swift in Sources */,
+				0A05EF742357C28400486B9F /* ROVBeacon.swift in Sources */,
 				0A649C9E2328C6EB00FAF9D1 /* CustomParticipantListener.cpp in Sources */,
 				0ACD6F5A23433E2300E5BDED /* FlatButton.swift in Sources */,
 				0A28A422232D5D1F00C4D04D /* RovTridentMotorCommand.swift in Sources */,

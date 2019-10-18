@@ -209,7 +209,7 @@ DQ
         <scene sceneID="R2V-B0-nI4">
             <objects>
                 <windowController showSeguePresentationStyle="single" id="B8D-0N-5wS" customClass="AutoSWindowController" customModule="TridentApp" customModuleProvider="target" sceneMemberID="viewController">
-                    <window key="window" title="Trident" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="VideoWindow" animationBehavior="default" titleVisibility="hidden" id="IQv-IB-iLA">
+                    <window key="window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="VideoWindow" animationBehavior="default" id="IQv-IB-iLA">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="196" y="240" width="480" height="270"/>
@@ -250,78 +250,92 @@ DQ
                                 </textFieldCell>
                             </textField>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="rbs-P3-fsr">
-                                <rect key="frame" x="393" y="337" width="248" height="24"/>
+                                <rect key="frame" x="406" y="337" width="235" height="24"/>
                                 <subviews>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="is9-Bu-2bL">
-                                        <rect key="frame" x="6" y="4" width="41" height="15"/>
-                                        <textFieldCell key="cell" lineBreakMode="clipping" title="Depth:" id="dZH-uO-kuJ">
-                                            <font key="font" size="13" name="SFProDisplay-Light"/>
-                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="q9i-df-4gu">
-                                        <rect key="frame" x="43" y="4" width="46" height="15"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="42" id="ZJv-A3-Im6"/>
-                                        </constraints>
-                                        <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="100.6" id="wmv-QW-OjM">
-                                            <font key="font" size="13" name="Menlo-Regular"/>
-                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="frd-FQ-gU0">
-                                        <rect key="frame" x="101" y="4" width="15" height="15"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="11" id="kAZ-Pw-tvJ"/>
-                                        </constraints>
-                                        <textFieldCell key="cell" lineBreakMode="clipping" title="􀇬" id="4xW-1y-Hcw">
-                                            <font key="font" size="13" name="SFProDisplay-Light"/>
-                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zWM-Ae-qCL">
-                                        <rect key="frame" x="114" y="4" width="37" height="15"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="33" id="MUc-6Y-3r2"/>
-                                        </constraints>
-                                        <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="24.2" id="h7w-zM-Vr4">
-                                            <font key="font" size="13" name="Menlo-Regular"/>
-                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="EU2-MI-1bX">
-                                        <rect key="frame" x="163" y="4" width="27" height="15"/>
-                                        <textFieldCell key="cell" lineBreakMode="clipping" title="􀛨" id="Np2-pl-c9e">
-                                            <font key="font" size="13" name="SFProDisplay-Light"/>
-                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="q2s-ce-J2h">
-                                        <rect key="frame" x="188" y="4" width="54" height="15"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="sXr-lo-cM7"/>
-                                        </constraints>
-                                        <textFieldCell key="cell" lineBreakMode="clipping" title="10h25m" id="yiv-S7-HtI">
-                                            <font key="font" size="13" name="Menlo-Regular"/>
-                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
+                                    <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qo6-j9-TBw">
+                                        <rect key="frame" x="0.0" y="4" width="235" height="15"/>
+                                        <subviews>
+                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="is9-Bu-2bL">
+                                                <rect key="frame" x="-2" y="0.0" width="48" height="15"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="eP5-zx-6ZG"/>
+                                                </constraints>
+                                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="Depth:" id="dZH-uO-kuJ">
+                                                    <font key="font" size="13" name="SFProDisplay-Light"/>
+                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                </textFieldCell>
+                                            </textField>
+                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="q9i-df-4gu">
+                                                <rect key="frame" x="42" y="0.0" width="46" height="15"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="42" id="ZJv-A3-Im6"/>
+                                                </constraints>
+                                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="100.6" id="wmv-QW-OjM">
+                                                    <font key="font" size="13" name="Menlo-Regular"/>
+                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                </textFieldCell>
+                                            </textField>
+                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="frd-FQ-gU0">
+                                                <rect key="frame" x="84" y="0.0" width="22" height="15"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="18" id="fLG-GO-NvD"/>
+                                                </constraints>
+                                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="􀇬" id="4xW-1y-Hcw">
+                                                    <font key="font" size="13" name="SFProDisplay-Light"/>
+                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                </textFieldCell>
+                                            </textField>
+                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zWM-Ae-qCL">
+                                                <rect key="frame" x="102" y="0.0" width="37" height="15"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="33" id="MUc-6Y-3r2"/>
+                                                </constraints>
+                                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="24.2" id="h7w-zM-Vr4">
+                                                    <font key="font" size="13" name="Menlo-Regular"/>
+                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                </textFieldCell>
+                                            </textField>
+                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="EU2-MI-1bX">
+                                                <rect key="frame" x="135" y="0.0" width="52" height="15"/>
+                                                <textFieldCell key="cell" lineBreakMode="clipping" title="℃    􀛨" id="Np2-pl-c9e">
+                                                    <font key="font" size="13" name="SFProDisplay-Light"/>
+                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                </textFieldCell>
+                                            </textField>
+                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="q2s-ce-J2h">
+                                                <rect key="frame" x="183" y="0.0" width="54" height="15"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="sXr-lo-cM7"/>
+                                                </constraints>
+                                                <textFieldCell key="cell" lineBreakMode="clipping" title="10h25m" id="yiv-S7-HtI">
+                                                    <font key="font" size="13" name="Menlo-Regular"/>
+                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                </textFieldCell>
+                                            </textField>
+                                        </subviews>
+                                        <visibilityPriorities>
+                                            <integer value="1000"/>
+                                            <integer value="1000"/>
+                                            <integer value="1000"/>
+                                            <integer value="1000"/>
+                                            <integer value="1000"/>
+                                            <integer value="1000"/>
+                                        </visibilityPriorities>
+                                        <customSpacing>
+                                            <real value="3.4028234663852886e+38"/>
+                                            <real value="3.4028234663852886e+38"/>
+                                            <real value="3.4028234663852886e+38"/>
+                                            <real value="3.4028234663852886e+38"/>
+                                            <real value="3.4028234663852886e+38"/>
+                                            <real value="3.4028234663852886e+38"/>
+                                        </customSpacing>
+                                    </stackView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="q2s-ce-J2h" firstAttribute="leading" secondItem="EU2-MI-1bX" secondAttribute="trailing" constant="2" id="5XE-IE-ST9"/>
-                                    <constraint firstItem="EU2-MI-1bX" firstAttribute="leading" secondItem="zWM-Ae-qCL" secondAttribute="trailing" constant="16" id="I12-mp-IGa"/>
-                                    <constraint firstItem="is9-Bu-2bL" firstAttribute="centerY" secondItem="rbs-P3-fsr" secondAttribute="centerY" id="OjA-x4-c7i"/>
-                                    <constraint firstItem="EU2-MI-1bX" firstAttribute="centerY" secondItem="rbs-P3-fsr" secondAttribute="centerY" id="UEm-h7-PVy"/>
-                                    <constraint firstItem="q9i-df-4gu" firstAttribute="centerY" secondItem="rbs-P3-fsr" secondAttribute="centerY" id="UqB-1O-QiX"/>
-                                    <constraint firstItem="frd-FQ-gU0" firstAttribute="centerY" secondItem="rbs-P3-fsr" secondAttribute="centerY" id="fNP-zU-lHu"/>
+                                    <constraint firstAttribute="trailing" secondItem="Qo6-j9-TBw" secondAttribute="trailing" id="Dcg-9C-k9g"/>
                                     <constraint firstAttribute="height" constant="24" id="kRj-G4-Jkn"/>
-                                    <constraint firstItem="zWM-Ae-qCL" firstAttribute="leading" secondItem="frd-FQ-gU0" secondAttribute="trailing" constant="2" id="qAu-2o-ffh"/>
-                                    <constraint firstItem="zWM-Ae-qCL" firstAttribute="centerY" secondItem="rbs-P3-fsr" secondAttribute="centerY" id="qvf-QY-b9s"/>
-                                    <constraint firstItem="q2s-ce-J2h" firstAttribute="centerY" secondItem="rbs-P3-fsr" secondAttribute="centerY" id="twI-Nc-nLV"/>
-                                    <constraint firstItem="frd-FQ-gU0" firstAttribute="leading" secondItem="q9i-df-4gu" secondAttribute="trailing" constant="16" id="uXv-0D-76b"/>
-                                    <constraint firstItem="is9-Bu-2bL" firstAttribute="leading" secondItem="rbs-P3-fsr" secondAttribute="leading" constant="8" id="vEU-ZC-WaI"/>
-                                    <constraint firstAttribute="trailing" secondItem="q2s-ce-J2h" secondAttribute="trailing" constant="8" id="xeY-Lw-mEc"/>
-                                    <constraint firstItem="q9i-df-4gu" firstAttribute="leading" secondItem="is9-Bu-2bL" secondAttribute="trailing" id="zgb-Yu-5a5"/>
+                                    <constraint firstItem="Qo6-j9-TBw" firstAttribute="centerY" secondItem="rbs-P3-fsr" secondAttribute="centerY" id="lhY-sL-SWR"/>
+                                    <constraint firstItem="Qo6-j9-TBw" firstAttribute="leading" secondItem="rbs-P3-fsr" secondAttribute="leading" id="qXH-42-tE5"/>
                                 </constraints>
                             </customView>
                             <button focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="aaa-wW-Mjv">

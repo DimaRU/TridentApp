@@ -228,6 +228,7 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
         self.rovBeacon = rovBeacon
         self.vehicleId = rovBeacon.uuid
         self.statusLabel.isHidden = true
+        view.window?.title = rovBeacon.uuid
 
         let timeMs = UInt(Date().timeIntervalSince1970 * 1000)
         FastRTPS.send(topic: .rovDatetime, ddsData: String(timeMs))

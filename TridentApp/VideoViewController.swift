@@ -438,15 +438,3 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
     }
 
 }
-
-extension NSMenu {
-    func recursiveSearch(tag: Int) -> NSMenuItem? {
-        for item in items {
-            if item.tag == tag { return item }
-            if item.hasSubmenu, let item = item.submenu?.recursiveSearch(tag: tag) {
-                return item
-            }
-        }
-        return nil
-    }
-}

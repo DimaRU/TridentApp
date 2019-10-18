@@ -17,6 +17,7 @@ final class TridentDrive {
     private var upLever: Float = 0
     private var downLever: Float = 0
     private var tridentCommandTimer: Timer?
+    private var zeroCount = 0
 
     func start() {
         tridentCommandTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { [weak self] timer in
@@ -24,6 +25,15 @@ final class TridentDrive {
             let thrust = self.forwardLever - self.backwardLever
             let yaw = self.rightLever - self.leftLever
             let pitch = self.downLever - self.upLever
+            
+            if (thrust, yaw, pitch) == (0, 0, 0) {
+                self.zeroCount += 1
+            } else {
+                self.zeroCount = 0
+            }
+            if self.zeroCount >= 2 {
+                return
+            }
             let tridentCommand = RovTridentControlTarget(id: "control", pitch: pitch, yaw: yaw, thrust: thrust, lift: 0)
             FastRTPS.send(topic: .rovControlTarget, ddsData: tridentCommand)
         }

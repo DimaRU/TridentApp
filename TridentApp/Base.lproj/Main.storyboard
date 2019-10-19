@@ -68,10 +68,7 @@
                                                 <action selector="lightButtonPress:" target="Ady-hI-5gd" id="KFk-at-Qk2"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Camera rec" tag="2" id="R5I-As-yal">
-                                            <string key="keyEquivalent" base64-UTF8="YES">
-DQ
-</string>
+                                        <menuItem title="Camera rec" tag="2" keyEquivalent="r" id="R5I-As-yal">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="recordingButtonPress:" target="Ady-hI-5gd" id="hbO-k8-Ksx"/>
@@ -97,7 +94,7 @@ DQ
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Trident view" id="9Rg-Yx-IoP">
                                     <items>
-                                        <menuItem title="Relative Yaw" keyEquivalent="r" id="vaE-qm-q3j">
+                                        <menuItem title="Relative Yaw" keyEquivalent="y" id="vaE-qm-q3j">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="relativeYawAction:" target="Ady-hI-5gd" id="agM-aR-Wx8"/>

@@ -1,16 +1,13 @@
-git clone https://github.com/eProsima/foonathan_memory_vendor.git
-cd foonathan_memory_vendor
-mkdir build && cd build
-cmake -DCMAKE_INSTALL_PREFIX=../../build -DCMAKE_BUILD_TYPE=Release ..
+#!/bin/bash
+#git submodule update --init --recursive
+mkdir temp && cd temp
+cmake -DCMAKE_INSTALL_PREFIX=../build -DCMAKE_BUILD_TYPE=Release ../foonathan_memory_vendor
 cmake --build . --target install
-cd ../..
-git clone git@github.com:DimaRU/Fast-RTPS.git
-cd Fast-RTPS
-git submodule update --init --recursive
-mkdir build && cd build
-cmake -Dfoonathan_memory_DIR=../../build/share/foonathan_memory/cmake -DCMAKE_INSTALL_PREFIX=../../build -DTHIRDPARTY=ON -INTERNALDEBUG=ON -DCMAKE_BUILD_TYPE=Debug ..
+cd .. && rm -rf temp
+mkdir temp && cd temp
+cmake -Dfoonathan_memory_DIR=../build/share/foonathan_memory/cmake -DCMAKE_INSTALL_PREFIX=../build -DTHIRDPARTY=ON -INTERNALDEBUG=ON -DCMAKE_BUILD_TYPE="$1" ../Fast-RTPS
 cmake --build . --target install
-cd ../..
-mkdir Framework
+cd .. && rm -rf temp
+mkdir Framework || true
 cp build/lib/libfastrtps.1.dylib Framework/
 cp build/lib/libfastcdr.1.dylib Framework/

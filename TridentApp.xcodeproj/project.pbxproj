@@ -22,13 +22,13 @@
 		0A45C91723539AE000D15334 /* TridentApp.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A45C91623539AE000D15334 /* TridentApp.scnassets */; };
 		0A45C91923539F0300D15334 /* FloatingViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A45C91823539F0300D15334 /* FloatingViewProtocol.swift */; };
 		0A45C91B2353A25800D15334 /* RovModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A45C91A2353A25800D15334 /* RovModelView.swift */; };
+		0A45DBCB235C97CC00C40EE7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A45DBCA235C97CC00C40EE7 /* Assets.xcassets */; };
 		0A4D7A7423550C5200008205 /* AutoSWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4D7A7323550C5200008205 /* AutoSWindowController.swift */; };
 		0A4D7A762355123600008205 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4D7A752355123600008205 /* Preferences.swift */; };
 		0A649C9E2328C6EB00FAF9D1 /* CustomParticipantListener.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A649C9C2328C6EB00FAF9D1 /* CustomParticipantListener.cpp */; };
 		0A6B1CA52324438A00D48305 /* FastRTPS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6B1CA42324438A00D48305 /* FastRTPS.swift */; };
 		0A6F176E2330FD3900A35506 /* RovRecording.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6F176D2330FD3900A35506 /* RovRecording.swift */; };
 		0A7654842319C16900AF9488 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7654832319C16900AF9488 /* AppDelegate.swift */; };
-		0A7654882319C16900AF9488 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A7654872319C16900AF9488 /* Assets.xcassets */; };
 		0A76548B2319C16900AF9488 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A7654892319C16900AF9488 /* Main.storyboard */; };
 		0A7654952319C21000AF9488 /* CDRCodable in Frameworks */ = {isa = PBXBuildFile; productRef = 0A7654942319C21000AF9488 /* CDRCodable */; };
 		0A765499231A597900AF9488 /* libfastrtps.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A765497231A597900AF9488 /* libfastrtps.1.dylib */; };
@@ -50,6 +50,15 @@
 		0A7654C0231A693300AF9488 /* RovVideoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7654B6231A692500AF9488 /* RovVideoData.swift */; };
 		0A861E962327E9EF00A54F72 /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7654C1231A6B1600AF9488 /* VideoViewController.swift */; };
 		0A9B64EC2350E0FF00041FBD /* RovQuaternion+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9B64EB2350E0FE00041FBD /* RovQuaternion+extensions.swift */; };
+		0AA03B2A235C9FD900396E52 /* SF-Pro-Display-Thin.otf in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A6D9618235BB50C003E7339 /* SF-Pro-Display-Thin.otf */; };
+		0AA03B2B235C9FD900396E52 /* SF-Pro-Display-Light.otf in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A6D9619235BB50C003E7339 /* SF-Pro-Display-Light.otf */; };
+		0AA03B2C235C9FD900396E52 /* SF-Pro-Display-Regular.otf in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A6D961A235BB50C003E7339 /* SF-Pro-Display-Regular.otf */; };
+		0AA03B2D235C9FD900396E52 /* SF-Pro-Display-Bold.otf in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A6D961B235BB50C003E7339 /* SF-Pro-Display-Bold.otf */; };
+		0AA03B2E235C9FD900396E52 /* SF-Pro-Display-Medium.otf in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A6D961C235BB50C003E7339 /* SF-Pro-Display-Medium.otf */; };
+		0AA03B2F235C9FD900396E52 /* SF-Pro-Display-Heavy.otf in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A6D961D235BB50C003E7339 /* SF-Pro-Display-Heavy.otf */; };
+		0AA03B30235C9FD900396E52 /* SF-Pro-Display-Semibold.otf in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A6D961E235BB50C003E7339 /* SF-Pro-Display-Semibold.otf */; };
+		0AA03B31235C9FD900396E52 /* SF-Pro-Display-Ultralight.otf in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A6D961F235BB50C003E7339 /* SF-Pro-Display-Ultralight.otf */; };
+		0AA03B32235C9FD900396E52 /* SF-Pro-Display-Black.otf in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0A6D9620235BB50C003E7339 /* SF-Pro-Display-Black.otf */; };
 		0AA77B4D2355E7F90099ACFB /* DisplayManage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA77B4C2355E7F90099ACFB /* DisplayManage.swift */; };
 		0AAD92F82322B4B1000EAE4E /* RovParticipant.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0AAD92F62322B4B1000EAE4E /* RovParticipant.mm */; };
 		0ACC21CD2353CA6100B3CEB7 /* DDSTypeString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ACC21CC2353CA6100B3CEB7 /* DDSTypeString.swift */; };
@@ -64,6 +73,24 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		0A6D962A235BB58D003E7339 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = Fonts;
+			dstSubfolderSpec = 7;
+			files = (
+				0AA03B2A235C9FD900396E52 /* SF-Pro-Display-Thin.otf in CopyFiles */,
+				0AA03B2B235C9FD900396E52 /* SF-Pro-Display-Light.otf in CopyFiles */,
+				0AA03B2C235C9FD900396E52 /* SF-Pro-Display-Regular.otf in CopyFiles */,
+				0AA03B2D235C9FD900396E52 /* SF-Pro-Display-Bold.otf in CopyFiles */,
+				0AA03B2E235C9FD900396E52 /* SF-Pro-Display-Medium.otf in CopyFiles */,
+				0AA03B2F235C9FD900396E52 /* SF-Pro-Display-Heavy.otf in CopyFiles */,
+				0AA03B30235C9FD900396E52 /* SF-Pro-Display-Semibold.otf in CopyFiles */,
+				0AA03B31235C9FD900396E52 /* SF-Pro-Display-Ultralight.otf in CopyFiles */,
+				0AA03B32235C9FD900396E52 /* SF-Pro-Display-Black.otf in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		0A76549C231A598100AF9488 /* Embed Libraries */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -95,15 +122,24 @@
 		0A45C91623539AE000D15334 /* TridentApp.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = TridentApp.scnassets; sourceTree = "<group>"; };
 		0A45C91823539F0300D15334 /* FloatingViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingViewProtocol.swift; sourceTree = "<group>"; };
 		0A45C91A2353A25800D15334 /* RovModelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RovModelView.swift; sourceTree = "<group>"; };
+		0A45DBCA235C97CC00C40EE7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0A4D7A7323550C5200008205 /* AutoSWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoSWindowController.swift; sourceTree = "<group>"; };
 		0A4D7A752355123600008205 /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
 		0A649C9C2328C6EB00FAF9D1 /* CustomParticipantListener.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CustomParticipantListener.cpp; sourceTree = "<group>"; };
 		0A649C9D2328C6EB00FAF9D1 /* CustomParticipantListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomParticipantListener.h; sourceTree = "<group>"; };
 		0A6B1CA42324438A00D48305 /* FastRTPS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastRTPS.swift; sourceTree = "<group>"; };
+		0A6D9618235BB50C003E7339 /* SF-Pro-Display-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Thin.otf"; sourceTree = "<group>"; };
+		0A6D9619235BB50C003E7339 /* SF-Pro-Display-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Light.otf"; sourceTree = "<group>"; };
+		0A6D961A235BB50C003E7339 /* SF-Pro-Display-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Regular.otf"; sourceTree = "<group>"; };
+		0A6D961B235BB50C003E7339 /* SF-Pro-Display-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Bold.otf"; sourceTree = "<group>"; };
+		0A6D961C235BB50C003E7339 /* SF-Pro-Display-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Medium.otf"; sourceTree = "<group>"; };
+		0A6D961D235BB50C003E7339 /* SF-Pro-Display-Heavy.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Heavy.otf"; sourceTree = "<group>"; };
+		0A6D961E235BB50C003E7339 /* SF-Pro-Display-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Semibold.otf"; sourceTree = "<group>"; };
+		0A6D961F235BB50C003E7339 /* SF-Pro-Display-Ultralight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Ultralight.otf"; sourceTree = "<group>"; };
+		0A6D9620235BB50C003E7339 /* SF-Pro-Display-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Black.otf"; sourceTree = "<group>"; };
 		0A6F176D2330FD3900A35506 /* RovRecording.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RovRecording.swift; sourceTree = "<group>"; };
 		0A7654802319C16900AF9488 /* TridentApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TridentApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A7654832319C16900AF9488 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		0A7654872319C16900AF9488 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0A76548A2319C16900AF9488 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0A76548C2319C16900AF9488 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0A76548D2319C16900AF9488 /* TridentApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TridentApp.entitlements; sourceTree = "<group>"; };
@@ -156,10 +192,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0A6D9617235BB50C003E7339 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				0A6D9618235BB50C003E7339 /* SF-Pro-Display-Thin.otf */,
+				0A6D9619235BB50C003E7339 /* SF-Pro-Display-Light.otf */,
+				0A6D961A235BB50C003E7339 /* SF-Pro-Display-Regular.otf */,
+				0A6D961B235BB50C003E7339 /* SF-Pro-Display-Bold.otf */,
+				0A6D961C235BB50C003E7339 /* SF-Pro-Display-Medium.otf */,
+				0A6D961D235BB50C003E7339 /* SF-Pro-Display-Heavy.otf */,
+				0A6D961E235BB50C003E7339 /* SF-Pro-Display-Semibold.otf */,
+				0A6D961F235BB50C003E7339 /* SF-Pro-Display-Ultralight.otf */,
+				0A6D9620235BB50C003E7339 /* SF-Pro-Display-Black.otf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		0A7654772319C16800AF9488 = {
 			isa = PBXGroup;
 			children = (
 				0A7654822319C16900AF9488 /* TridentApp */,
+				0A6D9617235BB50C003E7339 /* Fonts */,
 				0A765496231A597900AF9488 /* Framework */,
 				0A7654812319C16900AF9488 /* Products */,
 			);
@@ -190,7 +243,7 @@
 				0ACD6F5B23433E2D00E5BDED /* Extensions.swift */,
 				0A76549E231A681E00AF9488 /* FastRTPSBridge */,
 				0A7654AC231A691500AF9488 /* Model */,
-				0A7654872319C16900AF9488 /* Assets.xcassets */,
+				0A45DBCA235C97CC00C40EE7 /* Assets.xcassets */,
 				0A45C91623539AE000D15334 /* TridentApp.scnassets */,
 				0A7654892319C16900AF9488 /* Main.storyboard */,
 				0A76548C2319C16900AF9488 /* Info.plist */,
@@ -274,6 +327,7 @@
 				0A76547D2319C16900AF9488 /* Frameworks */,
 				0A76547E2319C16900AF9488 /* Resources */,
 				0A76549C231A598100AF9488 /* Embed Libraries */,
+				0A6D962A235BB58D003E7339 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -329,8 +383,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0A7654882319C16900AF9488 /* Assets.xcassets in Resources */,
 				0A76548B2319C16900AF9488 /* Main.storyboard in Resources */,
+				0A45DBCB235C97CC00C40EE7 /* Assets.xcassets in Resources */,
 				0A45C91723539AE000D15334 /* TridentApp.scnassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -540,6 +594,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Framework",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_BUNDLE_IDENTIFIER = in.ioshack.TridentApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "TridentApp/FastRTPSBridge/TridentApp-Bridging-Header.h";
@@ -568,6 +623,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Framework",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_BUNDLE_IDENTIFIER = in.ioshack.TridentApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "TridentApp/FastRTPSBridge/TridentApp-Bridging-Header.h";

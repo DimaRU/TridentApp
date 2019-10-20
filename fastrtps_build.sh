@@ -1,4 +1,5 @@
 #!/bin/bash
+export MACOSX_DEPLOYMENT_TARGET=10.14
 #git submodule update --init --recursive
 mkdir temp && cd temp
 cmake -DCMAKE_INSTALL_PREFIX=../build -DCMAKE_BUILD_TYPE=Release ../foonathan_memory_vendor

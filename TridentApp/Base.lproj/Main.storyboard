@@ -336,8 +336,12 @@
                                 </constraints>
                             </customView>
                             <button focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="aaa-wW-Mjv">
-                                <rect key="frame" x="603" y="292" width="22" height="29"/>
-                                <buttonCell key="cell" type="square" title="􀝌" bezelStyle="shadowlessSquare" alignment="center" lineBreakMode="truncatingTail" state="on" focusRingType="none" imageScaling="proportionallyDown" inset="2" id="8cy-GX-LyS">
+                                <rect key="frame" x="595" y="297" width="30" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="24" id="MKV-yS-fIv"/>
+                                    <constraint firstAttribute="width" constant="30" id="zz4-BK-seF"/>
+                                </constraints>
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="Light Off" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" focusRingType="none" imageScaling="proportionallyDown" inset="2" id="8cy-GX-LyS">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" size="24" name="SFCompactDisplay-Regular"/>
                                 </buttonCell>
@@ -463,6 +467,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Light Off" width="24" height="24"/>
         <image name="Trident" width="1000" height="562"/>
         <namedColor name="stopActive">
             <color white="0.10199999809265137" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

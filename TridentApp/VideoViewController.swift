@@ -357,14 +357,12 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
                 if lightPower.power > 0 {
                     // Light On
                     self.lightOn = true
-                    self.lightButton.title = "\u{10078B}"
-                    self.lightButton.contentTintColor = .white
+                    self.lightButton.image = NSImage(named: "Light On")
                     self.lightButton.layer?.backgroundColor = NSColor.black.withAlphaComponent(0.1).cgColor
                 } else {
                     // Light Off
                     self.lightOn = false
-                    self.lightButton.title = "\u{10074C}"
-                    self.lightButton.contentTintColor = nil
+                    self.lightButton.image = NSImage(named: "Light Off")
                     self.lightButton.layer?.backgroundColor = NSColor.white.withAlphaComponent(0.1).cgColor
                 }
             }

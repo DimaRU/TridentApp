@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0A05EF722357A50900486B9F /* RovSubsystemStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A05EF712357A50900486B9F /* RovSubsystemStatus.swift */; };
-		0A05EF742357C28400486B9F /* ROVBeacon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A05EF732357C28400486B9F /* ROVBeacon.swift */; };
+		0A05EF742357C28400486B9F /* RovBeacon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A05EF732357C28400486B9F /* RovBeacon.swift */; };
 		0A05EF772357CB2E00486B9F /* RovControllerStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A05EF752357CA8500486B9F /* RovControllerStatus.swift */; };
 		0A0BF9B623586E27002F527E /* RovFirmware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0BF9B523586E27002F527E /* RovFirmware.swift */; };
 		0A172EC5232B9574003C2A90 /* RovWriterListener.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A172EC3232B9574003C2A90 /* RovWriterListener.cpp */; };
@@ -66,6 +66,9 @@
 		0ACD6F5A23433E2300E5BDED /* FlatButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ACD6F5923433E2300E5BDED /* FlatButton.swift */; };
 		0ACD6F5C23433E2D00E5BDED /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ACD6F5B23433E2D00E5BDED /* Extensions.swift */; };
 		0AD277F4231FFBC30014D555 /* FastRTPSBridge.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0AD277F3231FFBC30014D555 /* FastRTPSBridge.mm */; };
+		0AE9C0F4235E05ED00A2C4FE /* RovCameraObjectTrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE9C0F3235E05ED00A2C4FE /* RovCameraObjectTrack.swift */; };
+		0AE9C0F6235E15A100A2C4FE /* I2CStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE9C0F5235E15A100A2C4FE /* I2CStats.swift */; };
+		0AE9C0F8235E180900A2C4FE /* RovSafetyState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE9C0F7235E180900A2C4FE /* RovSafetyState.swift */; };
 		0AF1164E2322584E000717F7 /* RovTopic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF1164D2322584E000717F7 /* RovTopic.swift */; };
 		0AF1165023226D32000717F7 /* RovDepth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF1164F23226D32000717F7 /* RovDepth.swift */; };
 		0AF11652232274FE000717F7 /* BatteryState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF11651232274FE000717F7 /* BatteryState.swift */; };
@@ -107,7 +110,7 @@
 
 /* Begin PBXFileReference section */
 		0A05EF712357A50900486B9F /* RovSubsystemStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RovSubsystemStatus.swift; sourceTree = "<group>"; };
-		0A05EF732357C28400486B9F /* ROVBeacon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ROVBeacon.swift; sourceTree = "<group>"; };
+		0A05EF732357C28400486B9F /* RovBeacon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RovBeacon.swift; sourceTree = "<group>"; };
 		0A05EF752357CA8500486B9F /* RovControllerStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RovControllerStatus.swift; sourceTree = "<group>"; };
 		0A0BF9B523586E27002F527E /* RovFirmware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RovFirmware.swift; sourceTree = "<group>"; };
 		0A172EC3232B9574003C2A90 /* RovWriterListener.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RovWriterListener.cpp; sourceTree = "<group>"; };
@@ -172,6 +175,9 @@
 		0ACD6F5B23433E2D00E5BDED /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		0AD277F2231FFBC20014D555 /* FastRTPSBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FastRTPSBridge.h; sourceTree = "<group>"; };
 		0AD277F3231FFBC30014D555 /* FastRTPSBridge.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = FastRTPSBridge.mm; sourceTree = "<group>"; };
+		0AE9C0F3235E05ED00A2C4FE /* RovCameraObjectTrack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RovCameraObjectTrack.swift; sourceTree = "<group>"; };
+		0AE9C0F5235E15A100A2C4FE /* I2CStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = I2CStats.swift; sourceTree = "<group>"; };
+		0AE9C0F7235E180900A2C4FE /* RovSafetyState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RovSafetyState.swift; sourceTree = "<group>"; };
 		0AF1164D2322584E000717F7 /* RovTopic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RovTopic.swift; sourceTree = "<group>"; };
 		0AF1164F23226D32000717F7 /* RovDepth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RovDepth.swift; sourceTree = "<group>"; };
 		0AF11651232274FE000717F7 /* BatteryState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryState.swift; sourceTree = "<group>"; };
@@ -310,8 +316,11 @@
 				0A6F176D2330FD3900A35506 /* RovRecording.swift */,
 				0A05EF752357CA8500486B9F /* RovControllerStatus.swift */,
 				0A05EF712357A50900486B9F /* RovSubsystemStatus.swift */,
-				0A05EF732357C28400486B9F /* ROVBeacon.swift */,
+				0A05EF732357C28400486B9F /* RovBeacon.swift */,
 				0A0BF9B523586E27002F527E /* RovFirmware.swift */,
+				0AE9C0F3235E05ED00A2C4FE /* RovCameraObjectTrack.swift */,
+				0AE9C0F5235E15A100A2C4FE /* I2CStats.swift */,
+				0AE9C0F7235E180900A2C4FE /* RovSafetyState.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -409,14 +418,17 @@
 				0A172EC5232B9574003C2A90 /* RovWriterListener.cpp in Sources */,
 				0A6F176E2330FD3900A35506 /* RovRecording.swift in Sources */,
 				0AF11654232277B5000717F7 /* RovFuelgauge.swift in Sources */,
+				0AE9C0F8235E180900A2C4FE /* RovSafetyState.swift in Sources */,
 				0A28A424232D614200C4D04D /* RovTridentControlTarget.swift in Sources */,
 				0A7654C0231A693300AF9488 /* RovVideoData.swift in Sources */,
 				0A28B707231AE067000FDA62 /* DDSType.swift in Sources */,
+				0AE9C0F4235E05ED00A2C4FE /* RovCameraObjectTrack.swift in Sources */,
 				0A45C91923539F0300D15334 /* FloatingViewProtocol.swift in Sources */,
 				0A7654842319C16900AF9488 /* AppDelegate.swift in Sources */,
 				0A7654AB231A68F400AF9488 /* PayloadDecoder.swift in Sources */,
 				0A7654BB231A693300AF9488 /* RovControlDescriptor.swift in Sources */,
 				0A7654BC231A693300AF9488 /* RovPoint.swift in Sources */,
+				0AE9C0F6235E15A100A2C4FE /* I2CStats.swift in Sources */,
 				0AD277F4231FFBC30014D555 /* FastRTPSBridge.mm in Sources */,
 				0A6B1CA52324438A00D48305 /* FastRTPS.swift in Sources */,
 				0AF1165023226D32000717F7 /* RovDepth.swift in Sources */,
@@ -431,7 +443,7 @@
 				0A0BF9B623586E27002F527E /* RovFirmware.swift in Sources */,
 				0A3456262355B98800BF65EE /* TridentDrive.swift in Sources */,
 				0A05EF722357A50900486B9F /* RovSubsystemStatus.swift in Sources */,
-				0A05EF742357C28400486B9F /* ROVBeacon.swift in Sources */,
+				0A05EF742357C28400486B9F /* RovBeacon.swift in Sources */,
 				0A649C9E2328C6EB00FAF9D1 /* CustomParticipantListener.cpp in Sources */,
 				0ACD6F5A23433E2300E5BDED /* FlatButton.swift in Sources */,
 				0A28A422232D5D1F00C4D04D /* RovTridentMotorCommand.swift in Sources */,

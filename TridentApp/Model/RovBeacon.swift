@@ -1,5 +1,5 @@
 //
-//  ROVBeacon.swift
+//  RovBeacon.swift
 //  TridentApp
 //
 //  Created by Dmitriy Borovikov on 17.10.2019.
@@ -18,7 +18,7 @@ struct ResinInfo: Codable {
     let hostOsVersion: String      // e.g., "Resin OS 2.3.0+rev1 (prod)"
 }
 
-struct ROVBeacon: DDSKeyed {
+struct RovBeacon: DDSKeyed {
     let uuid: String                //@key
     let productType: String         //@key
     let systemStatus: String        // General system status info, potentially useful for debugging and high level system views

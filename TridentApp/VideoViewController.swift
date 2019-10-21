@@ -32,7 +32,7 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
     private var lightOn = false
     private var videoSessionId: UUID?
     private var vehicleId: String?
-    private var rovBeacon: ROVBeacon?
+    private var rovBeacon: RovBeacon?
     
     private var depth: Float = 0 {
         didSet { depthLabel.stringValue = String(format: "%.1f", depth) }
@@ -224,7 +224,7 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
     }
 
     
-    private func rovProvision(rovBeacon: ROVBeacon) {
+    private func rovProvision(rovBeacon: RovBeacon) {
         self.rovBeacon = rovBeacon
         self.vehicleId = rovBeacon.uuid
         self.statusLabel.isHidden = true
@@ -380,7 +380,7 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
             }
         }
 
-        FastRTPS.registerReader(topic: .rovBeacon) { [weak self] (rovBeacon: ROVBeacon) in
+        FastRTPS.registerReader(topic: .rovBeacon) { [weak self] (rovBeacon: RovBeacon) in
             guard self?.vehicleId == nil else { return }
             DispatchQueue.main.async {
                 self?.rovProvision(rovBeacon: rovBeacon)
@@ -398,6 +398,18 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
 //        }
 //        FastRTPS.registerReader(topic: .rovFirmwareCommandRep) { (command: RovFirmwareCommand) in
 //            print(command)
+//        }
+//        FastRTPS.registerReader(topic: .rovControlCurrent) { (control: RovTridentControlTarget) in
+//            print(control)
+//        }
+//        FastRTPS.registerReader(topic: .navTrackingCurrent) { (cameraObjectTrack: RovCameraObjectTrack) in
+//            print(cameraObjectTrack)
+//        }
+//        FastRTPS.registerReader(topic: .mcuI2cStats) { (stats: I2CStats) in
+//            print(stats)
+//        }
+//        FastRTPS.registerReader(topic: .rovSafety) { (state: RovSafetyState) in
+//            print(state)
 //        }
 
     }

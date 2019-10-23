@@ -11,7 +11,6 @@ import SceneKit
 
 class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDelegate {
     @IBOutlet weak var imageView: NSImageView!
-    @IBOutlet weak var statusLabel: NSTextField!
     @IBOutlet weak var depthLabel: NSTextField!
     @IBOutlet weak var tempLabel: NSTextField!
     @IBOutlet weak var batteryTimeLabel: NSTextField!
@@ -79,7 +78,6 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        statusLabel.stringValue = ""
         depthLabel.stringValue = ""
         tempLabel.stringValue = ""
         batteryTimeLabel.stringValue = ""
@@ -94,8 +92,7 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
         
         videoDecoder = VideoDecoder()
         imageView.image = NSImage(named: "Trident")
-        statusLabel.stringValue = "Connecting to Trident..."
-        statusLabel.textColor = NSColor.lightGray
+        view.window?.title = "Connecting to Trident..."
 
         
         startRTPS()
@@ -227,7 +224,6 @@ class VideoViewController: NSViewController, NSWindowDelegate, VideoDecoderDeleg
     private func rovProvision(rovBeacon: RovBeacon) {
         self.rovBeacon = rovBeacon
         self.vehicleId = rovBeacon.uuid
-        self.statusLabel.isHidden = true
         view.window?.title = rovBeacon.uuid
 
         let timeMs = UInt(Date().timeIntervalSince1970 * 1000)

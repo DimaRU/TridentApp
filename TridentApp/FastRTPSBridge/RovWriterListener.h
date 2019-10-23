@@ -19,6 +19,7 @@ public:
     RovWriterListener(const char* topicName);
     ~RovWriterListener();
     void onWriterMatched(eprosima::fastrtps::rtps::RTPSWriter*, eprosima::fastrtps::rtps::MatchingInfo& info);
+    void on_liveliness_lost(eprosima::fastrtps::rtps::RTPSWriter* writer, const eprosima::fastrtps::LivelinessLostStatus& status);
     int n_matched;
     std::string topicName;
 };

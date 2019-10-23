@@ -22,6 +22,11 @@ RovWriterListener::~RovWriterListener()
 {
 }
 
+void RovWriterListener::on_liveliness_lost(RTPSWriter* writer, const LivelinessLostStatus& status)
+{
+    logWarning(WRITER_LISTENER, "Writer liveliness lost:" << status.total_count);
+}
+
 void RovWriterListener::onWriterMatched(RTPSWriter* writer, MatchingInfo& info)
 {
     switch (info.status)

@@ -17,12 +17,8 @@
 #include "fastrtps/rtps/history/WriterHistory.h"
 #include <string>
 #include <map>
-typedef unsigned char octet;
-
-#import <Cocoa/Cocoa.h>
 #import "RovTopicListener.h"
 #import "RovWriterListener.h"
-#import "TridentApp-Swift.h"
 
 class CustomParticipantListener;
 class RovParticipant
@@ -66,6 +62,6 @@ public:
                    const char* dataType,
                    const bool keyed);
     bool removeWriter(const char* name);
-    bool send(const char* name, const uint8_t* data, uint32_t length, const void* key, uint32_t keyLenght);
+    bool send(const char* name, const uint8_t* data, uint32_t length, const void* key, uint32_t keyLength);
     void resignAll();
 };

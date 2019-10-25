@@ -211,7 +211,7 @@ bool RovParticipant::removeWriter(const char* name)
     return true;
 }
 
-bool RovParticipant::send(const char* name, const uint8_t* data, uint32_t length, const void* key, uint32_t keyLenght)
+bool RovParticipant::send(const char* name, const uint8_t* data, uint32_t length, const void* key, uint32_t keyLength)
 {
     static const octet header[] = {0, 1, 0, 0};
     auto topicName = std::string(name);
@@ -227,7 +227,7 @@ bool RovParticipant::send(const char* name, const uint8_t* data, uint32_t length
     CacheChange_t * change;
     if (key) {
         InstanceHandle_t instanceHandle;
-        auto len = keyLenght < 16 ? keyLenght : 16;
+        auto len = keyLength < 16 ? keyLength : 16;
         memcpy(instanceHandle.value, key, len);
         change = writer->new_change([length]() -> uint32_t { return length+sizeof(header);}, ALIVE, instanceHandle);
         if (!change) {    // In the case history is full, remove some old changes
